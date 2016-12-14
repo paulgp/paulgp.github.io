@@ -37,6 +37,9 @@
 	<h3>
 	  <a id="recent-papers-updated" class="anchor" href="#workingpapers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Working Papers:</h3>
 	<p style="margin:0;" }><p style="margin:0; font-size:100%; font-weight:bold"> <a href="http://ssrn.com/abstract=2844316">Bad Credit, No Problem? Credit and Labor Market Consequences of Bad Credit Reports</a><br> with Will Dobbie, Neale Mahoney and Jae Song</p>
+	<button class="accordion">
+	  Abstract
+	</button>
 	<div style="background-color: #F1F1F1; color: #666; padding: 10px;"> Credit reports are used in nearly all consumer lending decisions and, increasingly, in hiring decisions in the labor market, but the impact of a bad credit report is largely unknown. We study the effects of credit reports on financial and labor market outcomes using a difference-in-differences research design that compares changes in outcomes over time for Chapter 13 filers, whose personal bankruptcy flags are removed from credit reports after 7 years, to changes for Chapter 7 filers, whose personal bankruptcy flags are removed from credit reports after 10 years. Using credit bureau data, we show that the removal of a Chapter 13 bankruptcy flag leads to a large increase in credit scores, and an economically significant increase in credit card balances and mortgage borrowing. We study labor market effects using administrative tax records linked to personal bankruptcy records. In sharp contrast to the credit market effects, we estimate a precise zero effect of flag removal on employment and earnings outcomes. We conclude that credit reports are important for credit market outcomes, where they are the primary source of information used to screen applicants, but are of limited consequence for labor market outcomes, where employers rely on a much broader set of screening mechanisms. </div></p>
         <p style="margin:0;" }><p style="margin:0; font-size:100%; font-weight:bold"> <a href="https://www.newyorkfed.org/research/staff_reports/sr770.html">Parsing the Content of Bank Supervision</a><br> with Beverly Hirtle and David Lucca</p>
 	<div style="background-color: #F1F1F1; color: #666; padding: 10px;"> We measure bank supervision using the database of supervisory issues, known as matters requiring attention or immediate attention, raised by Federal Reserve examiners to banking organizations. The volume of supervisory issues increases with banks’ asset size, especially for the largest and most complex banks, and decreases with profitability and the quality of the loan portfolio. Stressed banks are faster at resolving issues, but all else equal, resolving new issues takes longer the more issues a bank faces, which may suggest capacity constraints in addressing multiple supervisory issues. Using computational linguistic methods on the text of the issue description, we define five categorical issue topics. The subset of issues related to capital levels and loan portfolio are the most consequential in terms of regulatory rating downgrades and are directly related to changes in banks’ balance sheet characteristics and profitability. Other issues appear to reflect soft information and are less correlated with bank observables. By categorizing questions asked by analysts at banks’ quarterly earnings calls using the same linguistic approach, we find that market monitors raise issues similar to those of supervisors when the issues are related to hard information (such as loan quality or capital) and public supervisory assessment programs. </div></p>
@@ -61,5 +64,16 @@
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
+    <script> 
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].onclick = function(){
+            this.classList.toggle("active");
+            this.nextElementSibling.classList.toggle("show");
+      }
+    }
+    </script>
   </body>
 </html>
