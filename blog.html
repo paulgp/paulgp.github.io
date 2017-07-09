@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Paul Goldsmith-Pinkham by paulgp</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-65546321-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Paul Goldsmith-Pinkham</h1>
+        <p>Research Economist</p>
+        <h3><p class="view"><a href="https://paulgp.github.io/">Home</a></p></h3>
+        <h3><p class="view"><a href="https://paulgp.github.io/papers.html">Papers</a></p></h3>
+	<h3><p class="view"><a href="https://paulgp.github.io/blog.html">Data Viz Blog</a></p></h3>
+	<h3><p class="view"><a href="https://paulgp.github.io/papers/cv.pdf">CV</a></p></h3>
+	<p class="view"><img src="hbs_portrait2_circle.png" width=270 height=270></p>
+	<p>I currently work as a research economist at the Federal Reserve Bank of New York. If you need to reach me, please email me at paulgp at gmail dot com. </p>
+      </header>
+      <section>
+        <h3><a id="updates" class="anchor" href="#updates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Comparing <tt>tidyverse</tt> R to Stata </h3>
+	<p> I spent some time this weekend learning <tt>tidyverse</tt>, a set of R libraries inspired by <a href="http://tidyr.tidyverse.org/">tidyr</a> by Hadley Wickham. I have a lot of friends who swear by R -- I used it in college quite a bit, but once I switched to Stata I never went back. The main reason for this was that the base R language (which is how I learned R) is quite clunky -- it's painful to do basic data cleaning. However, I recently read through a nice post by David Robinson on the <a href="http://varianceexplained.org/r/teach-tidyverse/">values of tidyverse</a> and I decided to give a shot.</p>
+
+	<p>The results were amazing, and I'll try to show why I think the code is so great in tidyr. I also wanted to compare the regression output from Stata and R to make sure that switching over my analysis to R wouldn't screw with my estimates, standard errors, etc. Josh Angrist once told a class I was in that you can play around with creating your own estimators all you want, but in the end you should run it through Stata since they'll get all the standard errors right (specifically in the context of 2SLS). </p>
+
+	<p> Let me start by showing a basic data cleaning exercise in Stata, and then in R. </p>
+<b>Stata</b>
+<pre> <code>*** Load Data + create variables
+use data_master, clear
+keep if role == "author"
+gen had_female_org = organizer_female > 0 if ~missing(organizer_female)
+gen female = gender == "Female" if ~missing(female)
+keep had_female_org female code year
+
+*** Basic Summary Stats by groups
+mean female
+tab year, sum(female)
+tab code, sum(female)
+
+*** Simple Panel Regression
+areg female had_female_org i.year, absorb(code) cluster(code)
+</code></pre>
+<b>R</b>
+<pre> <code>
+library(dplyr)
+library(tidyr)
+library(broom)
+library(lfe)
+
+##Load Data + create variables
+masterdata <- read_csv("data_master.csv")
+regdata <- masterdata %>% filter(role == "author") %>%
+    mutate(had_female_org = organizer_female > 0,
+           female = gender == "Female") %>%
+    select(had_female_org, female, code, year)
+
+##Basic Summary Stats
+regdata %>% summarize(mean(female))
+regdata %>% group_by(year) %>% summarize(mean(female))
+regdata %>% group_by(code) %>% summarize(mean(female))      
+est <- felm(female ~  had_female_org | year + code | 0 | code,  data=regdata)
+tidy(est)
+summary(est)       
+</code></pre>
+
+<p> This is a pretty trivial example, and I didn't do a lot of data
+cleaning in it. (My other example uses basketball data that was in
+need of a lot of data cleaning, and was even cleaner. I chose this
+example because I didn't want to scare off any non-basketball
+economists.) However, I find the notation a lot easier to read, and a
+lot more concise. </p>
+
+<p> Moreover, and this is big: R is creating different
+matrices / vectors to store the data when it creates output. As a
+result, as you create different files, you can reappend or merge them
+to other files. In Stata, the amount of hacks you need to put in place
+to extract coefficients and pull them in and out of memory is a
+  nightmare. I only do it because I have no choice. </p>
+
+<p> What about output? Well, after making some dumb mistakes in Stata
+(e.g. that <tt>organizer_female > 0</tt> will evaluate as True if
+organizer_female is missing, a notorious Stata "feature"), I get exactly the same output. Here it is in Stata:
+ <img src="blog_images/stata_output.png"></p>
+and in R (first simplified, then the full output):
+<img src="blog_images/R_output_tidy.png"></p>
+<img src="blog_images/R_output_summary.png"></p>
+
+<p>Two things worth noting:
+<ul>
+  <li> The coefficients are exactly the same, as are the standard errors! Phew. </li>
+  <li> The F-statistics are slightly different, but it turns out that's because I didn't "absorb" the year effects in the Stata code. If you put the year effects into the model in R, the F-statistics are identical. </li>
+</ul>
+This made me pretty happy -- I'd be confident to run regressions in R
+now. The last question is about IV! Let's change the regression to be
+super hokey -- we'll use years to instrument for our RHS variable.</p>
+
+<b>Stata</b>
+<pre><code>egen code_id = group(code)
+reghdfe female (had_female_org =  i.year), absorb(code_id) vce(cluster code_id)
+</pre></code>
+<b>R</b>
+<pre><code>est <- felm(female ~ 1 | code | (had_female_org ~ factor(year)) | code,  data=regdata)
+tidy(est)
+summary(est)
+</pre></code>
+<p>
+The results here are promising, but I wish they were as exact as the non-IV results. Here's Stata:
+<img src="blog_images/stata_output_iv.png"></p>
+and in R (first simplified, then the full output):):
+<img src="blog_images/R_output_tidy_iv.png"></p>
+<img src="blog_images/R_output_summary_iv.png"></p>
+
+The coefficients are exactly identical. However, the standard errors
+and p-values are not perfectly lined up. I've also rerun this using
+ivreg2 (and excluding the code fixed effects) and there is a similar
+difference in the standard errors. The differences are tiny, but it's
+worth knowing in the back of your head. I'm still 100% confident to
+use this in my work, but it's notable that there are differences (and
+worth keeping in mind if you are ever trying to replicate results!).
+</p>
+
+
+        <h3><a id="updates" class="anchor" href="#updates" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stata Maps</h3>
+	<p> I recently put together a maptile geography to incorporate the <a href="http://blog.apps.npr.org/2015/05/11/hex-tile-maps.html">NPR hex tile map</a> for state maps to be used in Michael Stepner's excellent Stata <tt><a href="https://michaelstepner.com/maptile/">maptile</a></tt> ado program (which is a wrapper for <tt>spmap</tt>). It should be up soon on Michael's website, but you can grab it <a href="http://paulgp.github.io/stata/geo_statehex_creation.zip">here</a> for now.</p>
+	<p>These maps can be useful for two reasons: first, they prevent readers from overweighting unpopulated geographic areas and misinterepreting your results; second, they will make it easier for readers to see your variation in New England, since states will be better broken out. </p>
+	      <p> Below is an example using 2009 bankruptcy filing rates with the following line: <code class="outline">maptile frac_bk, geo(statehex) labelhex(statename_plus_percentage)</code>
+	       <img src="BankruptcyFiling.png"></p>
+      </section>
+  
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>

@@ -253,3 +253,13 @@ footer {
     color:#444;
   }
 }
+
+
+code { 
+    background: #F1F1F1; 
+}
+
+pre {
+    white-space: pre-wrap;
+    background: #F1F1F1;
+}
