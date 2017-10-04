@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>notes.html</title>
+<link rel="stylesheet" type="text/css" media="all" href="tufte-css-gh-pages/tufte.css" />
+</head>
+
+<body>
+
+<h1 id="what-is-the-breakdown-between-growth-full-time-and-part-time">What is the breakdown between growth full-time and part-time?</h1>
+<p>The question: <a href="https://www.bloomberg.com/amp/view/articles/2017-10-04/too-many-people-dream-of-a-charmed-life-in-academia">Noah Smith</a> wrote up a point about how part-time instructors have exploded in the U.S. I want to know if this is new institutions using part-time, or is it old institutions switching?</p>
+<h2 id="data">Data</h2>
+<p>I'm using the 1987, 1991, 1997, 2001, 2007 and 2015 Fall Staff Survey from IPEDS to look at it. It's a pain to harmonize but I think I roughly have it. First, I spot checked the result from Noah to my data. I'm focusing on just full-time faculty vs part-time. I'm ignoring the tenure-track vs not. I don't think that plays a big role in the argument, although being full-time non-tenure is also not the dream for a lot of Ph.D.s.</p>
+<p>The other thing I'm ignoring is Graduate Students. Mainly for speed, this is very gettable from the data. The number I'd like to match is 33/(33+14+34) = 40% around 1995, and 40 / (29+17+ 40) = 46% in 2015. If anything, I have a slightly higher number here. My 1987 data is weird though, and looks like something is off. Otherwise, you see a trend that is very similar to what Noah was pointing to.</p>
+<div class="figure">
+<img src="bar_part_full_overtime.png" title="Veryifying Data" alt="Double-checking Data" style="width: 600px;" />
+<p class="caption">Double-checking Data</p>
+</div>
+<h2 id="decomposing-the-growth">Decomposing the growth</h2>
+<p>Ok, so what share of this from new institutions vs changes? I assumed that the institution ID was constant over time to construct a panel. Then, I can look at the changes over time vs new schools. Of course, as I do this, I discover the ids for the 1987 and 1991 data are not working, so I drop those two years. This still leaves us an interesting 20 years, but not quite as cool.</p>
+<div class="figure">
+<img src="bar_part_full_overtime_panel.png" title="Veryifying Data" alt="Double-checking Data" style="width: 600px;" />
+<p class="caption">Double-checking Data</p>
+</div>
+<p>What I do is take the changes in each period of the raw numbers, and ask how much of the change is from a change within an institution, and how much is from new institutions. I first plot the overall number of each type. Then, I plot the share from within institution vs overall. I</p>
+<div class="figure">
+<img src="bar_part_full_overtime_panel_number.png" title="Number of Instructors by Type" alt="Number of Instructors by Type" style="width: 600px;"/>
+<p class="caption">Number of Instructors by Type</p>
+</div>
+<div class="figure">
+<img src="bar_full_panel_number_change.png" title="Change in Full-Time Instructors" alt="Change in Full-Time Instructors" style="width: 600px;"/>
+<p class="caption">Change in Full-Time Instructors</p>
+</div>
+<div class="figure">
+<img src="bar_part_panel_number_change.png" title="Change in Part-Time Instructors" alt="Change in Part-Time Instructors" style="width: 600px;"/>
+<p class="caption">Change in Part-Time Instructors</p>
+</div>
+<p>Of that change, existing institutions make up about 75% of the growth over the past 20 years, according to my calculations.</p>
+<div class="figure">
+<img src="bar_partfull_panel_number_pctchange.png" title="Percent Change Due to Part-Time" alt="Percent Change Due to Part-Time" style="width: 600px;"/>
+<p class="caption">Percent Change Due to Part-Time</p>
+</div>
+<p>I put my code and data on github <a href="https://github.com/paulgp/IPEDS_part_time">here:</a>. Please let me know if you find any errors! I am sure there are many.</p>
+
+</body>
+</html>
