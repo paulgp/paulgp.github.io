@@ -21,6 +21,17 @@
       ga('send', 'pageview');
     </script>
     <style>
+      button.accordion2 {
+      font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      cursor: pointer;
+      padding: 0px;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 100%;
+      transition: 0.4s;
+      background-color: #f8f8f8;
+      }
       button.accordion {
       font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
       cursor: pointer;
@@ -37,6 +48,14 @@
       }
       button.accordion:after {
       content: '[+]';
+      font-size: 90%;
+      color:#777;
+      float: left;
+      margin-left: 1px;
+      }
+
+      button.accordion2:after {
+      content: '[#]';
       font-size: 90%;
       color:#777;
       float: left;
@@ -75,10 +94,19 @@
       <section>
 	<h3>
 	  <a id="recent-papers-updated" class="anchor" href="#workingpapers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Working Papers:</h3>
+
+	<p style="margin:0;" }><p > <a style="margin:0; font-size:100%; font-weight:bold" href="http://paulgp.github.io/papers/bartik_gpss.pdf">Bartik Instruments: What, When, Why and How</a> <br> with Isaac Sorkin and Henry Swift <button class="accordion">
+	  Abstract
+	</button> <a href = "https://github.com/paulgp/bartik-weight"><button class="accordion2">  Code	</button>
+	</p>
+	<div class="panel" style="background-color: #F1F1F1; color: #666; padding: 10px;"> The Bartik instrument is formed by interacting local industry shares and national industry growth rates. We show that the Bartik instrument is numerically equivalent to using local industry shares as instruments. Hence, the identifying assumption is best stated in terms of these shares, with the national industry growth rates only affecting instrument relevance. We then show how to decompose the Bartik instrument into the weighted sum of the just-identified instrumental variables estimators, where the weights sum to one, can be negative and are easy to compute. These weights measure how sensitive the parameter estimate is to each instrument. We illustrate our results through three applications: estimating the inverse elasticity of labor supply, estimating local labor market effects of Chinese imports, and using simulated instruments to study the effects of Medicaid expansions. </div></p>
+
 	<p style="margin:0;" }><p > <a style="margin:0; font-size:100%; font-weight:bold" href="http://paulgp.github.io/papers/MLCreditPaper.pdf">Predictably Unequal? The Effects of Machine Learning on Credit Markets </a>  <br> with Andreas Fuster, Tarun Ramadorai and Ansgar Walther  <button class="accordion">
 	  Abstract
 	</button>
 	</p>
+
+
 	<div class="panel" style="background-color: #F1F1F1; color: #666; padding: 10px;"> Recent innovations in statistical technology, including in evaluating creditworthiness, have sparked concerns about impacts on the fairness of outcomes across categories such as race and gender. We build a simple equilibrium model of credit provision in which to evaluate such impacts. We find that as statistical technology changes, the effects on disparity depend on a combination of the changes in the functional form used to evaluate creditworthiness using underlying borrower characteristics and the cross-category distribution of these characteristics. Employing detailed data on US mortgages and applications, we predict default using a number of popular machine learning techniques, and embed these techniques in our equilibrium model to analyze both extensive margin (exclusion) and intensive margin (rates) impacts on disparity. We propose a basic measure of cross-category disparity, and find that the machine learning models perform worse on this measure than logit models, especially on the intensive margin. We discuss the implications of our findings for mortgage policy.
   </div></p>
 	<p style="margin:0;" }><p > <a style="margin:0; font-size:100%; font-weight:bold" href="http://paulgp.github.io/papers/cgp_nbergender.pdf">Gender Representation in Economics Across Topics and Time: Evidence from the NBER Summer Institute</a> <br> with Anusha Chari (Submitted) <button class="accordion">
@@ -88,11 +116,6 @@
 	<div class="panel" style="background-color: #F1F1F1; color: #666; padding: 10px;">We document the representation of female economists on the conference programs at the NBER Summer Institute from 2001-2016. Over the period from 2013-2016, women made up 20.6 percent of all authors on scheduled papers. However, there was large dispersion across programs, with the share of female authors ranging from 7.3 percent to 47.7 percent. While the average share of women rose slightly from 18.5% since 2001-2004, a persistent gap between finance, macroeconomics and microeconomics subfields remains, with women consisting of 14.4 percent of authors in finance, 16.3 percent of authors in macroeconomics, and 25.9 percent of authors in microeconomics. We examine three channels potentially affecting female representation. First, using anonymized data on submissions, we show that the rate of paper acceptance for women is statistically indistinguish- able to that of men. Second, we find that the share of female authors is comparable to the share of women amongst all tenure-track professors, but is ten percentage points lower than the share of women among assistant professors. Finally, within conference program, we find that when a woman organizes the program, the share of female authors and discussants is higher.
   </div></p>
 
-	<p style="margin:0;" }><p > <a style="margin:0; font-size:100%; font-weight:bold" href="http://paulgp.github.io/papers/bartik_gpss.pdf">Bartik Instruments: What, When, Why and How</a> <br> with Isaac Sorkin and Henry Swift <button class="accordion">
-	  Abstract
-	</button>
-	</p>
-	<div class="panel" style="background-color: #F1F1F1; color: #666; padding: 10px;"> The Bartik instrument is formed by interacting local industry shares and national industry growth rates. We show that the Bartik instrument is numerically equivalent to using local industry shares as instruments. Hence, the identifying assumption is best stated in terms of these shares, with the national industry growth rates only affecting instrument relevance. We then show how to decompose the Bartik instrument into the weighted sum of the just-identified instrumental variables estimators, where the weights sum to one, can be negative and are easy to compute. These weights measure how sensitive the parameter estimate is to each instrument. We illustrate our results through three applications: estimating the inverse elasticity of labor supply, estimating local labor market effects of Chinese imports, and using simulated instruments to study the effects of Medicaid expansions. </div></p>
         	
 	<p style="margin:0;" }><p > <a style="margin:0; font-size:100%; font-weight:bold" href="http://ssrn.com/abstract=2844316">Bad Credit, No Problem? Credit and Labor Market Consequences of Bad Credit Reports</a> <br> with Will Dobbie, Neale Mahoney and Jae Song (Submitted)	<button class="accordion">
 	  Abstract
