@@ -410,11 +410,9 @@ ggplot(data = mutual_fund_v_sp500, aes(x = year, y = mean_diff)) +
 
 ---
 
-##
-
 <section data-background="../Pictures/andy_dwyer.gif">
-
 </section>
+
 ---
 
 # Institutions
