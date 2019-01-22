@@ -1,0 +1,15 @@
+
+library(tidyverse)
+num_authors <- 1000
+
+author_type <- rnorm(num_authors, 1, 1)
+paper_type <- rnorm(num_authors, 1, 1)
+## relative quality of paper_type vs author_type
+pi <- 1
+quality <- exp(author_type + paper_type*pi)
+cites <- rlnorm(quality, sdlog =2)
+hist(cites)
+y <- asinh(cites)
+hist(y)
+
+lm( y ~ paper_type + author_type)

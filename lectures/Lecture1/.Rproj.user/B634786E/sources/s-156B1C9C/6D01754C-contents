@@ -1,0 +1,557 @@
+---
+width: 1440
+height: 900
+output: 
+  revealjs::revealjs_presentation:
+    css: ../header.css
+    theme: default
+    reveal_options:
+      controls: false
+      slideNumber: false
+      previewLinks: true
+      progress: true
+      logo: true
+    center: false
+    highlight: default
+    transition: none
+    mathjax: default
+    slide_level: 1
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+```
+
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ol {
+    display: block;
+  }
+</style>
+
+<section class=center>
+## Lecture 1: Course Overview and Review of Institutions and Markets
+</section>
+
+---
+
+# The goals of this class 
+
+<br>
+<div id="left">
+1. Understand the institutions and markets that matter
+2. Provide a toolkit for creating portfolios of financial assets
+3. Use **asset pricing models** to understand the trade-off between risk and return
+4. Apply these models to:
+    1. identify investment opportunities 
+    2. evaluate portfolio performance
+
+</div> 
+
+---
+
+# Timeline for our course
+## Part 1: Institutional details
+<div id="left">
+* Who issues, and who buys?
+* Define assets + securities classes
+* How are financial assets traded?
+* How have these financial assets performed historically?
+    - Strong focus on statistical properties and *data*
+    
+</div> 
+
+---
+
+# Timeline for our course
+## Part 2: Portfolio tools
+
+* How do we interpret observed returns?
+    + We need a model... 
+* But first, some basic portfolio management tools 
+    + Defining risk appetite/aversion
+    + Understanding mean‐variance trade-off 
+    + Allocating between risky and safe investments 
+    + Constructing a portfolio of risky investments
+        - **C**aptial **A**sset **P**ricing **M**odel
+        - **A**rbitrage **P**ricing **T**heory / Factor Models
+        
+---
+
+# Timeline for our course
+## Part 3: Critical evaluation of the tools
+
+* How consistent is CAPM with the data?
+* How consistent is the data with APT? 
+    + Markets are efficient? Or is it behavioral?
+* How should we use the models when there are market anomalies?
+    + Active portfolio management
+    + Treynor-Black / Black-Litterman
+    + Robust Portfolio Management
+    
+---
+
+# Timeline for our course
+## Part 4: Evaluate and attribute portfolio returns
+
+* CAPM / APT describe returns from a *passive* strategy (no skill required)
+* How should we evaluate active managers?
+    - Portfolio evaluation techniques answer the question “did you beat your benchmark?”
+    - Performance attribution answers the question, “how did you beat your benchmark?”
+
+---
+
+# Timeline for our course
+## Part 5: Applications and alternative forms of investing
+
+* Private equity and hedge funds
+* International investing
+* Fixed income (bonds, futures, forwards)
+       
+---
+
+# Class requirements 
+<div id="left">
+
+* Straight from the syllabus!
+* Three problem sets as homework:
+    - Due February 16, March 2 and May 4
+    - **To be done individually**
+* Two case write-ups:
+    - Yale University Investments Office (Due in class April 4)
+    - Firefighter (Due in class April 18)
+    - **To be done in groups 3-5**
+* One midterm and one final:
+    - March 5 in class
+    - May 7 in class
+    
+</div>
+
+<div id="right">
+  
+  Section 1 TA: Nikhil Maddirala
+  ![](global_aum.png)
+  
+  Section 2 TA: Akshay Rao
+  ![](global_aum.png)
+  
+</div>
+
+--- 
+
+
+![](global_aum.png)
+
+---
+
+
+## U.S. Institutional Holdings
+<!-- Source: https://www.federalreserve.gov/releases/z1/20180920/z1.pdf -->
+ 
+```{r, include=FALSE}
+us_holdings <- read_csv("fof_data.csv")
+```
+
+```{r, echo=FALSE,   out.width='1600px' , fig.asp = .4}
+xlabels <- c("Total Financial Assets",
+             "Bond Holdings",
+             "Equity Holdings")
+ylabels <- c("Closed End Funds",
+             "Life Insurance Companies",
+             "Mutual Funds",
+             "Private Pension Funds",
+             "Property-Casualty Insurance",
+             "Gov't Retirement Funds")
+ggplot(data=us_holdings %>% 
+         filter(variable %in% c( "total financial assets", "debt securities", "equities")) %>%
+         mutate(variable = recode_factor(variable, "total financial assets"="Total Assets", 
+                                         "debt securities"="Bonds", 
+                                         "equities"="Equities")) %>%
+         mutate(estimate = estimate/ 1000)) + 
+  geom_col(aes(x=institution, y= estimate, fill=institution)) +
+  coord_flip() +
+  theme_minimal() +
+  theme(text = element_text(size=18, 
+                            family="News Cycle")) + 
+  scale_fill_viridis_d(guide=FALSE) +
+  scale_x_discrete(labels = ylabels) +
+  ylab("Trillions of USD") +
+  xlab("") + 
+  facet_wrap(~variable)
+
+```
+
+---
+
+## Mutual Funds - Basic Definitions
+
+
+* Also called open end funds
+    + Investors pool and benefits from sharing information <br> collection and back‐office costs
+* Fund issues new shares when investors buy in and redeems shares when investors cash out
+* Priced at Net Asset Value (NAV):
+
+$$ \frac{\text{Market Value of Assets} - \text{Liabilities}}{\text{Shares Outstanding}} $$
+
+
+---
+
+## Mutual Funds - Costs of Investing in Mutual Funds
+
+* Fee Structure: Four types
+    1. Operating expenses (recurring)
+    2. 12 b‐1 charge (recurring)
+    3. Front‐end load (one time)
+    4. Back‐end load (one time)
+* Fees must be disclosed in the prospectus
+* Share classes with different fee combinations
+
+---
+
+## Mutual Funds - Example of Fees for Various Classes
+
+
+
+
+---
+
+## Mutual Funds - Fees and Incentives 
+
+* People don't (can't?) avoid high-fee index funds (Choi et al. 2010)
+
+* Experimenters overfocused on returns since *fund inception*
+
+![](choi_et_al_mutualfunds.png)
+
+
+---
+
+## Mutual Funds - Fees and Incentives 
+
+* Fund flow response distorts risk-taking incentives (Chevalier and Ellison (1997))
+
+![](chevalier_ellison_fund_flows.png)
+
+---
+
+## Mutual Funds - Costs over time
+
+* Mutual fund expense ratios have fallen over time
+* Driven by several factors:
+    1. Scale economies - assets under management have grown
+    2. Competition - investors pick funds with lower expense ratios
+    3. Increased presence of employer-sponsored retirement plans
+    
+```{r, include=FALSE}
+mf_expenses <- read_csv("mutual_fund_expenses.csv")
+library(viridis)
+```
+
+```{r, echo=FALSE,   out.width='1600px' , fig.asp = .4}
+ggplot(data=mf_expenses %>% mutate(expenses = `expense ratios` * 100)) + 
+  geom_col(aes(x=Year, y= expenses), fill = "#0f4d92") +
+  geom_text(aes(label=expenses, x=Year, y=expenses+5)) +
+  theme_minimal() +
+  theme(text = element_text(size=18, 
+                            family="News Cycle")) + 
+  ylab("") +
+  xlab("") 
+```
+
+<div style="text-align: right" color="black"><small>Source: [Investment Company Institute ](http://www.icifactbook.org)</small></div>
+
+
+---
+
+## Mutual Funds - Do funds managers earn their fees?
+
+<div class="fragment" data-fragment-index="1">
+* How could we answer this?
+</div>
+<div class="fragment" data-fragment-index="2">
+* One idea: how do mutual funds do compared to an index?
+</div>
+<div class="fragment" data-fragment-index="3">
+* Performance of actively managed funds below the return on:
+    + the Wilshire index in 23 of the 39 years from 1971 to 2009
+    + the S&P index in 30 of the 47 years from 1970 to 2017
+
+```{r, include=FALSE, cache=TRUE, echo=FALSE, message=FALSE}
+library(lubridate)
+mutualfunds <- read_csv("mutualfunds.csv", 
+                        col_types = cols(caldt = col_date(format = "%m/%d/%Y"), 
+                                         mret = col_double())) %>% 
+  mutate(year = year(caldt))
+
+avg_monthly_ret_mutuals <-  mutualfunds %>% group_by(caldt) %>% summarize(mean_ret = mean(mret, na.rm = TRUE))
+sp500 <- read_csv("sp500.csv", col_types = cols(caldt = col_date(format = "%m/%d/%Y")))
+
+mutual_fund_v_sp500 <- sp500 %>% right_join(avg_monthly_ret_mutuals) %>% 
+  rename(sp500_ew = ewretd, sp500_vw = vwretd, mutualfund_ew = mean_ret) %>%
+  select(-sp500_ew) %>% 
+  mutate(sp500_vw = sp500_vw,
+         mutualfund_ew= mutualfund_ew) %>%
+  mutate(sp500_v_mf = sp500_vw - mutualfund_ew) %>%
+  mutate( year = year(caldt)) %>%
+  group_by(year) %>%
+  summarize(mean_diff = mean(sp500_v_mf)) %>% 
+  mutate(negative = case_when(mean_diff < 0 ~ TRUE,
+                              TRUE ~ FALSE)) %>%
+  filter(year != 2018)
+mutual_fund_v_sp500_monthly <- sp500 %>% right_join(avg_monthly_ret_mutuals) %>% 
+  rename(sp500_ew = ewretd, sp500_vw = vwretd, mutualfund_ew = mean_ret) %>%
+  select(-sp500_ew) %>% 
+  mutate(sp500_vw = sp500_vw,
+         mutualfund_ew= mutualfund_ew) %>%
+  mutate(sp500_v_mf = sp500_vw - mutualfund_ew) %>%
+  group_by(caldt) %>%
+  summarize(mean_diff = mean(sp500_v_mf)) %>% 
+  mutate(negative = case_when(mean_diff < 0 ~ TRUE,
+                              TRUE ~ FALSE)) 
+  
+```
+
+```{r,  out.width='1600px' , fig.asp = .4,  message=FALSE}
+ggplot(data = mutual_fund_v_sp500, aes(x = year, y = mean_diff)) + 
+  geom_col(aes(fill = negative)) +
+  theme_minimal() +
+  theme(text = element_text(size=18, 
+                            family="News Cycle")) + 
+  ylab("") +
+  xlab("") +
+  scale_fill_viridis_d(guide=FALSE) +
+  ggtitle("S&P 500 minus Mutual Fund Average")
+
+```
+</div>
+
+---
+
+##
+
+<section data-background="andy_dwyer.gif">
+
+</section>
+---
+
+## Mutual Funds - Do fund managers earn their fees?
+
+* Are all mutual fund managers like Andy Dwyer, or just the average?
+* Malkiel (1995) evaluates 239 mutual funds with at least ten-year records
+    + Compare each fund's performance to holding the S&P 500
+
+<center>
+![](malkiel1_part1.png)
+![](malkiel1_part2.png)
+</center>
+
+---
+
+## Mutual Funds -- Persistence in performance?
+
+* Evidence for persistent superior performance is weak, but suggestive.
+* Malkiel (1995) tracks funds based on above/below median performance
+
+--- 
+
+## Mutual Funds -- Persistence in performance?
+
+* Bollen and Busse (2004) find tiny persistence at the quarterly level
+
+
+--- 
+
+## Mutual Funds -- Persistence in performance?
+
+Fama French “Luck vs Skill in Mutual Fund Returns” 2010
+
+* Value weighted portfolio of active funds earns the market return, minus fees
+* Distribution of “alpha” looks more consistent with luck than skill
+
+
+---
+
+## Closed End Funds
+
+* No change in shares outstanding
+* Old investors cash out by selling to new investors
+* Managers unburdened with managing flows
+* Traded continuously on exchanges
+* Priced at premium or discount to NAV * No easy arbitrage to close price gaps
+* Hedge funds may ride discounts
+* Alternatively, may attempt to “open” funds
+
+---
+
+## Other buyers/Other perspectives
+
+* Pension funds
+* Endowment Funds
+* Alternative Asset Managers
+* ...to be discussed in the context of cases and guest lectures
+* Next up...market structure
+
+---
+
+## What kinds of markets are there?
+
+1. Specialist Markets
+2. Over-the-counter (OTC) markets
+3. Electronic Communication Markets
+
+---
+
+## What types of orders are there?
+
+* Market order
+    – Buy or sell order to be executed immediately at prevailing bid/ask price
+* Limit order
+    – Buy or sell order with a pre‐specified limit for the price
+
+---
+
+## Limit orders make up a limit order book
+
+Examples of Limit order books from Justin
+
+---
+
+## Types of Markets: Specialist Exchanges
+
+* Traditionally, on specialist-based exchanges, trading occurred through a combination of an auction (the order book) and a market maker (the specialist)
+* Orders sent to exchange may be cleared electronically or sent to specialist
+  – Only one specialist for each stock
+  – Specialist may act as broker or as a dealer
+  
+---
+
+##  Types of Markets: Specialist Exchanges
+## Roles of Specialists
+
+* Broker
+  – Matches buy and sell orders
+  – Income generated by commissions
+
+* Dealer
+  – Specialists maintain their own bid and ask quotes and fill orders with own account if market spread too high
+  – Historically, participated in about 25% of all transactions
+  – Maintained price continuity
+
+
+---
+
+##  Types of Markets: OTC Markets
+
+* Trades negotiated dealer‐to‐dealer
+* Nasdaq (National Association of Securities Dealers Automated Quotation system)
+  – Originally, a price quotation system
+  – Large orders may still be negotiated through brokers and dealers
+  – Today, NASDAQ provides electronic trading (less OTC)
+  
+  
+
+---
+
+##  Types of Markets: Electronic Communication Networks
+
+* ECNs:Private computer networks that directly link buyers with sellers for automated order execution
+* To attract liquidity, networks may pay rebates to liquidity providers (market makers)
+* Electronic clearing facilitates high frequency trading
+  
+    
+
+---
+
+##  Types of Markets: Electronic Communication Networks
+## High Frequency Trading
+
+* Risks of high speed algorithmic trading include market disruption
+* Flash Crash (2010)
+  – On May 6, 2010, US indices fell by more than 5% in a matter of minutes, before rebounding almost as quickly
+* Knight Capital (2012)
+  – Flawed deployment of new trading program bankrupts major market maker
+  
+  
+---
+
+##  Types of Markets: Electronic Communication Networks
+## Flash Crash
+
+* SEC findings suggest the decline was triggered by a large automated sell order for S&P futures by a mutual fund
+    - Existing low volume due to high market uncertainty
+    – Sell order (75K contracts) was an automated algorithm that directed to sell 9% of prior minute’s trading volume
+    – HFTs responded to high volume of trades, but could not find fundamental buyers (SEC describes a game of “hot‐ potato”)
+    – High volume led to acceleration in sell order speed, which drove higher volatility and volume
+  
+  
+---
+
+## Short-selling
+* In our optimal portfolio, we’ll have the option to "short"– sell stocks that we don’t own
+* Why would we?
+  – Stock may be overpriced (negative alpha)
+  – Stock may be appropriately priced, but we want to hedge out risk from a long position in a similar security (pairs trading)
+
+    
+---
+
+## Short-selling
+## Mechanics
+
+Suppose we have one dollar and believe stock A will underperform stock B.
+
+* Buy $1 of B
+* Borrow \$1 worth of A (1/ $P_A$ shares) and promptly sell
+  - Now you owe the owner of A his shares back‐ you will have to repurchase them in the market at tomorrow’s price
+  - Proceeds from the sale serve as collateral to stock lender
+  - Reg T requires 50% additional collateral (above and beyond proceeds) be kept in account (shares of B will suffice) 
+* Final Payoff $=(1+r_B ‐ r_A)...+$ short rebate
+
+---
+
+PICTURE
+
+
+---
+
+## Short-selling
+## What is the short rebate?
+
+
+* Short rebate is the interest I earn on my dollar of collateral sitting with the stock lender
+    – Short Rebate$=$rf$‐$Security lending Fee
+* Securities lending fees vary greatly and reflect how easy the shares are to borrow (often less than 20 bps)
+* In obvious shorting situations, short rebate will go negative (shares “hot or trading “special”) or can’t be found
+
+---
+
+## Short-selling
+## Alternative ways to short stocks: *synthetic* shorts
+
+Consider the following replicating strategy: Buy a put and sell a call at the current strike price
+
+* However, options traded on less than half of publicly traded firms
+* Moreover, options market behaves badly for “hot shares”
+    – E.g. 3com and Palm
+    
+
+---
+
+## Short-selling
+## 3com/Palm Example paper figure
+
+XXX
+
+
+
+
+    
+
+
+

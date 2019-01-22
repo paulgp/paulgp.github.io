@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1547823549569.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "266C3A78",
+    "lastKnownWriteTime" : 6,
+    "last_content_update" : 1547823549569,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "A37D35A0",
+        "caption" : "sp500",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=sp500&cache_key=A37D35A0",
+        "displayedObservations" : "1111",
+        "environment" : "",
+        "object" : "sp500",
+        "preview" : "0",
+        "totalObservations" : "1111",
+        "variables" : "2"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
