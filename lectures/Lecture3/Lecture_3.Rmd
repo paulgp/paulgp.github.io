@@ -1308,7 +1308,7 @@ So why does diversification shift the frontier?
 
 options("kableExtra.html.bsTable" = T)
 kable(
-  head(as.tibble(cor(cov.mat2)), 10), booktabs = TRUE,
+  head(as.tibble(cor(as.matrix(covariance))), 10), booktabs = TRUE,
   caption = 'Covariance of Returns for 5 stocks (2010-2018)'
 ) %>%
   kable_styling(bootstrap_options = c("striped", "condensed")) 
