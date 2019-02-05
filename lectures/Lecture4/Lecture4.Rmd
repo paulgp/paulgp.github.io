@@ -1,0 +1,679 @@
+---
+width: 1440
+height: 900
+output: 
+  revealjs::revealjs_presentation:
+    css: ../header.css
+    theme: default
+    reveal_options:
+      controls: false
+      slideNumber: false
+      previewLinks: true
+      progress: true
+      logo: true
+    center: false
+    highlight: default
+    transition: none
+    mathjax: default
+    slide_level: 1
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(tidyquant)
+library(knitr)
+library(kableExtra)
+```
+
+<style type="text/css">
+  .reveal p {
+    text-align: left;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ol {
+    display: block;
+  }
+  td {
+   font-size: 16px;
+  }
+</style>
+
+<script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../pdf.css' : '../paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+
+<section class=center>
+## Lecture 4: Models of Expected Returns -- the CAPM and APT
+</section>
+
+---
+
+# Introduction to the CAPM
+
+* The Capital Asset Pricing Model (CAPM) takes the insights from mean variance analysis and asks "what happens if everyone behaves this way?"
+
+* Intuitively, the CAPM tells us, since everyone holds the same portfolio (the tangency portfolio), all assets should be judged based on their contribution to the risk and return on the tangency portfolio
+
+* Moreover, the tangency portfolio has to be the market portfolio
+    - Let's tackle this implication first
+    
+---
+
+# The Tangency Portfolio is the Market Portfolio
+
+* First, define the market portfolio as the value‐weighted portfolio of all assets traded in an economy
+
+* Let's start by assuming all assets = 2 stocks and all investors = 2 investors with $50 each
+
+* After solving for the MVE/tangency portfolio, both investors hold 20% of their risky portfolio in stock A and 80% in stock B
+
+* Lending/borrowing in the risk free asset sums to zero
+
+* The market capitalization of A is 0.2x\$100=\$20 and the market capitalization of B is 0.8 $\times$ \$100=\$80
+
+* Then, the market portfolio must be 20% weighted in stock A (\$20/\$100) and 80% (\$80/\$100) weighted in stock B, just like the MVE/tangency portfolio
+
+---
+
+# Tangency=market portfolio
+
+* Given that the MVE is now established for us, we can "free‐ride"" on the market portfolio, rather than solve for the MVE.
+
+    - This logic motivates the growth in indexing over the past 20 years.
+    
+* This result also allows us to restate the capital allocation line in terms of the market portfolio.
+
+$$
+E(r_{b}) = r_{f} + \frac{E(r_{m} - r_{f})}{\sigma_{m}}
+$$
+
+* Presented this way, it is commonly called the Capital Market Line (CML)
+
+---
+
+# Expected returns on individual assets
+
+* Given that all investors hold the market portfolio, we only care about how asset i contributes to the risk and return of the market portfolio
+
+* The contribution of asset $i$ to the market excess return is its expected excess return, $E(r_{i} - r_{f})$, times its market weight
+
+$$
+E(r_{m} - r_{f}) = \sum_{i=1}^{n} w_{i}E(r_{i} - r_{f})
+$$
+
+* E.g. Walmart's contribution to our portfolio's excess return is $w_{WMT}E(r_{WMT} - r_{f})$
+
+
+---
+
+# Expected returns on individual assets
+
+* Asset $i$’s contribution to the variance of the market portfolio is proportional to its covariance with the market, $Cov(r_{i}, r_{m})$
+
+$$
+\begin{aligned}
+\sigma_{m}^{2} &= \sum_{i=1}^{n}\sum_{j=1}^{n} w_{i}w_{j}Cov(r_{i}, r_{j}) = \sum_{i=1}^{n}w_{i}\sum_{j=1}^{n} w_{j}Cov(r_{i}, r_{j})\\
+&= \sum_{i=1}^{n}w_{i}\sum_{j=1}^{n} Cov(r_{i}, w_{j}r_{j}) =  \sum_{i=1}^{n}w_{i} Cov(r_{i}, \sum_{j=1}^{n}w_{j}r_{j}) = \sum_{i=1}^{n}w_{i} Cov(r_{i},r_{m})
+\end{aligned}
+$$
+
+* e.g. adding WalMart to our portfolio increases risk by $w_{WMT} Cov(r_{WMT}, r{m} )$
+
+---
+
+# Expected returns on individual assets
+
+* Next, the CAPM argues that in equilibrium, each security’s contribution to return, weighted by its contribution to risk, must be equal
+    - Any stock that contributes a higher (lower) return than justified based on its contribution to risk will be bought (sold) until this is no longer the case.
+
+* From prior slide, for assets i and j
+
+$$ 
+\frac{E(r_{i}) - r_{f})}{Cov(r_{i}, r_{m})} = \frac{E(r_{j}) - r_{f})}{Cov(r_{j}, r_{m})}
+$$
+    
+
+---
+
+# Expected returns on individual assets
+
+* This equality holds for all portfolios, *including the market portfolio*,
+
+$$ 
+\frac{E(r_{i}) - r_{f})}{Cov(r_{i}, r_{m})} = \frac{E(r_{j}) - r_{f})}{Cov(r_{j}, r_{m})} = \frac{E(r_{m}) - r_{f})}{Cov(r_{m}, r_{m})} = \frac{E(r_{m}) - r_{f})}{Var(r_{m})} 
+$$
+
+* After some manipulation, we have the famous relationship
+
+$$ 
+E(r_{i}) = r_{f} + \frac{Cov(r_{i}, r_{m})}{Var(r_{m})}(E(r_{m}) - r_{f}) = r_{f} + \beta_{i}(E(r_{i}) - r_{f})
+$$
+
+---
+
+# Interpreting the CAPM
+
+$$ 
+E(r_{i}) = r_{f} + \frac{Cov(r_{i}, r_{m})}{Var(r_{m})}(E(r_{m}) - r_{f}) = r_{f} + \beta_{i}(E(r_{i}) - r_{f})
+$$
+
+
+
+* The CAPM makes a statement about how expected returns should vary across assets
+
+* Answers the question “what expected returns assumptions are consistent with the market portfolio?”
+
+* Economically, it says investors receive returns proportional to a stock’s exposure to broad market risks
+
+    - Investors like stocks that hedge their market exposure and are willing to pay for this feature (or must be paid to forego it)
+    - In fact, the only priced measure of risk is beta
+    - The premium that investors are paid for accepting beta risk <br> is the
+market risk premium, E($r_{m} - r_{f}$)
+    - Why is beta the only priced risk?
+    
+
+
+---
+
+
+# A note on diversification
+
+* Suppose all assets have a common variance ($\sigma^{2}$) and equal covariance amongst each other $(\rho\sigma^{2})$. With weights of $1/n$ in each stock, the portfolio variance is
+
+$$
+\sigma^{2}(r_{p}) = n \times \bigg( \frac{1}{n^{2}}\sigma^{2}\bigg) + n(n-1) \times \bigg(\frac{1}{n^{2}} \rho \sigma^{2}\bigg) =  \frac{1}{n}\sigma^{2} + \frac{n-1}{n} \rho \sigma^{2}
+$$
+
+* Note that as the number of assets available grows, only covariance risk remains
+
+---
+
+```{r}
+ library(readxl)
+library(ggplot2)
+statman_portfolios <- read_excel("~/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Data/statman_portfolios.xlsx")
+```
+
+# A note on diversification
+## From Statman (1987)
+
+```{r,  out.width='1600px' , fig.asp = .4,  message=FALSE}
+p <- ggplot(statman_portfolios, aes(y=r_p, x = num_stocks))
+p + geom_line() +
+  theme_minimal() +
+  theme(text = element_text(size=18, 
+                            family="News Cycle")) + 
+  labs(x="Number of Stocks in Portfolio", y="", title="Average Portfolio Standard Deviation") +
+  ylim(0,50) +
+  scale_x_log10(breaks = c(1,2,4,10,20,40,100,500,1000))
+
+```
+
+
+---
+
+# The Security Market Line
+
+$$
+E(r_{i}) = r_{f} + \beta_{i} E(r_{m} - r_{f})
+$$
+
+* The Security Market Line plots the theoretical relationship between firm betas and expected returns
+
+```{r,  out.width='1600px' , fig.asp = .4,  message=FALSE, warning=FALSE}
+beta <- seq(0, 1.5, 0.1)
+equity_premium <- 0.08
+r_f <- 0.03
+e_r <- beta * equity_premium + r_f
+plot_data <- data.frame(beta, e_r)
+p <- ggplot(data = plot_data, aes(y = e_r, x = beta))
+p + geom_line() + 
+  xlim(0, 1.5) +
+  ylim(0, 1.5* equity_premium + r_f) +
+  theme_minimal() +
+  theme(text = element_text(size=18, 
+                            family="News Cycle"))  +
+  labs(x="Beta", y = "", title= "Expected Returns") +
+  annotate("segment", 
+           x = 0, xend = 1.0, 
+           y = r_f, yend = r_f,
+           color = "blue",
+           linetype = 2) +
+  annotate("segment", 
+           x = 1.0, xend = 1.0, 
+           y = r_f, yend = r_f+equity_premium,
+           color = "red",
+           linetype = 2) +
+  annotate("text", x = 1.1, y = r_f + equity_premium/2,
+           label = "E(r[m]) - r[f]", parse=TRUE, color="red") +
+  annotate("text", x = 1.35, y = 0.125,
+           label = "SML")
+```
+
+---
+
+# The Security Market Line
+
+* A stock’s alpha refers to its deviation from the predicted SML or
+
+$$
+\alpha_{i} = E(r_{i}) - r_{f} - \beta_{i}E(r_{m} - r_{f})
+$$
+
+```{r,  out.width='1600px' , fig.asp = .4,  message=FALSE, warning=FALSE}
+beta <- seq(0, 1.5, 0.1)
+equity_premium <- 0.08
+r_f <- 0.03
+e_r <- beta * equity_premium + r_f
+plot_data <- data.frame(beta, e_r)
+p <- ggplot(data = plot_data, aes(y = e_r, x = beta))
+p + geom_line() + 
+  xlim(0, 1.5) +
+  ylim(0, 1.5* equity_premium + r_f) +
+  theme_minimal() +
+  theme(text = element_text(size=18, 
+                            family="News Cycle"))  +
+  labs(x="Beta", y = "", title= "Expected Returns") +
+  annotate("point", x = 1.0, y = equity_premium + r_f) +
+  annotate("text", x = 1.1, y = equity_premium + r_f - .01, 
+           label = "Market Portfolio") +
+  annotate("point", x = 0.5, y = equity_premium*0.5 + r_f,
+           color = "blue") +
+  annotate("point", x = 0.5, 
+           y = equity_premium*0.5 + r_f + 0.02,
+           color = "red") +
+  annotate("segment", x = 0.5, xend = 0.5,
+           y = equity_premium*0.5 + r_f,
+           yend =  equity_premium*0.5 + r_f + 0.02,
+           linetype = 2) +
+  annotate("text", x = 0.45, equity_premium*0.5 + r_f + 0.01, 
+           label = "~alpha[i]", parse=TRUE, size = 6) +
+  annotate("text", x = 1.1, y = equity_premium + r_f - .01, 
+           label = "Market Portfolio") +
+  annotate("text", x = 1.35, y = 0.125,
+           label = "SML")
+```
+
+
+---
+
+# Implementing the CAPM
+
+* Betas can be uncovered by running linear regressions of firm excess returns on market excess returns (LINEST in excel)
+
+* In practice, we prefer market‐weighted market indices like the S&P500 to measure rm
+
+* Monthly returns avoid noise of higher frequency returns, but allow for feasible estimates over relatively short periods
+
+* Because betas may be dynamic, focus on prior 5 years
+
+---
+
+# What do betas look like? Where do they come from?
+
+* By definition, the average beta in the economy (weighted by value) is one (why?)
+
+* Industry and capital structure good predictors of equity betas
+
+* Can stocks have negative betas?
+    -  Put otherwise, would you ever accept a return less than the risk free rate?
+    
+* Also, remember, the betas we see are only statistical estimates of the true betas
+
+---
+
+# What’s wrong with the CAPM?
+
+* Accepting the wisdom of the CAPM involves its own trade‐offs
+
+* First, requires strong assumptions on distribution of returns, investor utility, information, and beliefs
+
+    - Investors are rational mean‐variance optimizers
+    - Information is costless and available to all investors
+    - There are homogeneous expectations
+    - Individual investors are price takers
+    - No taxes and transaction costs
+    
+* Second, it has faced empirical challenges  (we'll address this later)
+
+---
+
+# Arbitrage Pricing Theory
+
+* Out of dissatisfaction with some of the assumptions in the CAPM, in the 1970s Steve Ross developed arbitrage pricing theory to show the intuition was generalizable
+
+* Combining his own assumptions about return distributions and no‐arbitrage conditions, we will develop “factor models” to complement the CAPM
+
+* We will begin with a single factor model very close to the CAPM and build from there
+
+---
+
+# No arbitrage assumption
+
+* What does no arbitrage imply?
+
+    - No security/portfolio can assure a positive payoff, but have a negative (or zero) price
+    - Any violation that arises cannot persist for long
+    - i.e. no free lunch in financial markets
+    
+* Why do we believe no arbitrage is reasonable?
+
+    -  Otherwise, money‐making machines exist that guarantee infinite riskless profits
+    
+* Unlike the CAPM assumptions, “absence of arbitrage” excludes preferences and requires only a handful of rational investors
+
+---
+
+# Factor model assumption
+
+* Suppose that returns on a security come from two sources:
+
+    1. Common macro‐economic factor
+    2. Firm specific events
+    
+* Possible common macro‐economic factors
+    1. GDP growth
+    2. Interest Rates
+    3. Market performance
+    
+  
+---
+
+# Factor model assumption
+
+$$
+r_{i,t} = E(r_{i}) + \beta_{i}F_{t} + \epsilon_{i,t}
+$$
+
+$r_{i,t}$: Return on security of firm i at time t
+
+$\beta_{i}$: Factor sensitivity or factor loading or factor beta
+
+$F_{t}$: Surprise in macro‐economic factor (zero expected value)
+
+$\epsilon_{i,t}$: Firm specific events (zero expected value)
+
+The critical assumption: firm specific events ($\epsilon_{i,t}$) are independent (no covariance). This means the chosen factor is the only common factor.
+
+---
+
+# Single Factor Models
+
+* Using the formula for variance,
+
+$$
+\sigma_{i}^{2} = \beta_{i}^{2} \sigma_{F}^{2} + \sigma^{2}(\epsilon_{i})
+$$
+
+* Recall that in large portfolios, idiosyncratic risk is diversified away
+    - No covariance by assumption (once you account for $F$)
+    - Thus $\sigma^{2}(\epsilon_{i}) \rightarrow 0$ with many stocks
+    - Only variation in $F$ remains
+    
+* Hence, for a portfolio (that is well-diversified)
+
+$$
+r_{p,t} \approx E(r_{p}) + \beta_{p}F_{t}
+$$
+
+
+---
+
+# Single Factor Models
+
+* Thus, in theory, by forming portfolios and  eliminating
+idiosyncratic risk, we get
+
+$$
+r_{p,t} \approx E(r_{p}) + \beta_{p}F_{t}
+$$
+
+* Recall that $\beta_{p} = \sum_{i} w_{i}\beta_{i}$
+
+
+```{r,  out.width='1600px' , fig.asp = .4,  message=FALSE, warning=FALSE}
+beta <- seq(0, 1.5, 0.1)
+equity_premium <- 0.08
+r_f <- 0.03
+e_r <- beta * equity_premium + r_f
+alpha <- rnorm(length(beta), 0, .05)
+e_r2 <- beta * equity_premium + r_f + alpha
+plot_data <- data.frame(beta, e_r, e_r2) %>% gather(id, e_r, -beta) %>% mutate(id = as.factor(id))
+levels(plot_data$id) <- c("Portfolios", "Single Stocks")
+p <- ggplot(data = plot_data)
+p + geom_point(aes(y = e_r, x = beta)) + 
+  xlim(0, 1.5) +
+  ylim(0, 1.5* equity_premium + r_f) +
+  theme_minimal() +
+  geom_line(data =data.frame(beta, e_r ), aes(y = e_r, x = beta)) + 
+  theme(text = element_text(size=18, 
+                            family="News Cycle"))  +
+  labs(x="Beta", y = "", title= "Expected Returns") +
+  facet_wrap( ~ id)
+```
+---
+
+# Single Factor Models
+
+* Consider the implications of $r_{p} \approx E(r_{p}) + \beta_{p}F_{t}$
+
+* Assume $r_{f} = 0.04$ and two portfolios:
+
+    1. Portfolio A has $\beta_{A} = 1$ and $E(r_{A}) = 0.10$
+    2. Portfolio B has $\beta_{A} = 0.5$ and $E(r_{A}) = 0.06$
+    
+* This provides an arbitrage opportunity! How?
+
+---
+
+# Single Factor Models
+
+```{r}
+table <- tibble(portfolio = c("A", "B", "Riskless"), expected_return = c(0.10, 0.06, 0.04), beta = c(1, 0.5, 0))
+
+
+options("kableExtra.html.bsTable" = T)
+kable(
+  head(table, 10), booktabs = TRUE,
+  col.names = c("Portfolio", "Expecterd Return", "Beta")
+) %>%
+  kable_styling(bootstrap_options = c("striped", "condensed")) 
+
+```
+
+* Combine the riskless asset and $A$ to get a 0.5 beta portfolio (to match B):
+    - Solve $0.5 = w_{A} \times 1 + (1-w_{A}) \times 0$
+    - $w_{A} \rightarrow E(r_{p}) = (0.5 \times 0.10) + (0.5 + 0.04) = 0.07$
+    
+    
+* Two portfolios, identical betas, but different payoffs implies arbitrage
+
+---
+
+# Single Factor Models
+
+
+```{r}
+table <- tibble(portfolio = c("A", "B", "Riskless", "C"), expected_return = c(0.10, 0.06, 0.04, 0.07), beta = c(1, 0.5, 0, 0.5))
+
+
+options("kableExtra.html.bsTable" = T)
+kable(
+  head(table, 10), booktabs = TRUE,
+  col.names = c("Portfolio", "Expecterd Return", "Beta")
+) %>%
+  kable_styling(bootstrap_options = c("striped", "condensed")) 
+
+```
+
+* The new portfolio, C, offers an additional 1\% return
+    - Buy \$100 of C pays $7 + 0.5 \times (100 \times F)$
+    - Sell \$100 of B pays $-6 + 0.5 \times (100 \times F)$
+    - Net position is \$1, with zero factor risk
+    
+* Regrettably, arbitrage pricing theory assumes no free money
+
+---
+
+# Arbitrage Pricing Theory
+
+* No arbitrage condition implies portfolios with equal
+factor betas must have equal expected returns
+
+* This implies a new security market line $E(r_{i}) = r_{f} + \beta_{i}RP_{F}$, where
+where the slope $RP_{F}$ is the risk premium on factor F
+
+
+```{r,  out.width='1600px' , fig.asp = .4,  message=FALSE, warning=FALSE}
+beta <- seq(0, 1.5, 0.1)
+equity_premium <- 0.08
+r_f <- 0.03
+e_r <- beta * equity_premium + r_f
+plot_data <- data.frame(beta, e_r)
+p <- ggplot(data = plot_data, aes(y = e_r, x = beta))
+p + geom_line() + 
+  xlim(0, 1.5) +
+  ylim(0, 1.5* equity_premium + r_f) +
+  theme_minimal() +
+  theme(text = element_text(size=18, 
+                            family="News Cycle"))  +
+  labs(x="Factor Beta", y = "", title= "Expected Returns") +
+  annotate("segment", 
+           x = 0, xend = 1.0, 
+           y = r_f, yend = r_f,
+           color = "blue",
+           linetype = 2) +
+  annotate("segment", 
+           x = 1.0, xend = 1.0, 
+           y = r_f, yend = r_f+equity_premium,
+           color = "red",
+           linetype = 2) +
+  annotate("text", x = 1.2, y = r_f + equity_premium/2,
+           label = "Risk Premium", size = 6) 
+
+```
+
+
+---
+
+# Arbitrage Pricing Theory
+
+* Suppose the single factor in the factor model is the unexpected return on the market portfolio, $r_{m}‐E(r_{m})$
+
+* We are back to the CAPM security market line, $E(r_{i})=r_{f}+ \beta_{i} E(r_{m}‐r_{f})$
+
+
+
+```{r,  out.width='1600px' , fig.asp = .4,  message=FALSE, warning=FALSE}
+beta <- seq(0, 1.5, 0.1)
+equity_premium <- 0.08
+r_f <- 0.03
+e_r <- beta * equity_premium + r_f
+plot_data <- data.frame(beta, e_r)
+p <- ggplot(data = plot_data, aes(y = e_r, x = beta))
+p + geom_line() + 
+  xlim(0, 1.5) +
+  ylim(0, 1.5* equity_premium + r_f) +
+  theme_minimal() +
+  theme(text = element_text(size=18, 
+                            family="News Cycle"))  +
+  labs(x="Factor Beta", y = "", title= "Expected Returns") +
+  annotate("segment", 
+           x = 0, xend = 1.0, 
+           y = r_f, yend = r_f,
+           color = "blue",
+           linetype = 2) +
+  annotate("segment", 
+           x = 1.0, xend = 1.0, 
+           y = r_f, yend = r_f+equity_premium,
+           color = "red",
+           linetype = 2) +
+  annotate("text", x = 1.2, y = r_f + equity_premium/2,
+           label = "RiskPremium==r[m] - r[f]", parse=TRUE,
+           size = 6) 
+
+```
+
+---
+
+# Notes
+
+* Remember that the arbitrage only holds at the portfolio level where there is no idiosyncratic risk, such that $r_{p} = E(r_{p}) + \beta_{p}F$
+
+* Painting with a broad brush, if a factor model holds for all portfolios, then its implications are unlikely to be violated for more than a handful of individual assets
+
+---
+
+# Multifactor Models
+
+* Suppose that returns on a security come from multiple common factors
+
+* The "idiosyncratic"" returns $\epsilon_{i,t}$ in a misspecified single factor model will not be independent across firms
+
+* This implies risk cannot be diversified away and the APT will not hold
+
+* Solution: add more factors!
+
+---
+
+# Multifactor SM(L)
+
+$$
+E(r_{i}) = r_{f} + \beta_{i,F1}RP_{F1} + \beta_{i,F2}RP_{F2} 
+$$
+
+* $\beta_{i,F1}$: Factor sensitivity for $F_{1}$, asset $i$
+* $RP_{F1}$:  Risk premium for $F_{1}$
+* $\beta_{i,F2}$: Factor sensitivity for $F_{2}$, asset $i$
+* $RP_{F2}$:  Risk premium for $F_{2}$
+    
+In general, APT implies for $k$ different factors,
+
+$$
+E(r_{i,t}) = r_{f,t} = \sum_{f=1}^{K}\beta_{i,f}RP_{f,t}
+$$
+
+---
+
+# Where Should We Look for Factors?
+
+* Need important systematic risk factors
+
+* Chen, Roll, and Ross used industrial production, expected inflation, unanticipated inflation, excess return on corporate bonds, and excess return on long‐term government bonds
+
+*  Fama and French used returns from portfolios built on firm characteristics that proxy for systematic risk factors (book‐to‐market and size)
+
+---
+
+# Fama‐French Three‐Factor Model
+
+* SMB: Small Minus Big (firm size) portfolio
+* HML: High Minus Low (book‐to‐market ratio) portfolio
+* Are these portfolios correlated with actual (but currently unknown) systematic risk factors?
+
+$$
+E(r_{i} - r_{f}) = \beta_{i, m}E(r_{m} - r_{f}) + \beta_{i, SMB}E(r_{SMB}) + \beta_{i, HML}E(r_{HML})
+$$
+
+* Note, it is the securities' exposure that (should) matter, not its actual characteristic
+
+---
+
+# Recap
+
+* The APT was a response to strong assumptions embedded in the CAPM
+    - Only needs a well‐specified factor model and arbitrageurs
+    - APT is flexible, but is largely silent on where to look for priced sources of risk
+    
+* We should think of the CAPM, augmented with APT style factors, as a starting point for otherwise elusive expected return inputs
+
+
+
+
