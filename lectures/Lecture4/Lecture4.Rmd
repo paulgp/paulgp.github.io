@@ -91,7 +91,7 @@ library(kableExtra)
 * This result also allows us to restate the capital allocation line in terms of the market portfolio.
 
 $$
-E(r_{b}) = r_{f} + \frac{E(r_{m} - r_{f})}{\sigma_{m}}
+E(r_{b}) = r_{f} + \sigma_{b}\frac{E(r_{m} - r_{f})}{\sigma_{m}}
 $$
 
 * Presented this way, it is commonly called the Capital Market Line (CML)
