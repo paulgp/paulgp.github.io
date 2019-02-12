@@ -164,10 +164,9 @@ Prediction: $\lambda_{0} = 0$ and $\lambda_{1} = E(r_{m} - r_{f})$
 
 ---
 
-# Results
+# Results  (Fama, French, JEP 2004)
 
-* Evidence is suggestive, but not completely consistent with CAPM
-* Positive relation between beta and portfolio returns, but fitted line too flat (Fama, French, JEP 2004)
+* Positive relation between beta and portfolio returns, but fitted line too flat
 
 <center>
 ![Returns v Beta](/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/capm_returns_v_beta.png)
