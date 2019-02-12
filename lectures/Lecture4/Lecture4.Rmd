@@ -136,7 +136,7 @@ $$
 * From prior slide, for assets i and j
 
 $$ 
-\frac{E(r_{i}) - r_{f})}{Cov(r_{i}, r_{m})} = \frac{E(r_{j}) - r_{f})}{Cov(r_{j}, r_{m})}
+\frac{E(r_{i}) - r_{f}}{Cov(r_{i}, r_{m})} = \frac{E(r_{j}) - r_{f}}{Cov(r_{j}, r_{m})}
 $$
     
 
@@ -147,13 +147,13 @@ $$
 * This equality holds for all portfolios, *including the market portfolio*,
 
 $$ 
-\frac{E(r_{i}) - r_{f})}{Cov(r_{i}, r_{m})} = \frac{E(r_{j}) - r_{f})}{Cov(r_{j}, r_{m})} = \frac{E(r_{m}) - r_{f})}{Cov(r_{m}, r_{m})} = \frac{E(r_{m}) - r_{f})}{Var(r_{m})} 
+\frac{E(r_{i}) - r_{f}}{Cov(r_{i}, r_{m})} = \frac{E(r_{j}) - r_{f}}{Cov(r_{j}, r_{m})} = \frac{E(r_{m}) - r_{f}}{Cov(r_{m}, r_{m})} = \frac{E(r_{m}) - r_{f}}{Var(r_{m})} 
 $$
 
 * After some manipulation, we have the famous relationship
 
 $$ 
-E(r_{i}) = r_{f} + \frac{Cov(r_{i}, r_{m})}{Var(r_{m})}(E(r_{m}) - r_{f}) = r_{f} + \beta_{i}(E(r_{i}) - r_{f})
+E(r_{i}) = r_{f} + \frac{Cov(r_{i}, r_{m})}{Var(r_{m})}\bigg(E(r_{m}) - r_{f}\bigg) = r_{f} + \beta_{i}\bigg(E(r_{m}) - r_{f}\bigg)
 $$
 
 ---
@@ -161,7 +161,7 @@ $$
 # Interpreting the CAPM
 
 $$ 
-E(r_{i}) = r_{f} + \frac{Cov(r_{i}, r_{m})}{Var(r_{m})}(E(r_{m}) - r_{f}) = r_{f} + \beta_{i}(E(r_{i}) - r_{f})
+E(r_{i}) = r_{f} + \frac{Cov(r_{i}, r_{m})}{Var(r_{m})}\bigg(E(r_{m}) - r_{f}\bigg) = r_{f} + \beta_{i}\bigg(E(r_{m}) - r_{f}\bigg)
 $$
 
 
@@ -514,9 +514,9 @@ kable(
 ```
 
 * The new portfolio, C, offers an additional 1\% return
-    - Buy \$100 of C pays $7 + 0.5 \times (100 \times F)$
-    - Sell \$100 of B pays $-6 + 0.5 \times (100 \times F)$
-    - Net position is \$1, with zero factor risk
+    - Buy \$100 of C that pays $7 + 0.5 \times (100 \times F)$
+    - Sell \$100 of B that pays $6 + 0.5 \times (100 \times F)$
+    - Net position is \$1, with *zero* factor risk
     
 * Regrettably, arbitrage pricing theory assumes no free money
 
