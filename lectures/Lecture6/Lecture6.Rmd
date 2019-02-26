@@ -427,10 +427,19 @@ include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/
 # Compare Active to Passive Funds
 
 
-
 <center>
-```{r  out.width = "75%"}
-include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/active_share2.png') 
+```{r, out.width='1600px' , fig.asp = .5}
+#include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/active_share2.png') 
+index_fund_size <- tibble(ret = c(1.71, 1.39, 1.15, 0.19, -0.67, -2.06, -1.81, -1.90, -1.64, -1.69), 
+                          active = c(rep("High Active Share",5),rep("Low Active Share",5)),
+                          size_quint = c(1,2,3,4,5,1,2,3,4,5))
+ggplot(data = index_fund_size) +
+  geom_col(aes(y = ret, x = size_quint, fill = active), position = "dodge2") + 
+  labs(x="Size Quintile", y = "", title="Annualized Net Fund Alpha (p.p.) across sizes") +
+  theme_minimal() +
+  theme(text = element_text(size=18, 
+                            family="News Cycle")) 
+
 ```
 </center>
 
@@ -441,8 +450,18 @@ include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/
 
 
 <center>
-```{r  out.width = "75%"}
-include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/active_share3.png') 
+```{r  out.width='1600px' , fig.asp = .5}
+index_fund_size <- tibble(ret = c(-0.98, 0.39, 0.89, 1.04, 3.50, -2.05, -2.26, -1.78, -1.52, -1.58), 
+                          active = c(rep("High Active Share",5),rep("Low Active Share",5)),
+                          size_quint = c(1,2,3,4,5,1,2,3,4,5))
+ggplot(data = index_fund_size) +
+  geom_col(aes(y = ret, x = size_quint, fill = active), position = "dodge2") + 
+  labs(x="Prior Year Return Quintile", y = "", title="Annualized Net Fund Alpha (p.p.) across prior year return") +
+  theme_minimal() +
+  theme(text = element_text(size=18, 
+                            family="News Cycle")) 
+
+#include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/active_share3.png') 
 ```
 </center>
 
@@ -453,6 +472,9 @@ include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/
 <center>
 ```{r  out.width = "75%"}
 include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/active_share4.png') 
+#include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/active_share2.png') 
+
+```
 ```
 </center>
 
@@ -463,7 +485,7 @@ include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/
 
 * Treynor-Black addresses the trade-off between diversification and conviction
     - Even ex-ante correct beliefs can be wrong after the fact!
-    - i.e. alphq belief is right, but error term $\epsilon$ went the wrong way
+    - i.e. alpha belief is right, but error term $\epsilon$ went the wrong way
 * Black-Litterman admits uncertain beliefs about alpha and other inputs beforehand
     - Think Bayesian!
     - But not this Bayes:
