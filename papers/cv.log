@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  19 JUL 2018 19:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.4.16)  13 MAR 2019 09:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -369,9 +369,9 @@ File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 LaTeX Font Info:    Font shape `OT1/pplj/bx/n' in size <14.4> not available
 (Font)              Font shape `OT1/pplj/b/n' tried instead on input line 89.
 
-Overfull \hbox (2.6548pt too wide) in paragraph at lines 126--127
-[]\OT1/pplj/m/n/10 With Adrien Au-clert and Will Dob-bie (2017), ``Macroe-co-no
-mic Ef-fects of Debt Re-lief: Con-sumer Bankruptcy
+Overfull \hbox (2.6548pt too wide) in paragraph at lines 122--123
+[]\OT1/pplj/m/n/10 With Adrien Au-clert and Will Dob-bie (2019), [][]``Macroe-c
+o-nomic Ef-fects of Debt Re-lief: Con-sumer Bankruptcy
  []
 
 [1
@@ -391,7 +391,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 182.
 Here is how much of TeX's memory you used:
  6016 strings out of 492649
  87221 string characters out of 6129622
- 185011 words of memory out of 5000000
+ 186011 words of memory out of 5000000
  9848 multiletter control sequences out of 15000+600000
  16246 words of font info for 38 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -404,10 +404,10 @@ ype1/public/lm/lmtt8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/pa
 latino/uplb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/palatino/
 uplr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/palatino/uplri8a
 .pfb>
-Output written on cv.pdf (3 pages, 102972 bytes).
+Output written on cv.pdf (3 pages, 103055 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 68 compressed objects within 1 object stream
+ 82 PDF objects out of 1000 (max. 8388607)
+ 70 compressed objects within 1 object stream
  13 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
