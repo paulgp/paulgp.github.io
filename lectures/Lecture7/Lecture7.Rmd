@@ -294,7 +294,7 @@ include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/
 # Cohen Frazzini (2008)
 
 <center>
-```{r  out.width = "80%"}
+```{r  out.width = "70%"}
 include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/cohen_frazzini.png') 
 ```
 </center>
