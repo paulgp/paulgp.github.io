@@ -1,0 +1,240 @@
+---
+width: 1440
+height: 900
+output: 
+  revealjs::revealjs_presentation:
+    css: ../header.css
+    theme: default
+    reveal_options:
+      controls: false
+      slideNumber: false
+      previewLinks: true
+      progress: true
+      logo: true
+    center: false
+    highlight: default
+    transition: none
+    mathjax: default
+    slide_level: 1
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(tidyquant)
+library(knitr)
+library(kableExtra)
+```
+
+<style type="text/css">
+  .reveal p {
+    text-align: left;x
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ol {
+    display: block;
+  }
+  td {
+   font-size: 16px;
+  }
+</style>
+
+<script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../pdf.css' : '../paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+
+<section class=center>
+## Lecture 8 : Performance Evaluation
+</section>
+
+
+
+---
+
+# Why Performance Evaluation?
+
+* Picking the manager of our money 
+    - Recall choice of portfolio manager plays big role in returns
+* Compensation
+    - Don't want to pay "too much" for given factor risk; or for passive management
+    - Incentives matter -- designing compensation on poor measurement may induce poor behavior
+* Evaluating performance identifies the "value-add" of a manager or fund
+
+---
+
+# Risk adjustments
+
+* Focus on three basic measures of risk-adjustment
+    1. Sharpe ratio
+    2. Information ratio
+    3. Treynor ratio
+    
+* Each of these represent a rescaling / reinterpretation of alpha, so we begin there...
+
+---
+
+# Single Factor / CAPM alpha
+
+We construct our portfolio alpha as
+$$ 
+\alpha_{p} = \bar{r}_{p} - \left[\bar{r}_{f} + \beta_{p}(\bar{r}_{m} - \bar{r}_{f})\right]
+$$
+
+where 
+
+* $\bar{r}_{p}$: average return on the portfolio
+* $\beta_{p}$: portfolio Beta (risk loading on the market factor)
+* $\bar{r}_{f}$: average risk free rate
+* $\bar{r}_{m}$: average return on market index portfolio
+
+
+---
+
+# Multifactor alpha
+
+$$ 
+\alpha_{i} = \overline{{r}_{i}- r_{f}} - \beta_{i}(\overline{{r}_{m}- r_{f}}) - s_{i}\overline{SMB} - h_{i}\overline{HML}
+$$
+
+* $r_{m}$: monthly return on market index portfolio
+* $r_{f}$: monthly return on risk free asset portfolio
+* $SMB$: monthly return on Fama-French small minus big portfolio
+* $HML$: monthly return on Fama-French high minus low portfolio
+
+Or, just run the regression and extract the $\alpha_{i}$:
+$$
+{r}_{i,t}- r_{f,t} = \alpha_{i} + \beta_{i}(r_{m,t}- r_{f,t}) + s_{i}SMB_{t} + h_{i}HML_{t} + \epsilon_{it}
+$$
+
+Running regression is doubly useful b/c also provides a way to identify factor weights that a portfolio is constructing -- e.g. manager strategy.
+
+---
+
+# Risk Adjusted Performance: Sharpe
+
+Sharpe Ratio
+
+$$
+SR = \frac{\overline{r}_{p} - \overline{r}_{f}}{\sigma_{p}}
+$$
+
+* $\overline{r}_{p}$ : average return on the portfolio
+* $\overline{r}_{f}$ : average risk-free rate
+* $\sigma_{p}$ : portfolio standard deviation
+
+---
+
+# Risk Adjusted Performance: $M^{2}$
+
+* Sharpe ratio tells us the optimal risky portfolio
+
+* $M^{2}$ provides an economic interpretation of the Sharpe Ratio for portfolio $p$
+    - Blend $r_{p}$ with $r_{f}$ to form the complete portfolio return (call it $r_{p}^{blend}$) with the same standard deviation as the market $r_{m}$
+    * Given equivalent risk characteristics, $r_{m}$ and $r^{blend}_{p}$ can now be compared:
+    
+$$ 
+M^{2}  = r^{blend}_{p} - r_{m}
+$$
+
+where $r^{blend}_{p} = (\sigma_{m}/\sigma_{p})r_{p} + (1- (\sigma_{m}/\sigma_{p}))r_{f}$
+
+---
+
+# Sharpe ratio of an active portfolio
+
+* The Sharpe ratio of an optimally formed active+passive portfolio is
+
+$$ 
+SR_{A+P} = \sqrt{SR_{m}^{2} + \frac{\alpha^{2}_{A}}{\sigma^{2}_{A}(e)}}
+$$
+
+where $SR_{m}$ is the Sharpe ratio of the market, $\alpha_{A}$ and $\sigma^{2}_{A}(e)$ are the alpha and residual variance of the active portfolio
+
+* Active funds should be evaluated on the basis of their contribution to the Sharpe ratio
+
+---
+
+# Risk Adjusted Performance: Information Ratio
+
+$$
+IR = \alpha_{p} / \sigma(e_{p})
+$$
+
+$\alpha_{p}$ : portfolio alpha
+
+$\sigma(e_{p})$ : Residual *standard deviation* from CAPM regression
+
+$$
+r_{i,t} - r_{f} = \alpha_{i} + \beta_{i}(r_{m,t} - r_{f}) + \epsilon_{i,t}
+$$
+
+* Note: idiosyncratic risk matters... assumes you will not fully diversify away
+
+---
+
+# Risk Adjusted Performance: Treynor
+
+* Treynor Measure
+
+$$
+T = \frac{\overline{r}_{p} - \overline{r}_{f}}{\beta_{p}} 
+$$ 
+
+* $\overline{r}_{p}$ = Average return on the portfolio 
+* $\overline{r}_{f}$ : Average risk free rate
+* $\beta_{p}$ portfolio beta
+
+---
+
+# Risk Adjusted Performance: Treynor
+
+* Notice, adding the market variance to the denominator preserves the ranking of Treynor measures across portfolios/stocks
+
+$$
+\frac{\overline{r}_{p} - \overline{r}_{f}}{\beta_{p}\sigma_{m}^{2}} =  \frac{\overline{r}_{p} - \overline{r}_{f}}{Cov(r_{m}, r_{p})} 
+$$ 
+
+* Recall, this is a portfolio’s contribution to the "Reward/Risk" ratio of the market portfolio (see CAPM lecture notes)
+
+* Big assumption: idiosyncratic risk is diversified away
+
+---
+
+# Performance Evaluation Summary
+
+* Sharpe Ratio/ $M^{2}$:  the optimal measure of our overall risky portfolio
+
+* Information ratio give the contribution to overall Sharpe ratio of an active portfolio
+    - Assumes active portfolio risk is not diversified away (and is significant)
+    
+* Treynor measure considers the contribution of a stock (or one of many funds) to portfolio Sharpe ratio
+    - Assumes idiosyncratic risk will be diversified away 
+    
+---
+
+# Brimson's Decomposition
+
+* Suppose we want to compare a fund/fund manager to a benchmark portfolio
+* Allocate exceptional performance to three buckets
+    - Asset Allocation
+    - Stock Selection
+    - Interaction
+
+---
+
+# Brinson’s Decomposition
+
+* If we know weights and returns in each asset class, difference in portfolio returns and benchmark can be written as
+
+$$
+r_{p} - r_{b} = \sum_{i} \underbrace{(w_{i,p} - w_{i,b})r_{i,b}}_{\text{Asset Allocation}} + \sum_{i} \underbrace{(r_{i,p} - r_{i,b})w_{i,b}}_{\text{"Stock" Selection}} +  \sum_{i}(w_{i,p} - w_{i,b})(r_{i,p} - r_{i,b})
+$$
+
+* Interpretation for last term?
+
