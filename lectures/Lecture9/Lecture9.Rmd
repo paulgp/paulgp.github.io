@@ -1,0 +1,277 @@
+---
+width: 1440
+height: 900
+output: 
+  revealjs::revealjs_presentation:
+    css: ../header.css
+    theme: default
+    reveal_options:
+      controls: false
+      slideNumber: false
+      previewLinks: true
+      progress: true
+      logo: true
+    center: false
+    highlight: default
+    transition: none
+    mathjax: default
+    slide_level: 1
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(tidyquant)
+library(knitr)
+library(kableExtra)
+```
+
+<style type="text/css">
+  .reveal p {
+    text-align: left;x
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ol {
+    display: block;
+  }
+  td {
+   font-size: 16px;
+  }
+</style>
+
+<script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../pdf.css' : '../paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+
+<section class=center>
+## Lecture 9 : Private Equity
+</section>
+
+---
+
+# Alternative Investments Introduction
+
+* Let's broaden the scope of the investable universe
+    - Private equity, hedge funds, fixed income and derivatives
+
+* Everything we learned in first half of class applies, but...
+    - Data is more opaque
+    - Liquidity is a bigger issue
+    - Institutional details matter more
+        * E.g. Lock-up periods, redemption, fee structure
+    - Efficiency (maybe?)
+
+---
+
+# Private Equity
+
+* What is Private Equity (PE)?
+
+* A PE fund is a financial intermediary typically formed as limited partnerships
+    - General Partner (GP): Manage funds, make investments
+    - Limited Partners (LPs): Passive investors (pension funds, endowments)
+
+* A PE fund invests only in private (or soon-to-be-private) companies
+    - Costs: information asymmetry and illiquidity
+    - Benefits: control
+
+---
+
+# Private Equity
+
+* A PE fund takes an *active* role in the firm
+    - Added value through management/monitoring
+    
+* A PE fund has an exit strategy
+    - Because of illquidity of investment, targets must provide a clear path to exit (e.g. IPO or sale to another company)
+    - Funds are closed-end with lifespans of 10-12 years
+        - Commitments raised
+        - Capital calls/investments made
+        - "Harvesting" period
+        
+---
+
+# Venture Capital
+
+<center>
+```{r  out.width = "100%"}
+include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/vc_lerner.png') 
+```
+</center>
+
+
+---
+
+# What value does Venture Capital add?
+
+1. Screening:
+    * VCs as winner-pickers -- select 1-in-400 deals to fund
+    * Do VCs bet the jockey or the horse?
+    * High management turnover suggests the horse
+2. Advising/Monitoring:
+    * Requires control rights
+    * Investments typically include voting rights, board seats, esp. in bad times
+3. Exit
+
+*Important to have good VCs for good returns!*
+
+---
+
+
+<center>
+```{r  out.width = "100%"}
+include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/HowVentureSpend.png') 
+```
+</center>
+
+---
+
+# Buyout Funds
+
+* In contrast to VC, (Leveraged) Buyout (BO) funds focus on established firms
+
+* Firms are either private to begin with, or are taken private (as in a management buyout)
+
+* Large amounts of *new* debt are used to finance the repurchase of existing equity
+    - Often 90/10 debt-to-equity ratio in new company
+    - Example: RJR Nabisco, Dell
+
+---
+
+# Buyout Funds
+
+* Where does the value-add come from?
+    - No need to take company private to exploit an undervalued stock
+    - Similar to VC, control must matter
+* What types of things do LBO firms do once they have control that adds value?
+    - Spin-offs of conglomerates
+        - Beatrice Foods
+    - Efficiency gains (cost-cutting, union negotiations, layoffs)
+        - Safeway
+        
+---
+
+# Or is it just leverage?
+
+
+<center>
+```{r  out.width = "100%"}
+include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/dellvsBB_markit.png') 
+```
+</center>
+
+
+---
+
+# Private Equity Fund Contracts
+
+* Incentives of GPs and LPs may not always be aligned
+
+* GPs may have incentives to shirk or take excessive risk
+
+* Fees, co-investment by fund managers and covenants discipline GPs and protect the LPs
+
+---
+
+# Private Equity Fund Contracts
+
+* *Fees* include a flat rate (1-3%) plus 20-30% performance fee
+
+* *Co-investment*: General partners often required to personally invest in the funds (typically GP invests 1%)
+
+* *Covenants*: e.g. restrictions on activities
+
+---
+
+# Private Equity Fund Covenants
+
+
+<center>
+```{r  out.width = "60%"}
+include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/gomperslerner_convenants.png') 
+```
+</center>
+
+
+---
+
+# Private Equity Performance
+
+<center>
+```{r  out.width = "100%"}
+include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/kaplanschoar_pereturns.png') 
+```
+</center>
+
+* Table reports mean, median, standard deviations and 25-75th percentile of dollar weighted returns (IRR) to PE funds
+    - Why dollar-weighted returns?
+    - On average, roughly equivalent to S&P500 during same period (net of fees)
+    
+---
+
+# Private Equity Performance
+
+* How to identify good private equity funds?
+
+* Pick past winners! (What?)
+
+* Returns to private equity are highly persistent (Why?)
+
+* Issue: everyone wants to get in funds with strong performance
+    - Who gets access?
+    - What incentive effects does this create?
+    
+---
+
+# Private Equity Performance
+
+## Determinants of fund performance (Private Market Equivalents)
+
+* General Partner (PE funds) performance is persistent
+
+<center>
+```{r  out.width = "100%"}
+include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/kaplanschoar_persistence.png') 
+```
+</center>
+
+
+
+---
+
+# Private Equity Performance and Other Issues
+
+* Often the binding constraint for successful PE funds is investment opportunities, not investors
+
+* Leads to money-chasing-deals phenomenon
+
+* During periods of high flows into private equity, funds pay higher valuations for their acquisitions
+
+
+---
+
+<center>
+```{r  out.width = "80%"}
+include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/gomperslerner_moneychase.png') 
+```
+</center>
+
+
+---
+
+
+<center>
+```{r  out.width = "80%"}
+include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/gomperslerner_moneychase2.png') 
+```
+</center>
+
+
+
+    
