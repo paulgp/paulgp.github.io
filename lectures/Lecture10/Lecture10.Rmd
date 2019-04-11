@@ -1,0 +1,446 @@
+---
+width: 1440
+height: 900
+output: 
+  revealjs::revealjs_presentation:
+    css: ../header.css
+    theme: default
+    reveal_options:
+      controls: false
+      slideNumber: false
+      previewLinks: true
+      progress: true
+      logo: true
+    center: false
+    highlight: default
+    transition: none
+    mathjax: default
+    slide_level: 1
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(tidyquant)
+library(knitr)
+library(kableExtra)
+```
+
+<style type="text/css">
+  .reveal p {
+    text-align: left;x
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ol {
+    display: block;
+  }
+  td {
+   font-size: 16px;
+  }
+</style>
+
+<script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../pdf.css' : '../paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+
+<section class=center>
+## Lecture 10 : Hedge Funds
+</section>
+
+---
+
+# Hedge Funds vs. Mutual Funds
+
+<div class="column-left">
+*Hedge Fund*
+
+* Transparency: Limited Liability Partnerships that provide only minimal disclosure of strategy and portfolio composition
+* Less than 100 investors unless "qualified"
+</div>
+
+<div class="column-right">
+*Mutual Fund* 
+
+* Transparency: Regulations require public disclosure of strategy and portfolio composition
+* Number of investors is not limited
+</div>
+
+---
+
+# Hedge Funds vs. Mutual Funds
+
+<div class="column-left">
+*Hedge Fund*
+
+* Investment strategy: Very flexible, funds can act opportunistically and make a wide range of investments
+* Often use shorting, leverage, options
+</div>
+
+<div class="column-right">
+*Mutual Fund* 
+
+* Investment strategy: Predictable, stable strategies, stated in prospectus
+* Limited use of shorting, leverage, options
+
+</div>
+
+---
+
+# Hedge Funds vs. Mutual Funds
+
+<div class="column-left">
+*Hedge Fund*
+
+* Compensation structure: Typically charge a management fee of 1-2% of assets and an incentive fee of 20% of profits
+* Liquidity: Often have lock‐ up periods, require advance redemption notices, or may be gated
+</div>
+
+<div class="column-right">
+*Mutual Fund* 
+
+* Compensation structure: Fees are usually a fixed percentage of assets
+* Liquidity: Can move more easily into and out of a mutual fund
+
+</div>
+
+---
+
+# Hedge Fund Strategies
+
+* Directional
+    - Bets that one sector or another will outperform other sectors
+* Non‐directional
+    - Exploit temporary misalignments in relative valuation across securities
+    - By one type of security and sell another
+    - Market neutral
+* Implications for Beta of each strategy?
+
+---
+
+# Directional Trading
+
+* In contrast to non‐directional, market-neutral strategies, directional funds make large sectoral bets
+* Examples: Global Macro funds (e.g. Soros’ Quantum Hedge Fund) make large macro bets on currencies, commodities, sectors.
+
+---
+
+# Non‐Directional Trading
+
+* Relative value identifies rich vs. cheap based on a model of what prices "should be"
+    - Sometimes, economic models (e.g. Royal Dutch/Shell)
+    - Often, statistical models
+* Statistical Arbitrage
+    - Use data mining techniques to uncover systematic pricing patterns
+    - Trade on divergence from normal
+    - Can involve high frequency trading over short holding periods
+    
+---
+
+# Statistical Arbitrage Example: Pairs Trading
+
+* Find stocks which move together
+    - For a given pair, the relative value ($p_{1}/p_{2}$) provide a buy/sell signal
+    - High $p_{1}/p_{2}$ implies buy stock 2 and short stock 1
+    
+* David Shaw (D.E. Shaw) argues "...human beings don't like to trade against human nature, which wants to buy stocks after they go up, not down."
+
+* Long-short strategy is self-financing and market neutral 
+
+---
+
+# Pairs Trading Cookbook
+
+Step A: find stocks which move together
+
+1. For each stock, subtract off mean price, divide by standard deviation (normalized prices),
+
+$$ 
+\widetilde{p} = \frac{p - \overline{p}}{\sigma_{p}}
+$$
+
+2. Calculate sum of squared deviations of normalized prices $(\sum (\widetilde{p}_{1} - \widetilde{p}_{2})^{2}) across all possible pairs of stocks (N (N-1)/2)
+
+3. Each stock is paired with the stock for which the sum of squared errors is smallest
+
+What is implication for paired stocks $\beta$?
+
+--- 
+
+# Pairs Trading Cookbook
+
+* Limit focus to "top pairs"
+    - Chose top 5\% pairs based on minimum sum of squared deviations
+* Devise trading rule
+    1. Define daily distance as $d = (\widetilde{p}_{1} - \widetilde{p}_{2})^{2}$ and calculate historical standard deviation of price differences
+    2. "Open" pair when $d > 2\sigma(d)$
+    3. "Close" pair when $d = 0$
+    
+---
+
+# Pairs Trading Cookbook 
+## Goetzmann, Gatev and Rouwenhorst (2006)
+<center>
+```{r  out.width = "100%"}
+include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/pairs_trading.png') 
+```
+</center>
+
+--- 
+
+# Pairs Trading Results
+<center>
+```{r  out.width = "100%"}
+include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/pairs_trading_table.png') 
+```
+</center>
+
+
+--- 
+
+# Pairs Trading Results
+
+* Does pairs trading expose trade to risk factors?
+* Market neutrality suggests CAPM alpha, but what about other risks?
+
+<center>
+```{r  out.width = "100%"}
+include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/pairs_trading_table2.png') 
+```
+</center>
+
+* Coefficients and t-statistics from a five-factor model
+
+---
+
+# Merger Arbitrage
+
+* Often a long-short strategy strategy which buys target and sells acquirer in announced mergers
+
+* Hedge fund holds event risk
+    - Terms not reached
+    - Alternate bidders
+    - Regulatory approval not granted
+    
+---
+
+# Merger Arbitrage Example
+
+* Tellabs and Ciena merger
+    - Both companies involved in fiber‐optic/telecom networks
+    - Merged company would be able to compete with larger firms such as Lucent by sharing customer bases, exploiting size
+* 1‐for‐1 stock swap announced June 3, 1998
+    - Tellabs $64/share
+    - Ciena $60/share
+    - Upon merger, prices must be equal
+    
+---
+
+# Merger Arbitrage Example
+
+* Another infamous LTCM trade
+    - Commit $30M own capital, Borrow $30M @ 6% prime rate
+    - Buy 1M Ciena @ $60
+    - Sell 1M Tellabs @ $64
+    - Earn 4.5% short rebate (interest) on proceeds from short
+* What happens?
+    - Ciena loses two key customers, shares fall to $15 dollars, deal is abandoned
+    - Tellabs shares also decline before position is closed
+    
+---
+
+# Merger Arbitrage Example
+
+* Profits and losses from trade:
+    - $30M @ 6% prime rate X (110/360)        = ‐$550K
+    - $64M short rebate @ 4.5% X (110/360)    =  $880K
+    - Loss on Ciena 1M X ($15‐$60)            = ‐$45M
+    - Gain on Tellabs ‐1M X ($64‐$42)         =  $22M
+    - TOTAL                                   =‐$22.7M
+    
+Total return on committed capital: -75.57%
+
+---
+
+# Merger Arbitrage: large sample evidence
+
+<center>
+```{r  out.width = "100%"}
+include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/merger_arb_funds.png') 
+```
+</center>
+
+---
+
+# Merger Arbitrage: large sample evidence
+
+* Merger arb is profitable on average
+    - Theory: hedge funds earn premium for insuring shareholders against completion risk
+    
+<center>
+```{r  out.width = "100%"}
+include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/merger_arb_funds_table1.png') 
+include_graphics('/Users/PSG24/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Pictures/merger_arb_funds_table2.png') 
+```
+</center>
+  
+* 72‐86 bps in monthly alpha!
+    
+---
+
+# Hedge Fund Performance Evaluation
+
+* Recall our CAPM-based single factor model
+
+$$
+r_{i,t} - r_{f} = \alpha_{i} + \beta_{i} (r_{m,t} - r_{f}) + e_{i,t}
+$$
+
+* Note that for hedge funds, factor loadings are *dynamic*
+    - Consider market loading for a long-only market timer
+    - If successfull, $\beta$ is only postiive when market returns are high
+    - Implies non-linear factor loadings
+
+---
+
+# Dynamic Performance Evaluation
+
+* Suppose with perfect foresight, we can
+    1. Buy market when above risk-free rate of 4%
+    2. Hold t-bills when market returns below $r_{f}$
+
+<center>
+```{r, out.width='1600px' , fig.asp = .4,  message=FALSE}
+
+rf <- 0.04
+rm <- rnorm(100, mean=0.09, sd = 0.22)
+data <- tibble(rf, rm) %>% mutate(market_timer = case_when(rm > rf ~ rm, TRUE ~ rf))
+ggplot(data = data) + 
+  geom_point(aes(y = market_timer, x = rm)) +
+  xlim(-1, 1) +
+  ylim(0,1) + 
+  theme_minimal() +
+  theme(text = element_text(size=18, 
+                            family="News Cycle")) + 
+  labs(x="Market Returns", y="", title="Market Timer Returns") 
+
+```
+</center>
+--- 
+
+
+# Dynamic Performance Evaluation
+
+$$
+r_{p} = \alpha + r_{f} + \beta_{1}(r_{m} - r_{f}) + \beta_{2}(r_{m}-r_{f})^{2} + \epsilon_{p}
+$$
+
+* $\beta_{2} > 0$ implies market timing ability
+
+<center>
+```{r, out.width='1600px' , fig.asp = .4,  message=FALSE}
+
+rf <- 0.04
+rm <- rnorm(100, mean=0.09, sd = 0.22)
+data <- tibble(rf, rm) %>% mutate(market_timer = case_when(rm > rf ~ rm, TRUE ~ rf))
+ggplot(data = data) + 
+  geom_point(aes(y = market_timer, x = rm)) +
+  xlim(-1, 1) +
+  ylim(0,1) + 
+  theme_minimal() +
+  theme(text = element_text(size=18, 
+                            family="News Cycle")) + 
+  labs(x="Market Returns", y="", title="Market Timer Returns") 
+
+```
+</center>
+
+--- 
+
+# Dynamic Performance Evaluation
+
+* Alternatively, hedge funds may write out of the money put options that exacerbate downturns
+
+
+<center>
+```{r, out.width='1600px' , fig.asp = .4,  message=FALSE, warning=FALSE}
+
+rf <- 0.04
+rm <- rnorm(100, mean=0.09, sd = 0.22)
+data <- tibble(rf, rm) %>% mutate(market_timer = case_when(rm >= 0 ~ rm + 0.01, TRUE ~ rm*(2) + 0.01))
+ggplot(data = data) + 
+  geom_point(aes(y = market_timer, x = rm)) +
+  xlim(-0.5, 0.5) +
+  ylim(-1,1) + 
+  theme_minimal() +
+  theme(text = element_text(size=18, 
+                            family="News Cycle")) + 
+  labs(x="Market Returns", y="", title="Returns to option writers") 
+
+```
+</center>
+
+---
+
+# Dynamic Performance Evaluation
+
+$$
+r_{p} = \alpha + r_{f} + \beta_{1}(r_{m} - r_{f}) + \beta_{2}(r_{m}-r_{f})^{2} + \epsilon_{p}
+$$
+
+* $\beta_{2} < 0$ may imply option writing
+
+<center>
+```{r, out.width='1600px' , fig.asp = .4,  message=FALSE, warning=FALSE}
+
+rf <- 0.04
+rm <- rnorm(100, mean=0.09, sd = 0.22)
+data <- tibble(rf, rm) %>% mutate(market_timer = case_when(rm > 0 ~ rm + 0.01, TRUE ~ rm*(2) + 0.01))
+ggplot(data = data) + 
+  geom_point(aes(y = market_timer, x = rm)) +
+  xlim(-0.5, 0.5) +
+  ylim(-1,1) + 
+  theme_minimal() +
+  theme(text = element_text(size=18, 
+                            family="News Cycle")) + 
+  labs(x="Market Returns", y="", title="Returns to option writers") 
+
+```
+</center>
+
+
+---
+
+# Non-linear loadings across asset classes 
+
+
+$$
+\widetilde{r}_{p,t}^{e} = \alpha_{p} + \beta^{+}\max\{\widetilde{r}_{m,t}^{e} , 0\} + \beta^{-}\min\{\widetilde{r}_{m,t}^{e} , 0\} + \epsilon_{p,t}
+$$
+
+```{r,  out.width='1800px' , fig.asp = .5,  message=FALSE, warning=FALSE}
+library(readxl)
+hedge_fund_beta_nonlinear <- read_excel("~/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Data/hedge_fund_beta_nonlinear2.xlsx")
+
+hedge_fund_beta_nonlinear$case <- as.factor(hedge_fund_beta_nonlinear$case)
+levels(hedge_fund_beta_nonlinear$case) <- c("Difference", "beta_minus", "beta_plus")
+ggplot(data = hedge_fund_beta_nonlinear %>% mutate(significant = case_when(abs(t) > 2 ~ "Significant",
+                                                                           abs(t) <= 2 & t != 0 ~ "Insignificant",
+                                                                           t == 0 ~ "Difference"))) + 
+  geom_col(aes(y= beta, x = style, fill=significant)) + 
+  coord_flip() + 
+  facet_grid(.~ case) +
+  theme_minimal() +
+  theme(text = element_text(size=16, 
+                            family="News Cycle")) + 
+  labs(x="", y="Beta", title="Non-linear market loadings", fill="") 
+
+```
+
+
+
