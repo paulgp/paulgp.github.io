@@ -41,13 +41,6 @@ library(kableExtra)
   }
 </style>
 
-<script>
-    var link = document.createElement( 'link' );
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = window.location.search.match( /print-pdf/gi ) ? '../pdf.css' : '../paper.css';
-    document.getElementsByTagName( 'head' )[0].appendChild( link );
-</script>
 
 <section class=center>
 ## Lecture 8 : Performance Evaluation
