@@ -79,7 +79,7 @@ library(kableExtra)
 
 ---
 
-# Single Factor / CAPM alpha
+# Single Factor and CAPM alpha
 
 We construct our portfolio alpha as
 $$ 
