@@ -338,8 +338,8 @@ In model 2, we assume the news-based estimates are true (red) and incorporate th
 
 ```{r, echo=FALSE}
 model = lm(ui_growth ~ diff, data = joined_data, na.action= na.exclude )
-se.sum = sum(predict(model, newdata = joined_data, se.fit = TRUE)$se.fit * joined_data$baseline )
-fit.sum =  sum(predict(model, newdata = joined_data, se.fit = TRUE)$fit *  joined_data$baseline )
+se.sum = sum(predict(model, newdata = joined_data, se.fit = TRUE)$se.fit * joined_data$baseline )/1000000
+fit.sum =  sum(predict(model, newdata = joined_data, se.fit = TRUE)$fit *  joined_data$baseline )/1000000
 
 
 
@@ -347,13 +347,24 @@ fitted2 = fitted_data %>% bind_cols(tibble(se = predict(model, newdata = joined_
   mutate(se2 = case_when(fitted == TRUE ~ se*baseline,
                                        TRUE ~ 0)) 
 
-se2.sum = sum(fitted2$se2)
-fit2.sum = sum(fitted2$combined_projection)
+se2.sum = sum(fitted2$se2)/1000000
+fit2.sum = sum(fitted2$combined_projection)/1000000
 
 
-output = tibble(`Model 1 Output` = fit.sum, `Model 1 Output CI Lower` = fit.sum-2*se.sum, `Model 1 Output CI Upper` = fit.sum+2*se.sum,
-                `Model 2 Output` = fit2.sum, `Model 2 Output CI Lower` = fit2.sum-2*se2.sum, `Model 2 Output CI Upper` = fit2.sum+2*se2.sum,)
+output = tibble(`Estimate (millions)` = fit.sum, 
+                `CI Lower` = fit.sum-2*se.sum,
+                `CI Upper` = fit.sum+2*se.sum,
+                `Estimate 2 (millions)` = fit2.sum,
+                `CI Lower 2` = fit2.sum-2*se2.sum,
+                `CI Upper 2` = fit2.sum+2*se2.sum)
 
-output  %>% kable(digits = 3, format.args = list(big.mark = ",", scientific = FALSE)) %>%
+output  %>% kable(digits = 2, format.args = list(big.mark = ",", scientific = FALSE),
+                  col.names = c("Estimate (millions)",
+                           "CI Lower",
+                           "CI Upper",
+                           "Estimate (millions)",
+                           "CI Lower",
+                           "CI Upper")) %>%
+  add_header_above(c("Model 1" = 3, "Model 2" = 3)) %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 ```
