@@ -1,0 +1,25 @@
+\input{/Users/PSG24/Dropbox/Papers/header.tex}
+
+\title{Reduced Form Bartik Rotemberg Weight}
+\author{Paul Goldsmith-Pinkham, Isaac Sorkin, and Henry Swift}
+\begin{document}
+\maketitle
+
+Let our Bartik measure be $B_{i} = \sum_{k}Z_{ik}g_{k}$, controls $W_{i}$ (including a constant) and outcome $Y_{i}$. We're running the regression
+$$ Y_{i} = W_{i}\gamma + B_{i}\beta + \epsilon_{i}.$$
+
+We do residual regression, and denote $B_{i}^{\perp} = M_{W}B_{i}$, $Y_{i} = M_{W}Y_{i}$, such that
+
+$$Y_{i}^{\perp} = B_{i}^{\perp}\beta + \epsilon^{\perp}_{i}.$$
+
+Our estimate for $\beta$ can be written as (since $M_{W}$ is idempotent):
+
+$$\hat{\beta} = (B'B^{\perp})^{-1}(B'Y^{\perp})$$.
+
+As a result, it is possible to rewrite this as:
+
+$$\hat{\beta} = \sum_{k}\hat{\alpha}_{k}\hat{\beta}_{k}, \qquad \hat{\beta}_{k}  =(Z_{k}'B^{\perp})^{-1} (Z_{k}'Y^{\perp}), \qquad \hat{\alpha}_{k} = \frac{g_{k}Z_{k}'B^{\perp}}{\sum_{k'}g_{k'}Z_{k'}'B^{\perp}},$$.
+
+Hence, each $\beta_{k}$ can be recovered as using the industry share as an instrument for the reduced form measure.
+
+\end{document}
