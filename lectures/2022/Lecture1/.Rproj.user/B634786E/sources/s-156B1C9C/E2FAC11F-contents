@@ -1,0 +1,11 @@
+
+install.packages("tidyquant")
+library(tidyquant)
+
+netflix <- tq_get("^VIX", get = "stock.prices")
+
+
+ggplot(data = netflix) + 
+  geom_line(aes(y=close, x=date)) +
+  theme_tq() +
+  theme(text = element_text(size=20))

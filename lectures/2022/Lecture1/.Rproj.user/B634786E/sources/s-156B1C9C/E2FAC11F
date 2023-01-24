@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1545158013305.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "E2FAC11F",
+    "lastKnownWriteTime" : 1545170505,
+    "last_content_update" : 1545170505942,
+    "path" : "~/Dropbox/Teaching/MGT544Spring2019/Class Lectures/Lecture 1/lecture_1.R",
+    "project_path" : "lecture_1.R",
+    "properties" : {
+        "cursorPosition" : "10,36",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1547827146347.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "1CD1B99A",
+    "lastKnownWriteTime" : 4294967302,
+    "last_content_update" : 1547827146347,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "44837C68",
+        "caption" : "bonds",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=bonds&cache_key=44837C68",
+        "displayedObservations" : 1111,
+        "environment" : "",
+        "object" : "bonds",
+        "preview" : 0,
+        "totalObservations" : 1111,
+        "variables" : 2
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}
