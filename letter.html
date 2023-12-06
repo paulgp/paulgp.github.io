@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Paul Goldsmith-Pinkham by paulgp</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      ga('create', 'UA-65546321-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body>
+    <p class="left-align">
+        <font size="+3">Response to &ldquo;<a
+                href="https://libertylensecon.substack.com/p/the-silent-revolution-free-speech-8cb">The Silent Revolution:
+                Free Speech, Censorship, and the Campus Dilemma in America (Part 2)</a>&rdquo; by Joshua Rauh and Gregory
+            Kearney</font>
+    
+    <p class="empty-line"></p> <!-- Empty line with bigger margin -->
+    
+    <font size="+2">
+        <p> December 6, 2023
+    
+        <p class="empty-line"></p> <!-- Empty line with bigger margin -->
+    
+        <p> Dear Joshua and Gregory,
+    
+        <p> Thank you for taking the time to offer comments on our paper &ldquo;<a
+                href="https://florianederer.github.io/ejmr.pdf">Anonymity and Identity Online</a>&rdquo;. However, I am a
+            bit confused by some of these comments. I believe you may have read an old version of our paper because several
+            of the points that you raised in your Substack post on December 1, 2023, are explicitly addressed in the version
+            of our paper (available <a href="https://florianederer.github.io/ejmr.pdf">here</a>) that I <a
+                href="https://florianederer.github.io/rauh-email.jpg">emailed you on October 26, 2023</a>. For purposes of
+            correcting the record, I am responding to these points below.</p>
+    
+        <p>First, in Appendix A we describe the provenance of our data in detail. Our study uses only publicly available
+            pages on EJMR, the same pages viewed by other EJMR users and indexed by search engines such as Google, Yandex,
+            Baidu, Bing, and Archive.org. At no point did we access any non-public pages, hidden URLs, or APIs. Every page
+            of EJMR we used in our study was in a chain of links from the EJMR homepage. Every page permitted access from
+            EJMR's robots.txt, EULA (none), and terms of service (none). Furthermore, every single page from EJMR used in
+            our study contained advertisements. That is, everything in our study was visible to us as ordinary consumers of
+            the ordinary EJMR content designed for public consumption. What we present in the paper is a statistical
+            analysis of that ordinary, publicly available content, particularly the usernames shown on EJMR until May 2023.
+            We are looking at the same EJMR content as everybody else, but with our methods we can assign probabilities over
+            IP addresses for posts. This is all to say, our study is very plainly not a &ldquo;hack&rdquo;. It is instead
+            just like any other economics paper that uses crawled web data. I would appreciate it if you would clarify this
+            on your Substack because many people will not bother to read our paper and could be misinformed.</p>
+    
+        <p>Second, our study does not doxx anyone and does not reveal any personally identifying information. That is not
+            the purpose of the paper and there is no content of that kind in the paper. Instead, the paper describes
+            aggregated features of posting behavior on EJMR and only reveals a single IP address, which is provided
+            specifically in response to a public million-dollar prize offered by EJMR's owner for identifying the IP address
+            of one particular post.</p>
+    
+        <p>Third, our study received extremely careful IRB review at multiple junctures. In fact, I am certain that our
+            project received more scrutiny and employee time than 99% of economics studies this year. I am confused and
+            disheartened by your statement that we &ldquo;misled the IRB&rdquo;. I am not sure how to respond other than to
+            say that this is a completely false allegation.</p>
+    
+        <p>Fourth, you raise some concerns about the classifiers we use. Specifically, we used three classifiers:
+        <ul>
+            <li>misogyny with &ldquo;MilaNLProc&rdquo; (Attanasio et al. 2022)</li>
+            <li>toxicity with &ldquo;ToxiGen Roberta&rdquo; (Hartvigsen et al. 2022)</li>
+            <li>hate speech with &ldquo;Twitter Base Hate&rdquo; (Antypas and Camacho-Collados 2023) </li>
+        </ul>
+        Each of these classifiers has false positives and false negatives. The misclassifications you found are real and
+        dissatisfying to us. But, these are the best models available. They are literally best-in-class. The Toxigen model
+        in particular, which we use for toxicity classification, was just recently used for the same purpose in Meta's
+        Llama2 large language model, Meta's ChatGPT equivalent (see page 69 of <a
+            href="https://arxiv.org/abs/2307.09288">https://arxiv.org/abs/2307.09288</a>). In light of Meta's choice, we
+        feel comfortable using Toxigen. Furthermore, in our paper we compare EJMR to Reddit. We have no reason to think that
+        the classifiers are inconsistent across those datasets, so we expect any misclassifications to be equally
+        distributed.</p>
+    
+        <p>Fifth, we do not cherry-pick particular subreddits but instead compare EJMR to the 1,000 most popular subreddits
+            and provide a systematic and coherent explanation for our sample. In contrast, the other empirical analysis that
+            you cite does use a cherry-picked set of subreddits.</p>
+    
+        <p>Sixth, you wrote it is &ldquo;unclear to this point whether the authors are potentially double, triple,
+            quadruple, etc. counting &ldquo;toxic&rdquo; phrases.&rdquo; This is not true. On page 21 of our manuscript we
+            clearly state that we &ldquo;removed any quoted blocks of text belonging to other posts to avoid misattribution
+            of the content of posts.&rdquo;</p>
+    
+        <p>Finally, your Substack post contains significant speculation about what one could do with our data, but not what
+            our paper actually does.</p>
+    
+        <p>Florian Ederer <br> Allen and Kelli Questrom Professor in Markets, Public Policy & Law <br> Boston University</p>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>
