@@ -4,7 +4,7 @@
 
 body {
   padding:50px;
-  font:16px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font:15px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color:#777;
   font-weight:300;
 }
@@ -65,9 +65,7 @@ code, pre {
   color:#333;
   font-size:12px;
 }
-button {
-  padding: 0 0.5rem 0 1rem;
-}
+
 
 pre {
   padding:8px 15px;
