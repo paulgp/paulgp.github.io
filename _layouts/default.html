@@ -11,7 +11,7 @@
     {% endif %}
     <style>
         button.accordion2 {
-            font: 14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font: 14px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
             cursor: pointer;
             padding: 0px;
             border: none;
@@ -54,6 +54,7 @@
             color: #777;
             float: left;
             margin-left: 1px;
+            margin-right: 3px;
         }
     
         button.accordion.active:after {
@@ -77,8 +78,8 @@
 <body>
     <div class="wrapper">
         <header>
-            <h1>Paul Goldsmith-Pinkham</h1>
-    <p>Research Economist</p>
+            <!-- <h1>Paul Goldsmith-Pinkham</h1>
+    <p>Research Economist</p> -->
     <h3>
         <p class="view"><a href="/">Home</a></p>
     </h3>
@@ -108,8 +109,6 @@
     </h3>
             </h3>
             <p class="view"><img src="{{ '/assets/img/circle_cropped.png' | relative_url }}" width=270 height=270></p>
-            <p>I am an assistant professor at the Yale School of Management. If you need to reach me, please email me at
-                paul.goldsmith-pinkham at yale dot edu. </p>
         </header>
         <section>
             {{ content }}
