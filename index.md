@@ -4,7 +4,7 @@ title: Paul Goldsmith-Pinkham
 ---
 
 # Paul Goldsmith-Pinkham
-### Assistant Professor of Finance <br> Yale School of Management
+### Associate Professor of Finance <br> Yale School of Management
 
 ### CV
 [My CV is available here.](papers/cv.pdf)
