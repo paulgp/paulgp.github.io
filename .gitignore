@@ -8,5 +8,3 @@ cv.log
 cv.aux
 *.aux
 *.synctex.gz
-Gemfile
-Gemfile.lock
