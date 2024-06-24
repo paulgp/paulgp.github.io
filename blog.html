@@ -1,38 +1,8 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Paul Goldsmith-Pinkham by paulgp</title>
+---
+layout: default
+title: A Causal Affair (non-substack edition)
+---
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      
-      ga('create', 'UA-65546321-1', 'auto');
-      ga('send', 'pageview');
-    </script>
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Paul Goldsmith-Pinkham</h1>
-        <p>Research Economist</p>
-        <h3><p class="view"><a href="https://paulgp.github.io/">Home</a></p></h3>
-        <h3><p class="view"><a href="https://paulgp.github.io/papers.html">Papers</a></p></h3>
-	<h3><p class="view"><a href="https://paulgp.github.io/blog.html">Blog</a></p></h3>
-	<h3><p class="view"><a href="https://paulgp.github.io/papers/cv.pdf">CV</a></p></h3>
-	<p class="view"><img src="circle_cropped.png" width=270 height=270></p>
-	<p>I am an assistant professor at the Yale School of Managment. If you need to reach me, please email me at paul.goldsmith-pinkham at yale dot edu. </p>
-      </header>
       <section>
         <h3><a id="updates" class="anchor" href="#tidyreg" aria-hidden="true"><span class="octicon octicon-link"></span></a>Comparing <tt>tidyverse</tt> R to Stata </h3>
 	<p> I spent some time this weekend learning <tt>tidyverse</tt>, a set of R libraries inspired by <a href="http://tidyr.tidyverse.org/">tidyr</a> by Hadley Wickham. I have a lot of friends who swear by R -- I used it in college quite a bit, but once I switched to Stata I never went back. The main reason for this was that the base R language (which is how I learned R) is quite clunky -- it's painful to do basic data cleaning. However, I recently read through a nice post by David Robinson on the <a href="http://varianceexplained.org/r/teach-tidyverse/">values of tidyverse</a> and I decided to give a shot.</p>
@@ -142,8 +112,3 @@ worth keeping in mind if you are ever trying to replicate results!).
 	      <p> Below is an example using 2009 bankruptcy filing rates with the following line: <code class="outline">maptile frac_bk, geo(statehex) labelhex(statename_plus_percentage)</code>
 	       <img src="BankruptcyFiling.png"></p>
       </section>
-  
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-  </body>
-</html>
