@@ -1,9 +1,9 @@
 ---
-layout: default
+layout: blog
 title: Best Figures from Economics Papers
 ---
 
-Matt Notowidigdo prompted a <a href="https://twitter.com/ProfNoto/status/973319310700699649"><b>great thread of peoples' suggestions of their favorite figures</b></a>. I thought I would give a resting place for the nominees:
+Matt Notowidigdo prompted a <a href="https://twitter.com/ProfNoto/status/973319310700699649">great thread of peoples' suggestions of their favorite figures</a>. I thought I would give a resting place for the nominees:
 
 1. [Griliches (1957)](http://www.jstor.org/stable/1905380) ![Griliches](http://paulgp.github.io/best_figures/griliches1957.jpg)
 2. [Jensen (2007)](https://academic.oup.com/qje/article-abstract/122/3/879/1879540) ![Jensen](http://paulgp.github.io/best_figures/jensen2007.jpg)

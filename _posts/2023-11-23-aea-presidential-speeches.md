@@ -1,9 +1,9 @@
 ---
-layout: default
+layout: blog
 title: Presidential Lectures
 ---
 
-I wanted to put together a list of AEA (and other Economics groups) Presidential speeches for my own perusal. I thought I'd share it here in case it's useful for others. 
+I wanted to put together a list of AEA (and other Economics groups) Presidential speeches for my own perusal. I thought I'd share it here in case it's useful for others.
 
 (Cites as of 11/23/23)
 ## AEA Presidential Speeches
