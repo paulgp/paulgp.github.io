@@ -1,4 +1,11 @@
 
+Topics for today:
+
+1. VS Code + Copilot installation
+2. Examples using Chat LLMs for Research and Teaching
+3. Images from Midjourney
+4. Running your own LLM locally
+
 
 Goal for today's chat is to highlight a number of useful ways that you can use AI in your research and teaching. I'm using AI super loosely here -- what I really mean is the relatively new innovations of Large Language Models that have sprung up following the release of ChatGPT 3.
 
