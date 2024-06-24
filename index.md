@@ -16,7 +16,7 @@ title: Paul Goldsmith-Pinkham
 ### Teaching Materials
 [Ph.D. applied empirical methods course materials](https://github.com/paulgp/applied-methods-phd)
 
-### Blog (A Causal Affair (the non-substack version))
+### Blog  (the non-substack version)
 I write a blog about causal inference, household finance, and  econometrics.  You can find it [here](https://paulgp.github.io/blog.html).
 
 Some useful posts:

@@ -5,11 +5,10 @@ title: A Causal Affair
 
 <ul>
   {% for post in site.posts %}
+    {% unless post.exclude %}
     <li>
       <b> <a href="{{ post.url }}">{{ post.title }}</a> </b>
-
       <p> {{ post.date | date: "%B %-d, %Y" }}</p>
-
-      {{ post.excerpt }}      
-      <!-- <p><a href = "{{ post.url }}">Read more...</a></p> -->
+      {{ post.excerpt }}       
+    {% endunless %}
   {% endfor %}
