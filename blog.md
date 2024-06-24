@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: A Causal Affair (non-substack edition)
+title: A Causal Affair
 ---
 
 <ul>

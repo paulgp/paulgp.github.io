@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: blog
 title: Comparing tidyverse R to Stata
 ---
 

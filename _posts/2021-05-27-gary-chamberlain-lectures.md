@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: blog
 title: Gary Chamberlain Lecture Notes from Harvard's Econ 2120 Course
 ---
 
