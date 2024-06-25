@@ -6,6 +6,7 @@
     <title>{{ page.title }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/github-light.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/jekyll-code-style.css' | relative_url }}">
     {% if site.google_analytics and jekyll.environment == 'production' %}
     {% include analytics.html %}
     {% endif %}
@@ -90,6 +91,7 @@
             {{ content }}
         </div></div>
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/put-code-elements.js' | relative_url }}"></script>
 </body>
 
 </html>
