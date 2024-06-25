@@ -8,3 +8,4 @@ cv.log
 cv.aux
 *.aux
 *.synctex.gz
+.vscode/settings.json
