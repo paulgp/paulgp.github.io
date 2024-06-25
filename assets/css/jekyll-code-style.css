@@ -39,7 +39,7 @@ pre.highlight {
     }
 }
 
-/* pre.highlight::before {
+pre.highlight::before {
     content: attr(data-before);
     margin-top: -15px;
     float: right;
@@ -49,7 +49,7 @@ pre.highlight {
     font-size: .8em;
     letter-spacing: 1px;
     color: #3bc47f;
-} */
+}
 
 code {
     /* FONT OF ALL CODES */
