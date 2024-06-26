@@ -20,8 +20,9 @@ title: Paul Goldsmith-Pinkham
 I write a blog about causal inference, household finance, and  econometrics.  You can find it [here](https://paulgp.github.io/blog.html).
 
 Some useful posts:
-1. [Beamer Tips](https://paulgp.github.io/2018-04-30-beamer-tips.html)
-2. [Gary Chamberlain Lecture Notes](https://paulgp.github.io/2021-05-27-chamberlain-lecture-notes.html)
+1. [Beamer Tips](https://paulgp.github.io/2018/04/30/beamer-tips.html)
+2. [Gary Chamberlain Lecture Notes](https://paulgp.github.io/2021/05/27/chamberlain-lecture-notes.html)
+3. [AI in Research and Teaching](https://paulgp.github.io/2024/06/24/llm_talk.html)
 
 ### Contact
 - Email: paul.goldsmith-pinkham@yale.edu
