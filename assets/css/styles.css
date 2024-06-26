@@ -335,6 +335,7 @@ pre {
 
 
 .sidenote {
+  max-width: 100%;      /* Ensure sidenotes do not overflow */
   padding-left: 10px;
   margin-bottom: 1.5em;
   border-left: 1px solid black;
@@ -347,4 +348,9 @@ pre {
   color: #39c;
   ;
   border-color: #39c;
+}
+
+body, html {
+  overflow-x: hidden;
+  /* Prevent horizontal scrollbar */
 }

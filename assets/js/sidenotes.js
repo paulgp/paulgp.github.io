@@ -49,17 +49,30 @@
         // console.log(" ---> snStart " + (startPosition + startPosition / 3));
         // console.log(" ---> windowWidth " + $postContent.outerWidth());
 
+        const viewportWidth = $(window).width(); // Get the viewport width
+        const mainContentWidth = $postContent.outerWidth(true); // true includes margin
+        const availableSpace = viewportWidth - mainContentWidth - 200; // Subtract main content width and some padding from viewport width
+
+        let sideNoteWidth = startPosition / 5;
         // has room to show side content
-        if (startPosition + startPosition / 3 < $(".topnav").outerWidth()) {
+        if (availableSpace < 2*sideNoteWidth) {
             $footnotes.show();  // previous resize could have hidden footnotes
             return;
         }
         //endregion
-        if (window.innerWidth < 1200) {
-            $footnotes.show();  // previous resize could have hidden footnotes
-            return;
-        }
+        // if (window.innerWidth < 1200) {
+        //     $footnotes.show();  // previous resize could have hidden footnotes
+        //     return;
+        // }
+        // let mainRegionWidth = $(".topnav").outerWidth();
+        // let sideNoteWidth = $(".topnav").outerWidth() / 2;
+        // console.log(" ---> mainRegionWidth " + mainRegionWidth);
+        // console.log(" ---> mainRegionWidth " + sideNoteWidth);
 
+        // if (window.width < (mainRegionWidth + (2 * sideNoteWidth))) {
+        //     $footnotes.show();  // previous resize could have hidden footnotes
+        //     return;
+        // }
         const $fnItems = $footnotes.find("ol li");
 
         $("sup").each(function (index) {
