@@ -85,7 +85,7 @@
             position: "absolute",
             left: startPosition,
             top: topPosition["top"],
-            width: startPosition / 3,
+            width: startPosition / 5,
         });
 
         if (startPosition > 420) {
