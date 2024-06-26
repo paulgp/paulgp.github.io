@@ -56,11 +56,11 @@ code {
     font-family: 'Roboto Mono', monospace;
 
     /* INLINE CODE STYLE */
-    background: #0b0e0b;
+    /* background: #0b0e0b; */
     color: #dd828c;
     font-size: .9em;
     padding: 0 3px;
-    border: 1px solid #666;
+    /* border: 1px solid #666; */
     border-radius: 3px;
 }
 

@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/github-light.css' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/jekyll-code-style.css' | relative_url }}">
+    <script src="{{ 'assets/js/jquery.min.js' | relative_url }}"></script>
+    <script src="{{ 'assets/js/sidenotes.js' | relative_url }}"></script>
     {% if site.google_analytics and jekyll.environment == 'production' %}
     {% include analytics.html %}
     {% endif %}
@@ -86,7 +88,7 @@
       <a href="https://github.com/paulgp/applied-methods-phd">Applied Methods PhD Course</a>
        </div></div>
         <div class="wrapper2">
-        <div  style="background-color: #F1F1F1; color: #666; padding: 10px;">
+        <div  class = "post-content" style="background-color: #F1F1F1; color: #666; padding: 10px;">
             <h1> {{ page.title }} </h1>
             {{ content }}
         </div></div>

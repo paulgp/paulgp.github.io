@@ -104,7 +104,7 @@ img {
 }
 
 header {
-  width:300px;
+  width:250px;
   float:left;
   position:fixed;
 }
@@ -169,7 +169,7 @@ header ul a strong {
 }
 
 section {
-  width:600px;
+  width:650px;
   float:right;
   padding-bottom:50px;
   padding-right:20px;
@@ -333,3 +333,18 @@ pre {
   color: white;
 }
 
+
+.sidenote {
+  padding-left: 10px;
+  margin-bottom: 1.5em;
+  border-left: 1px solid black;
+  font-size: 0.8em;
+  color: $color-textunderline;
+  font-style: italic;
+}
+
+.sidenote-hover {
+  color: #39c;
+  ;
+  border-color: #39c;
+}
