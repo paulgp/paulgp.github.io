@@ -67,7 +67,7 @@
             createSideNote($(this), $footnoteText, startPosition);
         });
 
-        $footnotes.hide();
+        //$footnotes.hide();
     }
 
     function createSideNote(superscript, footnoteText, startPosition) {
