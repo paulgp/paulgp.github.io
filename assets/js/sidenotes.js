@@ -44,10 +44,10 @@
             + $postContent.outerWidth()
             + 60; // some padding
 
-        console.log(" ---> postWidth " + $postContent.position().left);
-        console.log(" ---> startPosition " + startPosition);
-        console.log(" ---> snStart " + (startPosition + startPosition / 3));
-        console.log(" ---> windowWidth " + $postContent.outerWidth());
+        // console.log(" ---> postWidth " + $postContent.position().left);
+        // console.log(" ---> startPosition " + startPosition);
+        // console.log(" ---> snStart " + (startPosition + startPosition / 3));
+        // console.log(" ---> windowWidth " + $postContent.outerWidth());
 
         // has room to show side content
         if (startPosition + startPosition / 3 < $(".topnav").outerWidth()) {
@@ -55,6 +55,10 @@
             return;
         }
         //endregion
+        if (window.innerWidth < 850 + (startPosition /2)) {
+            $footnotes.show();  // previous resize could have hidden footnotes
+            return;
+        }
 
         const $fnItems = $footnotes.find("ol li");
 
@@ -63,7 +67,7 @@
             createSideNote($(this), $footnoteText, startPosition);
         });
 
-        //$footnotes.hide();
+        $footnotes.hide();
     }
 
     function createSideNote(superscript, footnoteText, startPosition) {
