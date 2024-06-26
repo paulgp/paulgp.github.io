@@ -55,7 +55,7 @@
             return;
         }
         //endregion
-        if (window.innerWidth < 850 + (startPosition /2)) {
+        if (window.innerWidth < 1200) {
             $footnotes.show();  // previous resize could have hidden footnotes
             return;
         }
