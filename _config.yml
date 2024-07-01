@@ -19,6 +19,7 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Paul Goldsmith-Pinkham
+title_blog: A Causal Affair Blog
 email: paul.goldsmith-pinkham@yale.edu
 description: >- # this means to ignore newlines until "baseurl:"
   Homepage of the economist Paul Goldsmith-Pinkham
