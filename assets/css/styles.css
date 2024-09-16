@@ -278,6 +278,10 @@ pre {
     background: #F1F1F1;
 }
 
+li {
+  margin: 10px 0;
+}
+
 
 /* Add a black background color to the top navigation */
 .topnav {
@@ -358,3 +362,4 @@ body, html {
   overflow-x: hidden;
   /* Prevent horizontal scrollbar */
 }
+
