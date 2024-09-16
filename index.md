@@ -9,9 +9,7 @@ title: Paul Goldsmith-Pinkham
 [My CV is available here.](papers/cv.pdf)
 
 ### Research
-1.  [finance research](papers.html#empirical)
-2.  [econometrics research](papers.html#metrics)
-3.  [Covid-19 releated research](papers.html#covid)
+[My research is listed here.](papers.html)
 
 ### Teaching Materials
 [Ph.D. applied empirical methods course materials](https://github.com/paulgp/applied-methods-phd)
