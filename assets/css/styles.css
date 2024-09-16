@@ -48,6 +48,10 @@ a small {
   display:block;
 }
 
+b {
+  font-weight: 600;
+}
+
 .wrapper {
   width:960px;
   margin:0 auto;
