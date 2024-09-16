@@ -5,7 +5,7 @@ title: Research Papers
 
 My papers are listed below. I have separated [my Covid-19 work into a separate section below.](#section-4)
 	
-## Working Papers 
+### Working Papers 
 
 1. [Non-robustness of diffusion estimates on networks with measurement error](https://paulgp.github.io/papers/diffusion_error_CGPMTW.pdf) <br>
  with Arun Chandrasekhar, Tyler McCormick, Samuel Thau and Jerry Wei (Revise and Resubmit, **Econometrica**) <button class="accordion">
@@ -37,7 +37,7 @@ with Anusha Chari (Reject and Resubmit, **Review of Economics and Statistics**) 
 </button>
     <div class="panel" style="background-color: #F1F1F1; color: #666; padding: 10px;">  We document the representation of female economists on the conference programs at the NBER Summer Institute from 2001-2018. Over the period from 2016-2018, women made up slightly over 21 percent of all authors on scheduled papers. However, there was large dispersion in the female author share across programs. While the average share of women has slightly risen from 18 percent since 2001-2003, a persistent gap between finance, macroeconomics and microeconomics subfields remains. We examine several channels potentially affecting female representation including gender differences in acceptance and submissions rates, institutional rank, NBER affiliation, faculty seniority and the role of organizers. </div>
 
-## Publications
+### Publications
 
 1. [Contamination Bias in Linear Regression](https://paulgp.github.io/papers/gphk_feb152024.pdf) <br>
 with Peter Hull and Michal Kolesár (Forthcoming, **American Economic Review**) <button class="accordion">
@@ -112,7 +112,8 @@ with Tanju Yorulmazer (December 2009, **Journal of Financial Services Research**
 with Phil Everson (2008, **Journal of Quantitative Analysis in Sports**) <button class="accordion"> Abstract </button>
     <div class="panel" style="background-color: #F1F1F1; color: #666; padding: 10px;">Goal scoring in sports such as hockey and soccer is often modeled as a Poisson process. We work with a Poisson model where the mean goals scored by the home team is the sum of parameters for the home team's offense, the road team's defense, and a home advantage. The mean goals for the road team is the sum of parameters for the road team's offense and for the home team's defense. The best teams have a large offensive parameter value and a small defensive parameter value. A level-2 model connects the offensive and defensive parameters for the k teams. Parameter inference is made by imagining that goals can be classified as being strictly due to offense, to (lack of) defense, or to home-field advantage. Though not a realistic description, such a breakdown is consistent with our model assumptions and the literature, and we can work out the conditional distributions and generate random partitions to facilitate inference about the team parameters. We use the conditional Binomial distribution, given the Poisson totals and the current parameter values, to partition each observed goal total at each iteration in an MCMC algorithm. </div>
 
-## Resting Papers
+### Resting Papers
+
 1. [Parsing the Content of Bank Supervision](https://www.newyorkfed.org/research/staff_reports/sr770.html) <br>
 with Beverly Hirtle and David Lucca <button class="accordion">    Abstract  </button>
     <div class="panel" style="background-color: #F1F1F1; color: #666; padding: 10px;"> We measure bank supervision using the database of supervisory issues, known as matters requiring attention or immediate attention, raised by Federal Reserve examiners to banking organizations. The volume of supervisory issues increases with banks’ asset size, especially for the largest and most complex banks, and decreases with profitability and the quality of the loan portfolio. Stressed banks are faster at resolving issues, but all else equal, resolving new issues takes longer the more issues a bank faces, which may suggest capacity constraints in addressing multiple supervisory issues. Using computational linguistic methods on the text of the issue description, we define five categorical issue topics. The subset of issues related to capital levels and loan portfolio are the most consequential in terms of regulatory rating downgrades and are directly related to changes in banks’ balance sheet characteristics and profitability. Other issues appear to reflect soft information and are less correlated with bank observables. By categorizing questions asked by analysts at banks’ quarterly earnings calls using the same linguistic approach, we find that market monitors raise issues similar to those of supervisors when the issues are related to hard information (such as loan quality or capital) and public supervisory assessment programs. </div>
@@ -121,7 +122,7 @@ with Beverly Hirtle and David Lucca <button class="accordion">    Abstract  </bu
 with Adam Ashcraft and James Vickery <button class="accordion"> Abstract </button>
     <div class="panel" style="background-color: #F1F1F1; color: #666; padding: 10px;"> We study credit ratings on subprime and Alt-A mortgage-backed-securities (MBS) deals issued between 2001 and 2007, the period leading up to the subprime crisis. The fraction of highly rated securities in each deal is decreasing in mortgage credit risk (measured either ex ante or ex post), suggesting that ratings contain useful information for investors. However, we also find evidence of significant time variation in risk-adjusted credit ratings, including a progressive decline in standards around the MBS market peak between the start of 2005 and mid-2007. Conditional on initial ratings, we observe underperformance (high mortgage defaults and losses and large rating downgrades) among deals with observably higher risk mortgages based on a simple ex ante model and deals with a high fraction of opaque low-documentation loans. These findings hold over the entire sample period, not just for deal cohorts most affected by the crisis. </div>
 
-## Covid-19 Publications
+### Covid-19 Publications
 
 1. [Can a Trusted Messenger Change Behavior when Information is Plentiful? Evidence from the First Months of the COVID-19 Pandemic in West Bengal](https://economics.mit.edu/sites/default/files/2022-08/wb_manuscript_final.pdf)  <br>
 with Abhijit Banerjee, Marcella Alsan, Emily Breza, Arun G. Chandrasekhar, Abhijit Chowdhury, Esther Duflo, and Benjamin A. Olken (Forthcoming, **Review of Economics and Statistics**)
