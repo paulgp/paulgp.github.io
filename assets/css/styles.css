@@ -38,7 +38,7 @@ h3, h4, h5, h6 {
 a {
   color:#39c;
   font-weight:500;
-  text-decoration:none;
+  text-decoration:underline;
 }
 
 a small {
@@ -46,6 +46,10 @@ a small {
   color:#777;
   margin-top:-0.6em;
   display:block;
+}
+
+b {
+  font-weight: 600;
 }
 
 .wrapper {
@@ -274,6 +278,10 @@ pre {
     background: #F1F1F1;
 }
 
+li {
+  margin: 10px 0;
+}
+
 
 /* Add a black background color to the top navigation */
 .topnav {
@@ -354,3 +362,4 @@ body, html {
   overflow-x: hidden;
   /* Prevent horizontal scrollbar */
 }
+
