@@ -6,7 +6,7 @@ tags: [Research, AI, Economic Theory, Readers Digest]
 ---
 
 
-Ben Golub had the idea of [summarizing technical papers (such as in Econometrica) using AI to be more easily approached by non-technical economists.](https://bsky.app/profile/bengolub.bsky.social/post/3lacwdogwti2w)  These papers were selected from the list of the [most prominent recent papers in Econometrica by Google Scholar.](https://scholar.google.com/citations?hl=en&vq=bus_economics&view_op=list_hcore&venue=G0hmswRVzmAJ.2024) This is the second post, for an economic theory paper.  I also posted one for an [econometrics paper.](https://paulgp.github.io/2024/11/05/readers-digest-farrell-et-al-2021.html)
+Ben Golub had the idea of [summarizing technical papers (such as in Econometrica) using AI to be more easily approached by non-technical economists.](https://bsky.app/profile/bengolub.bsky.social/post/3lacwdogwti2w)  These papers were selected from the list of the [most prominent recent papers in Econometrica by Google Scholar.](https://scholar.google.com/citations?hl=en&vq=bus_economics&view_op=list_hcore&venue=G0hmswRVzmAJ.2024) This is the second post, for an economic theory paper.  I also posted one for an [econometrics paper.](https://paulgp.github.io/2024/11/06/readers-digest-farrell-et-al-2021.html)
 
 
 ## Targeting Interventions in Networks: A Reader's Digest
