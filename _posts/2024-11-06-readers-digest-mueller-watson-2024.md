@@ -7,7 +7,7 @@ tags: [Research, AI, Econometrics, Readers Digest]
 
 **Editors Note: This summmary was created using Claude AI. Please send me any comments or corrections.**
 
-[*Galeotti, Golub, and Goyal (Econometrica, 2020)*](https://www.econometricsociety.org/publications/econometrica/2024/09/01/Spatial-Unit-Roots-and-Spurious-Regression)
+[*Mueller and Watson (Econometrica, 2024)*](https://www.econometricsociety.org/publications/econometrica/2024/09/01/Spatial-Unit-Roots-and-Spurious-Regression)
 
 **Key Takeaway**: When analyzing spatial data (like county-level economic indicators), strong spatial correlation can lead to false statistical significance in regressions, even when using clustered standard errors or spatial HAC corrections. Just as economists difference time series data to handle unit roots, spatial data may need special transformations before regression analysis.
 
@@ -106,7 +106,6 @@ The paper is most relevant when:
 Researchers should be explicit about which aspect of the paper they're drawing on (testing, transformation methods, or theoretical results about spurious regression) as each has different requirements and limitations.
 
 ## How does this differ from Kelly (2020) (Understanding Persistence)
-
 Kelly (2020) and Mueller and Watson (2024) both tackle issues with spatial persistence regressions but take importantly different approaches:
 
 Key Differences:
