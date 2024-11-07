@@ -5,7 +5,7 @@ date: 2024-11-06
 tags: [Research, AI, Econometrics, Readers Digest]
 ---
 
-**Editors Note: This summmary was created using Claude AI. Please send me any comments or corrections.**
+*Editors Note: This summmary was created using Claude AI. Please send me any comments or corrections.*
 
 [*Mueller and Watson (Econometrica, 2024)*](https://www.econometricsociety.org/publications/econometrica/2024/09/01/Spatial-Unit-Roots-and-Spurious-Regression)
 
