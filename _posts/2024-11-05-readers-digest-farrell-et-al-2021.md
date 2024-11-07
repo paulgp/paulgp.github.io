@@ -97,7 +97,7 @@ The authors' results have important limitations:
 The paper is best positioned as part of the broader literature on valid inference after machine learning, specifically addressing the theoretical gaps for deep learning in econometric applications.
 
 
-[^1] Understanding β (Beta) and d in Practice
+[^1]: Understanding β (Beta) and d in Practice
 
 ## What These Numbers Mean
 

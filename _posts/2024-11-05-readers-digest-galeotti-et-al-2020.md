@@ -41,7 +41,7 @@ This paper makes three important contributions:
 
 3. **Methodological Innovation**: The use of network principal components to analyze intervention strategies is novel and provides a powerful analytical tool that others can build on.
 
-### Key Result: Simple Interventions (Proposition 2)
+### Key Result: Simple Interventions (Proposition 2) [^1]
 
 The paper's most practically relevant result (shown in Proposition 2) demonstrates that when the intervention budget is large enough, the optimal strategy becomes remarkably simple:
 
@@ -113,3 +113,59 @@ The paper is most useful as:
 3. A guide for empirical researchers on how network structure should inform intervention design
 
 Remember that the paper's key contribution is providing a practical framework for intervention design, not just a theoretical result. Applied researchers should emphasize this aspect when citing.
+
+[^1]: Here's a sketch of the formal model, focusing on its key elements and structure.
+
+## Core Model Setup
+
+### Players and Network
+- Set of players: N = {1,...,n}, where n ≥ 2
+- Network represented by symmetric adjacency matrix G
+- Entry gij ≥ 0 represents strength of connection between i and j
+- No self-links (gii = 0)
+
+### Player Utilities
+Each player i's utility is:
+```
+Ui(a,G) = ai(bi + β∑j∈N gij aj) - (1/2)ai² + Pi(a-i,G,b)
+```
+where:
+- ai is player i's action (continuous)
+- bi is standalone marginal return for player i
+- β captures strategic interactions:
+  - β > 0: strategic complements
+  - β < 0: strategic substitutes
+- Pi captures pure externalities that don't affect best responses
+
+### Equilibrium
+- First order conditions give best responses:
+```
+ai = bi + β∑j∈N gij aj
+```
+- In matrix form: [I - βG]a* = b
+- Under assumptions, unique Nash equilibrium exists:
+```
+a* = [I - βG]⁻¹b
+```
+
+### Planner's Problem
+The planner can modify standalone marginal returns (b) to maximize welfare:
+```
+max_b W(b,G)
+s.t. a* = [I - βG]⁻¹b
+     ∑i∈N (bi - b̂i)² ≤ C
+```
+where:
+- b̂ are status quo marginal returns
+- C is planner's budget
+- W(b,G) = w∑i(ai*)² for some w ∈ R
+
+### Key Innovation
+The paper analyzes this using principal components:
+- G = UΛUᵀ where:
+  - Λ is diagonal matrix of eigenvalues
+  - U contains corresponding eigenvectors
+- This allows decomposing interventions into components that can be analyzed separately
+- Optimal targeting depends on strategic complement/substitute nature and eigenvalue structure
+
+This setup allows analyzing how network structure interacts with strategic incentives to determine optimal intervention policies.
