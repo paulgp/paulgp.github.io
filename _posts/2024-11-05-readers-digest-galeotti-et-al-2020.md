@@ -1,4 +1,3 @@
-
 ---
 layout: blog
 title: "Testing out a new format: Reader's Digest of Econometrica Papers [Economic Theory Paper]"
