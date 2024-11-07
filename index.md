@@ -21,7 +21,7 @@ Some useful posts:
 1. [Beamer Tips](https://paulgp.github.io/2018/04/30/beamer-tips.html)
 2. [Gary Chamberlain Lecture Notes](https://paulgp.github.io/2021/05/27/gary-chamberlain-lectures.html)
 3. [AI in Research and Teaching](https://paulgp.github.io/2024/06/24/llm_talk.html)
-
+4.  Reader's Digest of Econometrica Papers -- [Deep Neural Networks for Estimation and Inference](https://paulgp.github.io/2024/11/06/readers-digest-farrell-et-al-2021.html) and [Targeting Interventions in Networks](https://paulgp.github.io/2024/11/06/readers-digest-galeotti-et-al-2020.html)
 ### Contact
 - Email: paul.goldsmith-pinkham@yale.edu
 - Twitter: [@paulgp](https://twitter.com/paulgp)
