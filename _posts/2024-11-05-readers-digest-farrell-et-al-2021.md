@@ -36,7 +36,7 @@ This paper matters for three key reasons:
 
 ### Key Result: Theorem 1
 
-The paper's most important result is Theorem 1, which shows that multilayer perceptron networks achieve a convergence rate of approximately n^(-β/(β+d))[^1], where:
+The paper's most important result is Theorem 1, which shows that multilayer perceptron networks achieve a convergence rate of approximately n^(-β/(β+d)), where:
 - n is the sample size
 - β measures how smooth the true function is
 - d is the number of input variables
@@ -97,7 +97,7 @@ The authors' results have important limitations:
 The paper is best positioned as part of the broader literature on valid inference after machine learning, specifically addressing the theoretical gaps for deep learning in econometric applications.
 
 
-[^1]: Understanding β (Beta) and d in Practice
+## Understanding β (Beta) and d in Practice
 
     ## What These Numbers Mean
 
@@ -139,12 +139,12 @@ The paper is best positioned as part of the broader literature on valid inferenc
     - Rate ≈ n^(-2/7) ≈ n^(-0.29)
     - Pretty good! Usable with moderate sample sizes
 
-    2. **Marketing Application**: β = 2, d = 150
+    1. **Marketing Application**: β = 2, d = 150
     - Rate ≈ n^(-2/152) ≈ n^(-0.013)
     - Much slower - needs very large samples
     - This is why big data applications work well
 
-    3. **Best Case**: β = 4, d = 3
+    1. **Best Case**: β = 4, d = 3
     - Rate ≈ n^(-4/7) ≈ n^(-0.57)
     - Close to parametric rate of n^(-0.5)
     - Rare in practice
