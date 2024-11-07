@@ -96,62 +96,61 @@ The authors' results have important limitations:
 
 The paper is best positioned as part of the broader literature on valid inference after machine learning, specifically addressing the theoretical gaps for deep learning in econometric applications.
 
-
 ## Understanding β (Beta) and d in Practice
 
-    ## What These Numbers Mean
+## What These Numbers Mean
 
-    - **d**: Number of features/covariates in your data
-    - **β**: Smoothness parameter of the true function (roughly, how many continuous derivatives it has)
+- **d**: Number of features/covariates in your data
+- **β**: Smoothness parameter of the true function (roughly, how many continuous derivatives it has)
 
-    ## Typical Values in Economic Applications
+## Typical Values in Economic Applications
 
-    ### For d (dimensions):
-    - **Small**: d = 4-10 
-    - Example: Basic wage regression (age, education, experience, gender)
-    - Traditional RCT with few controls
+### For d (dimensions):
+- **Small**: d = 4-10 
+- Example: Basic wage regression (age, education, experience, gender)
+- Traditional RCT with few controls
 
-    - **Medium**: d = 20-50
-    - Example: Consumer choice models
-    - Policy evaluation with demographic controls
-    
-    - **Large**: d = 100-500
-    - Example: The paper's retail catalog application (d ≈ 150)
-    - Modern marketing applications with customer features
+- **Medium**: d = 20-50
+- Example: Consumer choice models
+- Policy evaluation with demographic controls
 
-    ### For β (smoothness):
-    - **β = 1**: Function is continuous but can have sharp turns
-    - Example: Simple threshold effects in policy
-    
-    - **β = 2**: Function is continuously differentiable
-    - Example: Most standard economic relationships
-    - This is commonly assumed in practice
-    
-    - **β = 4**: Function is very smooth
-    - Example: Well-behaved utility functions
-    - Often used in theoretical work
+- **Large**: d = 100-500
+- Example: The paper's retail catalog application (d ≈ 150)
+- Modern marketing applications with customer features
 
-    ## What This Means in Practice
+### For β (smoothness):
+- **β = 1**: Function is continuous but can have sharp turns
+- Example: Simple threshold effects in policy
 
-    Let's look at convergence rate n^(-β/(β+d)) with some examples:
+- **β = 2**: Function is continuously differentiable
+- Example: Most standard economic relationships
+- This is commonly assumed in practice
 
-    1. **Simple Case**: β = 2, d = 5
-    - Rate ≈ n^(-2/7) ≈ n^(-0.29)
-    - Pretty good! Usable with moderate sample sizes
+- **β = 4**: Function is very smooth
+- Example: Well-behaved utility functions
+- Often used in theoretical work
 
-    1. **Marketing Application**: β = 2, d = 150
-    - Rate ≈ n^(-2/152) ≈ n^(-0.013)
-    - Much slower - needs very large samples
-    - This is why big data applications work well
+## What This Means in Practice
 
-    1. **Best Case**: β = 4, d = 3
-    - Rate ≈ n^(-4/7) ≈ n^(-0.57)
-    - Close to parametric rate of n^(-0.5)
-    - Rare in practice
+Let's look at convergence rate n^(-β/(β+d)) with some examples:
 
-    ## Rule of Thumb
-    - If d < 20 and β ≥ 2, traditional sample sizes (n = 1000-5000) are often sufficient
-    - If d > 100, you typically need n > 100,000 for reliable results
-    - When d is large relative to n, consider dimension reduction or feature selection first
+1. **Simple Case**: β = 2, d = 5
+- Rate ≈ n^(-2/7) ≈ n^(-0.29)
+- Pretty good! Usable with moderate sample sizes
 
-    This illustrates why the method works well in the paper's retail application (large n, moderate d) but might struggle in settings with many features and smaller samples.
+1. **Marketing Application**: β = 2, d = 150
+- Rate ≈ n^(-2/152) ≈ n^(-0.013)
+- Much slower - needs very large samples
+- This is why big data applications work well
+
+1. **Best Case**: β = 4, d = 3
+- Rate ≈ n^(-4/7) ≈ n^(-0.57)
+- Close to parametric rate of n^(-0.5)
+- Rare in practice
+
+## Rule of Thumb
+- If d < 20 and β ≥ 2, traditional sample sizes (n = 1000-5000) are often sufficient
+- If d > 100, you typically need n > 100,000 for reliable results
+- When d is large relative to n, consider dimension reduction or feature selection first
+
+This illustrates why the method works well in the paper's retail application (large n, moderate d) but might struggle in settings with many features and smaller samples.
