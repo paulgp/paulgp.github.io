@@ -5,7 +5,7 @@ date: 2024-11-06
 tags: [Research, AI, Econometrics, Readers Digest]
 ---
 
-Ben Golub had the idea of [summarizing technical papers (such as in Econometrica) using AI to be more easily approached by non-technical economists.](https://bsky.app/profile/bengolub.bsky.social/post/3lacwdogwti2w)  These papers were selected from the list of the [most prominent recent papers in Econometrica by Google Scholar.](https://scholar.google.com/citations?hl=en&vq=bus_economics&view_op=list_hcore&venue=G0hmswRVzmAJ.2024) First, an econometrics paper. I will also post one for [a theory paper.](https://paulgp.github.io/2024/11/05/readers-digest-galeotti-et-al-2020.html)
+Ben Golub had the idea of [summarizing technical papers (such as in Econometrica) using AI to be more easily approached by non-technical economists.](https://bsky.app/profile/bengolub.bsky.social/post/3lacwdogwti2w)  These papers were selected from the list of the [most prominent recent papers in Econometrica by Google Scholar.](https://scholar.google.com/citations?hl=en&vq=bus_economics&view_op=list_hcore&venue=G0hmswRVzmAJ.2024) First, an econometrics paper. I will also post one for [a theory paper.](https://paulgp.github.io/2024/11/06/readers-digest-galeotti-et-al-2020.html)
 
 
 
