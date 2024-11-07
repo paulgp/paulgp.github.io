@@ -19,7 +19,7 @@ I write a blog about causal inference, household finance, and  econometrics.  Yo
 
 Some useful posts:
 1. [Beamer Tips](https://paulgp.github.io/2018/04/30/beamer-tips.html)
-2. [Gary Chamberlain Lecture Notes](https://paulgp.github.io/2021/05/27/chamberlain-lecture-notes.html)
+2. [Gary Chamberlain Lecture Notes](https://paulgp.github.io/2021/05/27/gary-chamberlain-lectures.html)
 3. [AI in Research and Teaching](https://paulgp.github.io/2024/06/24/llm_talk.html)
 
 ### Contact
