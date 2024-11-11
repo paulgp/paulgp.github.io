@@ -114,8 +114,6 @@ The paper is most useful as:
 
 Remember that the paper's key contribution is providing a practical framework for intervention design, not just a theoretical result. Applied researchers should emphasize this aspect when citing.
 
-Here's the model with proper LaTeX math formatting in Markdown:
-
 ## Core Model Setup
 
 ### Players and Network
