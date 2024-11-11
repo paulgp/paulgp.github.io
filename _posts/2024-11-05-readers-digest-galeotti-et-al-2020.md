@@ -114,56 +114,56 @@ The paper is most useful as:
 
 Remember that the paper's key contribution is providing a practical framework for intervention design, not just a theoretical result. Applied researchers should emphasize this aspect when citing.
 
+Here's the model with proper LaTeX math formatting in Markdown:
+
 ## Core Model Setup
-Here's a sketch of the formal model, focusing on its key elements and structure.
 
 ### Players and Network
-- Set of players: N = {1,...,n}, where n ≥ 2
-- Network represented by symmetric adjacency matrix G
-- Entry gij ≥ 0 represents strength of connection between i and j
-- No self-links (gii = 0)
+- Set of players: $N = \{1,\ldots,n\}$, where $n \geq 2$
+- Network represented by symmetric adjacency matrix $G$
+- Entry $g_{ij} \geq 0$ represents strength of connection between $i$ and $j$
+- No self-links ($g_{ii} = 0$)
 
 ### Player Utilities
-Each player i's utility is:
-```
-Ui(a,G) = ai(bi + β∑j∈N gij aj) - (1/2)ai² + Pi(a-i,G,b)
-```
+Each player $i$'s utility is:
+
+$$U_i(a,G) = a_i(b_i + \beta\sum_{j\in N} g_{ij} a_j) - \frac{1}{2}a_i^2 + P_i(a_{-i},G,b)$$
+
 where:
-- ai is player i's action (continuous)
-- bi is standalone marginal return for player i
-- β captures strategic interactions:
-- β > 0: strategic complements
-- β < 0: strategic substitutes
-- Pi captures pure externalities that don't affect best responses
+- $a_i$ is player $i$'s action (continuous)
+- $b_i$ is standalone marginal return for player $i$
+- $\beta$ captures strategic interactions:
+  - $\beta > 0$: strategic complements
+  - $\beta < 0$: strategic substitutes
+- $P_i$ captures pure externalities that don't affect best responses
 
 ### Equilibrium
 - First order conditions give best responses:
-```
-ai = bi + β∑j∈N gij aj
-```
-- In matrix form: [I - βG]a* = b
+
+$$a_i = b_i + \beta\sum_{j\in N} g_{ij} a_j$$
+
+- In matrix form: $[I - \beta G]a^* = b$
 - Under assumptions, unique Nash equilibrium exists:
-```
-a* = [I - βG]⁻¹b
-```
+
+$$a^* = [I - \beta G]^{-1}b$$
 
 ### Planner's Problem
-The planner can modify standalone marginal returns (b) to maximize welfare:
-```
-max_b W(b,G)
-s.t. a* = [I - βG]⁻¹b
-   ∑i∈N (bi - b̂i)² ≤ C
-```
+The planner can modify standalone marginal returns ($b$) to maximize welfare:
+
+$$\max_b W(b,G)$$
+$$\text{s.t. } a^* = [I - \beta G]^{-1}b$$
+$$\sum_{i\in N} (b_i - \hat{b}_i)^2 \leq C$$
+
 where:
-- b̂ are status quo marginal returns
-- C is planner's budget
-- W(b,G) = w∑i(ai*)² for some w ∈ R
+- $\hat{b}$ are status quo marginal returns
+- $C$ is planner's budget
+- $W(b,G) = w\sum_i(a_i^*)^2$ for some $w \in \mathbb{R}$
 
 ### Key Innovation
 The paper analyzes this using principal components:
-- G = UΛUᵀ where:
-- Λ is diagonal matrix of eigenvalues
-- U contains corresponding eigenvectors
+- $G = U\Lambda U^T$ where:
+  - $\Lambda$ is diagonal matrix of eigenvalues
+  - $U$ contains corresponding eigenvectors
 - This allows decomposing interventions into components that can be analyzed separately
 - Optimal targeting depends on strategic complement/substitute nature and eigenvalue structure
 
