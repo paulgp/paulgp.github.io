@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="{{ '/assets/css/jekyll-code-style.css' | relative_url }}">
     <script src="{{ 'assets/js/jquery.min.js' | relative_url }}"></script>
     <script src="{{ 'assets/js/sidenotes.js' | relative_url }}"></script>
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
     {% if site.google_analytics and jekyll.environment == 'production' %}
     {% include analytics.html %}
     {% endif %}
+    {% include custom_math.html %}
     <style>
         button.accordion2 {
             font: 14px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
