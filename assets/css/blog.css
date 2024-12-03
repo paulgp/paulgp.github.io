@@ -1,0 +1,180 @@
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=ET+Book:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&display=swap');
+
+/* Base styles */
+.blog-content {
+    font-family: 'ET Book', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    color: #111;
+}
+
+/* Typography */
+.blog-content h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+}
+
+.blog-content h2 {
+    font-size: 1.8rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.blog-content h3 {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+}
+
+/* Paragraphs */
+.blog-content p {
+    margin-bottom: 1.5rem;
+    hyphens: auto;
+}
+
+
+/* Code blocks */
+.blog-content pre {
+    font-family: 'Fira Code', monospace;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 1.5rem 0;
+    border: 1px solid #e9ecef;
+}
+
+.blog-content code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    background: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+}
+
+/* LaTeX blocks */
+.math-block {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #fcfcfc;
+}
+
+/* Images */
+.blog-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 2rem 0;
+}
+
+.blog-content figure {
+    margin: 2rem 0;
+}
+
+.blog-content figcaption {
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+/* Links */
+.blog-content a {
+    color: #2b6cb0;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.blog-content a:hover {
+    border-bottom-color: currentColor;
+}
+
+/* Blockquotes */
+.blog-content blockquote {
+    margin-left: 0;
+    padding-left: 1.5rem;
+    border-left: 3px solid #ccc;
+    color: #555;
+    font-style: italic;
+}
+
+
+@media (max-width: 768px) {
+    .blog-content {
+        font-size: 1rem;
+        padding: 0 1.2rem;
+    }
+
+    .blog-content h1 {
+        font-size: 2rem;
+    }
+
+    .blog-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .blog-content h3 {
+        font-size: 1.25rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    .blog-content {
+        max-width: none;
+        padding: 0;
+    }
+
+    .sidenote {
+        float: none;
+        display: block;
+        margin: 1rem 0;
+        width: 100%;
+    }
+}
+
+section {
+    max-width: 600px;
+    position: relative;
+    margin-right: 200px;
+    /* Make room for sidenotes */
+}
+
+.sidenote {
+    position: absolute;
+    right: -220px;
+    width: 200px;
+    font-size: 0.9rem;
+    color: #666;
+    padding-left: 1rem;
+    font-style: italic;
+}
+
+@media screen and (max-width: 1200px) {
+    section {
+        margin-right: 0;
+    }
+
+    .sidenote {
+        position: static;
+        width: auto;
+        right: auto;
+        margin: 1rem 0;
+        padding: 1rem;
+        background: #f8f8f8;
+        border-left: 3px solid #2b6cb0;
+    }
+}

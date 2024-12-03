@@ -5,14 +5,26 @@
     <meta charset="utf-8">
     <title>{{ page.title }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/github-light.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/jekyll-code-style.css' | relative_url }}">
-    <script src="{{ 'assets/js/jquery.min.js' | relative_url }}"></script>
-    <script src="{{ 'assets/js/sidenotes.js' | relative_url }}"></script>
+    <link rel="stylesheet" href="{{ '/assets/css/blog.css' | relative_url }}">
     {% if site.google_analytics and jekyll.environment == 'production' %}
     {% include analytics.html %}
     {% endif %}
-    {% include custom_math.html %}
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true
+      },
+      TeX: {
+        equationNumbers: { autoNumber: "AMS" }
+      }
+    });
+    </script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
     <style>
         button.accordion2 {
             font: 14px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -25,7 +37,7 @@
             transition: 0.4s;
             background-color: #f8f8f8;
         }
-    
+
         button.accordion {
             font: 14px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
             cursor: pointer;
@@ -37,12 +49,12 @@
             transition: 0.4s;
             background-color: #f8f8f8;
         }
-    
+
         button.accordion.active,
         button.accordion:hover {
             background-color: #f8f8f8;
         }
-    
+
         button.accordion:after {
             content: '[+]';
             font-size: 90%;
@@ -51,7 +63,7 @@
             margin-left: 1px;
             margin-right: 3px;
         }
-    
+
         button.accordion2:after {
             content: '[#]';
             font-size: 90%;
@@ -60,11 +72,11 @@
             margin-left: 1px;
             margin-right: 3px;
         }
-    
+
         button.accordion.active:after {
             content: "[\2212]";
         }
-    
+
         div.panel {
             padding: 0 20px;
             margin-top: 5px;
@@ -72,31 +84,33 @@
             background-color: white;
             font-size: 100%;
         }
-    
+
         div.panel.show {
             display: block !important;
         }
     </style>
-        <link rel="alternate" type="application/atom+xml" title="{{ site.title_blog }}" href="/feed.xml">
+    <link rel="alternate" type="application/atom+xml" title="{{ site.description }}" href="/feed.xml">
 </head>
 
 <body>
-    <div class="wrapper2">
-        <div class = "topnav">
-        <a href="/">Home</a>
-       <a href="/papers/cv.pdf">CV</a>
-      <a href="/papers.html">Papers</a>
-      <a href="/blog.html">Blog (A Causal Affair) </a>
-      <a href="https://github.com/paulgp/applied-methods-phd">Applied Methods PhD Course</a>
-       </div></div>
-        <div class="wrapper2">
-        <div  class = "post-content" style="background-color: #F1F1F1; color: #666; padding: 10px;">
-            <h1> {{ page.title }} </h1> 
+    <div class="wrapper">
+        <section>
+            <h1> {{ page.title }} </h1>
             {{ content }}
-        </div></div>
-        <a class="btn btn-rss" href="/feed.xml" target="_blank">RSS</a>
+        </section>
+                <header>
+                    <div class="sidenav">
+                        <a href="/">Home</a>
+                        <a href="/papers/cv.pdf">CV</a>
+                        <a href="/papers.html">Papers</a>
+                        <a href="/blog.html">Blog (A Causal Affair) </a>
+                        <a href="https://github.com/paulgp/applied-methods-phd">Applied Methods PhD Course</a></p>
+                        <img src="{{ '/assets/img/circle_cropped.png' | relative_url }}" width=250 height=250>
+                    </div>
+                </header>
+    </div>
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/put-code-elements.js' | relative_url }}"></script>
+
 </body>
 
 </html>

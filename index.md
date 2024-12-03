@@ -15,7 +15,7 @@ title: Paul Goldsmith-Pinkham
 [Ph.D. applied empirical methods course materials](https://github.com/paulgp/applied-methods-phd)
 
 ### Blog  (the non-substack version)
-I write a blog about causal inference, household finance, and  econometrics.  You can find it [here](https://paulgp.github.io/blog.html).
+[I write a blog about causal inference, household finance, and  econometrics.](https://paulgp.github.io/blog.html)
 
 Some useful posts:
 1. [Beamer Tips](https://paulgp.github.io/2018/04/30/beamer-tips.html)

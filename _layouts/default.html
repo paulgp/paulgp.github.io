@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <title>{{ page.title }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/css/github-light.css' | relative_url }}">
     {% if site.google_analytics and jekyll.environment == 'production' %}
     {% include analytics.html %}
     {% endif %}
@@ -78,20 +77,20 @@
 
 <body>
     <div class="wrapper">
-        <header>
-        <div class="sidenav">
-            <a href="/">Home</a>
-           <a href="/papers/cv.pdf">CV</a>
-                <a href="/papers.html">Papers</a>
-                <a href="/blog.html">Blog (A Causal Affair) </a>
-                <a href="https://github.com/paulgp/applied-methods-phd">Applied Methods PhD Course</a></p>
-            <img src="{{ '/assets/img/circle_cropped.png' | relative_url }}" width=250 height=250>
-            </div>
-        </header>
         <section>
             <h1> {{ page.title }} </h1>
             {{ content }}
         </section>
+        <header>
+            <div class="sidenav">
+                <a href="/">Home</a>
+                <a href="/papers/cv.pdf">CV</a>
+                <a href="/papers.html">Papers</a>
+                <a href="/blog.html">Blog (A Causal Affair) </a>
+                <a href="https://github.com/paulgp/applied-methods-phd">Applied Methods PhD Course</a></p>
+                <img src="{{ '/assets/img/circle_cropped.png' | relative_url }}" width=250 height=250>
+            </div>
+        </header>
     </div>
     <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
 
