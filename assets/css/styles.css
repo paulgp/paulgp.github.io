@@ -75,16 +75,14 @@ a:hover {
   border-bottom-color: currentColor;
 }
 
-/* Navigation */
+/* Navigation with responsive image and proper line breaks */
 .sidenav {
   background: #f7fafc;
   border-radius: 8px;
   padding: 1.5rem;
-  /* Increased padding */
-  margin-top: 0;
-  /* Remove top margin to align with main content */
   margin-bottom: 2rem;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .sidenav a {
@@ -93,11 +91,98 @@ a:hover {
   padding: 0.5rem 1rem;
   margin: 0.25rem 0;
   color: #4a5568;
-  font-size: 1.25rem;
-  /* Increased font size */
   border-radius: 4px;
   transition: all 0.2s;
   box-sizing: border-box;
+  white-space: normal;
+  /* Ensure text wraps */
+  word-wrap: break-word;
+  /* Handle long words */
+}
+
+.sidenav img {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  /* Increased from 250px */
+  display: block;
+  margin: 1rem auto;
+  aspect-ratio: 1 / 1;
+}
+
+/* Progressive size adjustments */
+/* Progressive size adjustments */
+@media (min-width: 1400px) {
+  .sidenav a {
+    font-size: 1.25rem;
+  }
+
+  .sidenav img {
+    max-width: 300px;
+  }
+
+  /* Increased */
+}
+
+@media (max-width: 1399px) and (min-width: 1200px) {
+  .sidenav a {
+    font-size: 1.1rem;
+  }
+
+  .sidenav img {
+    max-width: 260px;
+  }
+
+  /* Adjusted proportionally */
+}
+
+@media (max-width: 1199px) and (min-width: 992px) {
+  .sidenav a {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+    /* Slightly reduced padding */
+  }
+
+  .sidenav {
+    padding: 1.25rem;
+  }
+
+  .sidenav img {
+    max-width: 190px;
+  }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+  .sidenav a {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.6rem;
+    /* Further reduced padding */
+  }
+
+  .sidenav {
+    padding: 1rem;
+  }
+
+  .sidenav img {
+    max-width: 160px;
+  }
+}
+
+/* Tablet and mobile adjustments */
+@media (max-width: 767px) {
+  .sidenav {
+    padding: 1rem;
+  }
+
+  .sidenav a {
+    font-size: 1rem;
+    text-align: center;
+    padding: 0.75rem;
+  }
+
+  .sidenav img {
+    max-width: 200px;
+  }
 }
 
 .sidenav a:hover {
@@ -108,7 +193,8 @@ a:hover {
 /* Layout */
 .wrapper {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 250px;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  /* Increased from 250px to 300px */
   gap: 2rem;
   max-width: 65rem;
   margin: 0 auto;

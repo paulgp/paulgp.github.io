@@ -178,3 +178,79 @@ section {
         border-left: 3px solid #2b6cb0;
     }
 }
+
+/* Add to your blog.css */
+
+.marginfigure {
+    float: right;
+    clear: right;
+    margin-right: -60%;
+    width: 50%;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    vertical-align: baseline;
+    position: relative;
+}
+
+.marginfigure img {
+    width: 100%;
+    height: auto;
+    margin: 0 0 0.5rem 0;
+}
+
+.marginfigure figcaption {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: #666;
+    margin-top: 0.5rem;
+    padding-left: 1rem;
+    font-style: italic;
+}
+
+/* Mobile adjustments */
+@media (max-width: 1200px) {
+    .marginfigure {
+        float: none;
+        display: block;
+        margin: 2rem 0;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .marginfigure img {
+        max-width: 100%;
+    }
+}
+
+/* Wide figure spanning main text and margin */
+.widefigure {
+    margin: 2rem 0;
+    width: calc(100% + 60%);
+    /* Extends into margin area */
+    position: relative;
+    clear: both;
+}
+
+.widefigure img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.widefigure figcaption {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #666;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* Mobile adjustments */
+@media (max-width: 1200px) {
+    .widefigure {
+        width: 100%;
+        margin: 2rem 0;
+    }
+}
