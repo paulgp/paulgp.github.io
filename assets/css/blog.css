@@ -254,3 +254,34 @@ section {
         margin: 2rem 0;
     }
 }
+
+/* Mobile adjustments to match abstract panel style */
+@media (max-width: 1200px) {
+    .sidenote {
+        float: none;
+        position: relative;
+        display: block;
+        margin: 1rem 0;
+        width: 100%;
+        background: #F1F1F1;
+        /* Light gray background to match abstracts */
+        color: #666;
+        /* Gray text color */
+        padding: 10px;
+        /* Match abstract padding */
+        border-left: 3px solid #2b6cb0;
+        /* Blue left border */
+        font-style: normal;
+        /* Remove italic style if any */
+        font-size: 0.9rem;
+        /* Slightly larger for better mobile readability */
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 640px) {
+    .sidenote {
+        margin: 0.75rem 0;
+        padding: 8px;
+    }
+}
