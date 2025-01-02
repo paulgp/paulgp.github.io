@@ -51,7 +51,7 @@ title: Paul Goldsmith-Pinkham
       if (error) return React.createElement('div', { className: 'text-red-500' }, error);
 
       return React.createElement('div', { className: 'p-4' },
-        React.createElement('h2', { className: 'text-2xl font-bold mb-4 capitalize' }, `Presentations`),
+        React.createElement('h2', { className: 'text-2xl font-bold mb-4 capitalize' }, `Presentations List`),
         React.createElement('ul', { className: 'space-y-4' },
           pdfs.map((pdf, index) => 
             React.createElement('li', { 
