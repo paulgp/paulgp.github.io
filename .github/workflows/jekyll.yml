@@ -11,13 +11,12 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.3'
-          bundler-cache: true
+          bundler-cache: false  # Changed to false to handle dependencies manually
 
-      - name: Update Bundle
-        run: bundle update
-
-      - name: Install pdf-reader gem
-        run: gem install pdf-reader
+      - name: Install dependencies
+        run: |
+          bundle install --full-index
+          gem install pdf-reader
 
       - name: Build site
         run: bundle exec jekyll build
