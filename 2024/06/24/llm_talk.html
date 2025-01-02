@@ -1,0 +1,512 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Using AI in Research and Teaching: A Practical Guide</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/blog.css">
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true
+      },
+      TeX: {
+        equationNumbers: { autoNumber: "AMS" }
+      }
+    });
+    </script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <style>
+        button.accordion2 {
+            font: 14px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            cursor: pointer;
+            padding: 0px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 100%;
+            transition: 0.4s;
+            background-color: #f8f8f8;
+        }
+
+        button.accordion {
+            font: 14px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            cursor: pointer;
+            padding: 0px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 100%;
+            transition: 0.4s;
+            background-color: #f8f8f8;
+        }
+
+        button.accordion.active,
+        button.accordion:hover {
+            background-color: #f8f8f8;
+        }
+
+        button.accordion:after {
+            content: '[+]';
+            font-size: 90%;
+            color: #777;
+            float: left;
+            margin-left: 1px;
+            margin-right: 3px;
+        }
+
+        button.accordion2:after {
+            content: '[#]';
+            font-size: 90%;
+            color: #777;
+            float: left;
+            margin-left: 1px;
+            margin-right: 3px;
+        }
+
+        button.accordion.active:after {
+            content: "[\2212]";
+        }
+
+        div.panel {
+            padding: 0 20px;
+            margin-top: 5px;
+            display: none;
+            background-color: white;
+            font-size: 100%;
+        }
+
+        div.panel.show {
+            display: block !important;
+        }
+    </style>
+    <link rel="alternate" type="application/atom+xml" title="Homepage of the economist Paul Goldsmith-Pinkham" href="/feed.xml">
+</head>
+
+<body>
+    <div class="wrapper">
+        <section>
+            <h1> Using AI in Research and Teaching: A Practical Guide </h1>
+            <p><em>[N.B. I gave a version of this post for an internal discussion at SOM. I’ve modified it for general consumption. Many of the examples I walked through live – I will try to add videos for those, in the future, but for now they will just sit as “examples” in the text.]</em></p>
+
+<p>The goal for today’s post is to highlight a number of useful ways that you can use AI in your research and teaching. I’m using AI super loosely here – what I really mean is the relatively new innovations of Large Language Models that have sprung up following the release of ChatGPT 3.</p>
+
+<p>Today, I will cover a few topics:</p>
+<ol>
+  <li>VS Code + Copilot installation</li>
+  <li>Examples using Chat LLMs for research and teaching</li>
+  <li>Images from Midjourney</li>
+  <li>Running your own LLM locally</li>
+</ol>
+
+<h2 id="vs-code--copilot">VS Code + Copilot</h2>
+
+<p>A big chunk of what I want to show you revolves around <a href="https://code.visualstudio.com/">VS Code</a>. This is a free code editor that is quite powerful and has a lot of extensions that make it a great choice for coding. Benefits include:</p>
+
+<ol>
+  <li>Free</li>
+  <li>Good IDE with broad support</li>
+  <li>Built-in Git that is quite good (see next post)</li>
+  <li>Great remote access for servers</li>
+  <li>Copilot (LLM for inline code suggestions and chat program)</li>
+  <li>Extensions with open community (good for many software platforms, also alows extensions in CodeGPT)</li>
+</ol>
+
+<p><a href="https://paulgp.substack.com/p/setting-up-github-copilot-and-vscode">I wrote a blog post</a> last year on setting this up, but I’ll walk through it here as well. Much of my version is in Mac, so sorry if you’re a Windows user!</p>
+
+<ol>
+  <li>Install VS Code
+    <ul>
+      <li><a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>
+ <img src="/assets/img/vscode_install.webp" alt="img" width="600" /></li>
+    </ul>
+  </li>
+  <li>
+    <p>Setup <em>Extensions</em></p>
+
+    <p>Extensions are first- and third-party additions to VS Code that give additional functionality. Often, these will give improved code highlighting such as for Stata, R, or LaTeX. And, as we will see in a second, they also open up a collaborative LLM that helps you code (and will chat with you to fix and explain code). Some useful language-specific extensions:</p>
+    <ul>
+      <li><strong>LaTeX</strong>
+        <ul>
+          <li>Latex Workshop</li>
+          <li><a href="https://vkuhlmann.com/latex/configuration/fixingVSCode#fixing-using-the-wizard">This package sometimes can’t find latex compiler, see here for a fix and discussion</a></li>
+        </ul>
+
+        <p><img src="/assets/img/vscode_latex1.webp" alt="img" width="600" /></p>
+
+        <p>Then you’ll have a similar LaTeX environment to many of the LaTeX editors, but with the added benefit of being able to use an LLM to help you write LaTeX code.</p>
+
+        <p><img src="/assets/img/vscode_latex2.webp" alt="img" width="600" /></p>
+      </li>
+      <li><strong>Python</strong>
+        <ul>
+          <li>Python, Pylance, Python Debugger, autopep8, Jupyter</li>
+        </ul>
+      </li>
+      <li><strong>R</strong> I now use this instead of RStudio<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> (which has its own LLM, but I prefer the VS Code environment)
+        <ul>
+          <li><a href="https://github.com/randy3k/radian">radian</a> – a console with multiline editing and rich syntax highlighting</li>
+          <li><a href="https://aeturrell.com/blog/posts/setting-up-r-in-vscode/">https://aeturrell.com/blog/posts/setting-up-r-in-vscode/</a></li>
+          <li>Useful keystrokes:
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">shift+Enter: Run Selection</code> → To run a given selection.</li>
+              <li><code class="language-plaintext highlighter-rouge">shift+cmd+S: Source file</code> → Run the whole file</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>Stata</strong>
+        <ul>
+          <li>stataRun, Stata Enhanced</li>
+          <li>This works in Mac OS well, not so well in Windows<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup></li>
+          <li>
+            <p>Only modifications that I had to do to get this working was to go into the stataRun extension and change the program from StataSE to StataMP (you can edit your preferences for an extension by going to the extension and clicking the little gear next to where the install/uninstall button is):</p>
+
+            <p><img src="/assets/img/vscode_stata.webp" alt="stataRun" width="800" /></p>
+          </li>
+          <li>Historically, Stata was not as good in LLMs as other language. <a href="https://blogs.worldbank.org/en/impactevaluations/can-ai-write-your-stata-code">Owen Ozier wrote about this</a> but my sense is that has changed a lot in the last year.</li>
+          <li>Useful keystrokes:
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">shift+cmd+a: Run All Lines</code> → This will run the entire file</li>
+              <li><code class="language-plaintext highlighter-rouge">shift+cmd+s: Run Selection</code> → To run a given selection. If no selection is made it default to Run All</li>
+              <li><code class="language-plaintext highlighter-rouge">shift+cmd+c: Run Current Line</code> → This will run the current line code</li>
+              <li><code class="language-plaintext highlighter-rouge">shift+cmd+d: Run Downward Lines</code> → from current line to end</li>
+              <li><code class="language-plaintext highlighter-rouge">shift+cmd+f: Run Frontward Lines</code> → from first line to current line</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>Remote</strong>
+        <ul>
+          <li>Makes it very easy to work on remote servers, like high performance clusters</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Install Copilot + Chat
+    <ul>
+      <li><a href="https://github.com/features/copilot/plans">https://github.com/features/copilot/plans</a></li>
+      <li>
+        <p>You should be able to get this for free <a href="https://github.com/edu/teachers">if you have a .edu email address</a>
+This will seem to do nothing to your editor, but will add this little icon on the bottom of your editor:</p>
+
+        <p><img src="/assets/img/vscode_copilot1.webp" alt="alt text" width="600" /></p>
+      </li>
+    </ul>
+  </li>
+  <li>[Optional] You can setup other preferences such as:
+    <ul>
+      <li>Theme</li>
+      <li>Font</li>
+      <li>Keybindings</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="some-examples-of-how-copilot-is-awesome">Some examples of how Copilot is awesome</h3>
+
+<ol>
+  <li>
+    <p><strong>R</strong></p>
+
+    <p>One easy task is to define a scripted program that does a particular task, such as downloading the population for states and making a plot. To try this out, write the following in a comment at the top of a blank R script:</p>
+
+    <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="c1">## This program downloads population counts for all states in the US in 2018.</span><span class="w">
+
+ </span><span class="c1">## It then makes a bar chart for each state, with states on the y-axis, </span><span class="w">
+ </span><span class="c1">## and population on the x-axis, from largest to smallest state.</span><span class="w">
+
+ </span><span class="c1">## It uses the tidycensus package to download the data, </span><span class="w">
+ </span><span class="c1">## and ggplot2 to make the bar charts.</span><span class="w">
+</span></code></pre></div>    </div>
+
+    <p>This approach requires the tidycensus package installed (and ggplot2).</p>
+
+    <p>After you enter this comment, hit return twice, and wait for Copilot to propose a line of code. Then hit tab to accept the proposals. As you move across lines, it will write out the code.</p>
+
+    <p>One interesting fact — you will have to hit return more than once, because it wants the proper line breaks!</p>
+
+    <p><img src="/assets/img/vscode_R_example1.webp" alt="alt text" /></p>
+  </li>
+  <li>
+    <p><strong>Latex</strong></p>
+
+    <p>This is where things got even more amazing. Consider the writing from <a href="https://academic.oup.com/rfs/article/36/11/4588/7156853?guestAccessKey=2de5aec0-8cff-492f-be02-2695c8744589&amp;login=true&amp;utm_source=authortollfreelink&amp;utm_campaign=rfs&amp;utm_medium=email">a recent paper that we just got published</a>. I can open a new latex document, and enter our opening paragraph, and then the first two sentences. Github Copilot proposes the rest of the paragraph. It’s not even a totally unreasonable proposal! [It’s not correct, in our setting, but it’s still a remarkable attempt!]</p>
+
+    <p><img src="/assets/img/vscode_latex_example1.webp" alt="alt text" /></p>
+
+    <p>I’ve had other settings where it will propose explanations for regression tables that are not even half-bad. It’s a pretty killer tool to have for someone who struggles to get words down on the page (like me) — the words may not be great, but then you can edit them and fix it up. Pretty remarkable.</p>
+  </li>
+  <li>
+    <p><strong>Explaining code</strong></p>
+
+    <p>Often, you’ll inherit code (or read coauthors’ code) that you don’t understand. Copilot can help explain what the code is doing. For example, consider the following SAS code (from WRDS):</p>
+
+    <div class="language-sas highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cm">/* ************************************************************ */</span>
+ <span class="cm">/* This code calculates Bond Returns using FISD and Trace Data  */</span>
+ <span class="cm">/* Should Run "Clean_Trace_Standard" and "Clean_Trace_Enhanced" */</span> 
+ <span class="cm">/*             prior to running this code 			            */</span>
+ <span class="cm">/* Author: Rabih Moussawi, Qingyi (Freda) Drechsler             */</span> 
+ <span class="cm">/* Date: November 2018											*/</span>
+ <span class="cm">/* Updated: April 2022                                          */</span>
+ <span class="cm">/* Current Version: v9                                          */</span>
+ <span class="cm">/* ************************************************************ */</span><span class="p">;</span>
+
+ <span class="o">&lt;</span><span class="n">Comments</span> <span class="n">removed</span> <span class="k">by</span> <span class="n">PGP</span><span class="o">&gt;</span>
+
+ <span class="cm">/* ************************************************ */</span>
+ <span class="cm">/* Step 1:                                          */</span>  
+ <span class="cm">/* Combine cleaned Standard and Enhanced TRACE Data */</span>
+ <span class="cm">/* ************************************************ */</span>
+
+ <span class="cm">/* Get Trace Enhanced Cutoff Date */</span>
+ <span class="k">proc</span> <span class="k">sql</span> <span class="n">noprint</span><span class="p">;</span>
+ <span class="k">select</span> <span class="k">distinct</span> <span class="k">max</span><span class="p">(</span><span class="n">TRD_EXCTN_DT</span><span class="p">)</span> <span class="k">format</span> <span class="n">date9</span><span class="p">.</span> <span class="k">into</span> <span class="p">:</span><span class="n">cutoffdate</span>
+ <span class="k">from</span> <span class="n">tracee</span><span class="p">.</span><span class="n">trace_enhanced</span><span class="p">;</span>
+ <span class="k">quit</span><span class="p">;</span>
+
+ <span class="k">%put</span> <span class="nv">&amp;cutoffdate</span><span class="p">;</span>
+
+ <span class="cm">/* Enhanced TRACE has an 18m lag and post the CutOffDate use data directly from standard TRACE */</span>
+ <span class="k">data</span> <span class="nv">trace_std</span><span class="p">;</span> <span class="k">set</span> <span class="n">trace_standard_clean</span><span class="p">;</span> 
+ <span class="k">where</span> <span class="n">trd_exctn_dt</span> <span class="o">&gt;</span> <span class="s2">"</span><span class="si">&amp;cutoffdate</span><span class="s2">"</span><span class="n">d</span> <span class="ow">and</span> <span class="n">cmsn_trd</span> <span class="ow">ne</span> <span class="s1">'Y'</span> <span class="ow">and</span> <span class="n">rptd_pr</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">;</span>
+ <span class="n">SEQNUM</span> <span class="o">=</span> <span class="n">msg_seq_nb</span><span class="p">;</span>
+ <span class="k">drop</span> <span class="n">msg_seq_nb</span> <span class="n">orig_msg_seq_nb</span><span class="p">;</span>
+ <span class="k">run</span><span class="p">;</span>
+
+ <span class="k">data</span> <span class="nv">trace_enh</span><span class="p">;</span> <span class="k">set</span> <span class="n">trace_enhanced_clean</span><span class="p">;</span>
+ <span class="k">where</span> <span class="n">cmsn_trd</span> <span class="ow">ne</span> <span class="s1">'Y'</span> <span class="ow">and</span> <span class="n">rptd_pr</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">;</span>
+ <span class="n">SEQNUM</span><span class="o">=</span><span class="k">input</span><span class="p">(</span><span class="n">msg_seq_nb</span><span class="p">,</span><span class="n">best12</span><span class="p">.);</span> 
+ <span class="k">label</span> <span class="n">SEQNUM</span><span class="o">=</span><span class="s2">"Message Sequence Number"</span><span class="p">;</span>
+ <span class="k">drop</span> <span class="n">msg_seq_nb</span> <span class="n">orig_msg_seq_nb</span><span class="p">;</span>
+ <span class="k">run</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <p>You may not know SAS very well (or at all). You can ask Copilot to explain what this code does by selecting the text
+ <img src="/assets/img/vs_code_explainsas.png" alt="alt text" /></p>
+
+    <p>Then, you can even ask it to write similar code in Python’s Pandas (or whatever language you like):
+ <img src="/assets/img/vs_code_explainsas2.png" alt="alt text" /></p>
+  </li>
+</ol>
+
+<p>Some more examples  (videos to come):</p>
+<ol>
+  <li>Example prompt/script for scraping data</li>
+  <li>Converting HTML to markdown</li>
+  <li>Creating comments for code</li>
+</ol>
+
+<h3 id="copilot-vs-codegpt">Copilot vs. CodeGPT</h3>
+<ul>
+  <li>Copilot is the official Microsoft LLM product, and quite good</li>
+  <li><a href="https://codegpt.co/">CodeGPT</a><sup id="fnref:Thx" role="doc-noteref"><a href="#fn:Thx" class="footnote" rel="footnote">3</a></sup> is an extension by a third-party that uses other LLMs as their backend.</li>
+  <li>Key benefit from CodeGPT – ability to use other LLMs (such as more cutting edge LLMs like Claude 3.5 Sonnet)</li>
+  <li>More importantly – can use open source LLMs run locally
+    <ul>
+      <li>This can be helpful for people trying to set things up in sensitive environments!</li>
+    </ul>
+  </li>
+  <li>Available in the VS Code Extensions</li>
+</ul>
+
+<h3 id="known-issues-ive-had-with-vs-code">Known issues I’ve had with VS Code</h3>
+<ol>
+  <li>For Mac users, launch vscode from the command line rather than from Applications – the <code class="language-plaintext highlighter-rouge">PATH</code> variable isn’t the same for each, and many of the relevant programs are on the command line <code class="language-plaintext highlighter-rouge">PATH</code> variable. <a href="https://code.visualstudio.com/docs/setup/mac">You need to install the <code class="language-plaintext highlighter-rouge">code</code> command for VS Code for this.</a></li>
+  <li>Sometimes the LaTeX compiler or Python interpreter can’t be found. This is a <code class="language-plaintext highlighter-rouge">PATH</code> issue.</li>
+  <li>Sometimes httpgd messes up inside VS Code. I often will have the graphs in a separate window, instead, but can be annoying.</li>
+</ol>
+
+<h2 id="chat-llms-for-research-and-teaching-living-document">Chat LLMs for Research and Teaching [Living Document]<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">4</a></sup></h2>
+
+<p>I am going to walk through a number of use cases here. There are many more, and I still don’t use these LLMs as effectively as I should. For any of these tasks below, I have in mind that you would use the chat interface for <a href="https://chatgpt.com/?model=gpt-4o">ChatGPT</a> or <a href="https://claude.ai/new">Claude</a>. I pay for both (!) because I find them useful for different things. You should pay for it!<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote" rel="footnote">5</a></sup> There are a few things below that are distinctive (Midjourney, for example) that are separate from ChatGPT and Claude.</p>
+
+<ol>
+  <li><strong>Write script to scrape data</strong>
+    <ul>
+      <li>Example: Pull NBER Working paper codes</li>
+      <li>Example: pull all journal of finance brattle prize winners. Look at how citation counts correlate with probability of winning</li>
+    </ul>
+  </li>
+  <li><strong>Construct a make file for a project</strong>
+    <ul>
+      <li>Use example  <a href="http://paulgp.github.io/files/README_bartik.pdf">README  from Bartik paper</a> + Claude</li>
+    </ul>
+  </li>
+  <li><strong>Quiz questions for class -&gt; mapping to qualtrics</strong>
+ Prompt for class:
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code> I'm writing a multiple choice short quiz for a class called 
+ "Investment Management" for MBA students.
+ You're going to help me write the quizzes. 
+ My questions look like this:
+
+ <span class="sb">`latex
+
+ \question The CAPM model is a single factor model. What is the factor? 
+ \begin{choices}
+ \choice The risk-free rate
+ \correctchoice The market risk premium
+ \choice The market return
+ \choice The market volatility
+ \end{choices} 
+ `</span>
+
+ Generally, I want you to ask questions that probe understanding and
+ require students to use logic, not just memory. Feel free to use 
+ situational questions like "Imagine that...". Please acknowledge.
+</code></pre></div>    </div>
+
+    <p>Now we’ll give it my materials from a day of class:</p>
+
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Let's write five questions evaluating the material 
+ in these slides that are attached.
+</code></pre></div>    </div>
+
+    <p>I currently manually copy this into a Qualtrics survey, but figuring out how to automate that process as well (takes about 3 minutes, not a huge deal, but would be nice to do automatically). Would be even easier to do with Canvas, as it allows for QTI format (which can be converted from <a href="https://pypi.org/project/text2qti/">Markdown</a>).</p>
+  </li>
+  <li>
+    <p><strong>Making clip art for slides</strong></p>
+
+    <p>Often, it is nice to make “clip art” for slides. Either title slides, or simply decoration to make your slides nicer (and more engaging) without adding text.<br />
+ I use <a href="https://docs.midjourney.com/docs/quick-start">Midjourney</a> to construct this type of “art.”</p>
+
+    <p>An example prompt:</p>
+
+    <p><code class="language-plaintext highlighter-rouge">a researcher being helped by a robot to do programming in sepia tone --ar 1:1 </code></p>
+
+    <p><img src="/assets/img/midjourney.webp" alt="alt text" width="600" /></p>
+
+    <p>Example slides <a href="https://paulgp.github.io/presentations/saffran_lecture.pdf">here</a></p>
+
+    <p>Here are some tutorials on how to use Midjourney:</p>
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=5deYUaqwreo">https://www.youtube.com/watch?v=5deYUaqwreo</a></li>
+      <li><a href="https://docs.midjourney.com/docs/quick-start">https://docs.midjourney.com/docs/quick-start</a></li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Chatbots and their various forms</strong></p>
+
+    <p>Open AI has ChatGPT.</p>
+
+    <p>Anthropic has Claude.</p>
+
+    <p>Others include Gemini, Mixtral, and many alternatives (open source too). There are many to use. If you want to use your own, you need to set it up locally. This can be non-trivial, especially for the powerful ones. Would be good to have more of an expert chime in, but here are a few fun exmaples:</p>
+
+    <ol>
+      <li><a href="https://ollama.com/">https://ollama.com/</a></li>
+      <li><a href="https://github.com/simonw/llm">https://github.com/simonw/llm</a></li>
+      <li><a href="https://github.com/npiv/chatblade">https://github.com/npiv/chatblade</a></li>
+    </ol>
+
+    <p>For example, here’s an LLM running locally with minimal setup thanks to Ollama:</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ ollama run llama3
+ &gt;&gt;&gt; What are the four horsemen of the apocalypse for an economist?
+ What a great question!
+
+ In economics, the "Four Horsemen of the Apocalypse" refers to four major economic crises that had significant impacts on the global economy in the 20th century. These crises were:
+
+ 1. **The Great Depression (1929-1939)**: A severe and prolonged downturn in economic activity that affected many countries worldwide, leading to widespread unemployment, business failures, and a significant decline in international trade.
+ 2. **The Oil Shock of 1973 (1973-1974)**: A sudden and sharp increase in oil prices, triggered by an Arab-Israeli war, which led to a global energy crisis, high inflation, and a recession in many countries.
+ 3. **The Latin American Debt Crisis (1980s)**: A widespread default on international debts by several Latin American countries, which was exacerbated by high interest rates, currency fluctuations, and structural adjustment policies imposed by the
+ International Monetary Fund (IMF).
+ 4. **The Asian Financial Crisis (1997-1998)**: A rapid and severe decline in asset values and a collapse of currencies in several East Asian economies, particularly Thailand, Indonesia, Malaysia, and South Korea, triggered by poor economic
+ management, excessive debt, and capital flight.
+
+ These crises were characterized by:
+
+ * Sharp declines in economic activity
+ * High levels of uncertainty and volatility
+ * Significant changes in monetary and fiscal policies
+ * International coordination and cooperation to address the crises
+
+ Economists often use these four crises as case studies to analyze and learn from the causes, consequences, and responses to such events.
+</code></pre></div>    </div>
+
+    <p>But there are good and real research applications that you should consider, especially once combined with tuning.</p>
+  </li>
+  <li>
+    <p><strong>Making your evaluations more paletable (and making evals more useful than just scores)</strong></p>
+
+    <p>Here’s two sets of evals from my courses: <a href="https://s3.amazonaws.com/file.paulgp.com/30d/28807_spring_2024_mgt_544_01-investment_management.pdf">Investment Management</a> and <a href="https://s3.amazonaws.com/file.paulgp.com/30d/31357_spring_2024_econ_574_01mgmt_737_01-applied_empirical_methods.pdf">Applied Empirical Methods</a>.</p>
+
+    <p>Let’s go through an evaluation and ask it to digest it for us:</p>
+
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     I just got course evaluations for my class, Investment Management. I've attached the PDF of the reviews. Can you summarize and read through and give me the highlights? I'd like to hear positive stuff, to feel good, and also any constructive feedback I can take.
+</code></pre></div>    </div>
+
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Any particularly nice comments that I should add to my file of "feel good" comments?
+</code></pre></div>    </div>
+
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Can you give me any suggestions on how I can address the concerns raised by the students?
+</code></pre></div>    </div>
+
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Can you do the same now for these reviews for my PhD class?
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Converting math to code</strong></p>
+
+    <p>Let’s write some math on the board and ask it to convert it to LaTeX code.</p>
+  </li>
+  <li>
+    <p><strong>Convert tables in papers to graphs (almost) instantly</strong></p>
+
+    <p>Let’s take a table from <a href="https://www.sciencedirect.com/science/article/pii/S0304405X19301680">a paper</a> and ask it to convert it to a graph.
+ <img src="/assets/img/claude_table_graph_table.png" alt="alt text" />
+ <img src="/assets/img/claude_table_graph.png" alt="alt text" />
+ <img src="/assets/img/claude_table_graph2.png" alt="alt text" />
+ <img src="/assets/img/claude_table_graph3.png" alt="alt text" />
+ <img src="/assets/img/claude_table_graph4.png" alt="alt text" /></p>
+
+    <p>I then futzed around with it in Claude (asked it to rotate, etc.) and got this:
+ <img src="/assets/img/Table7.png" alt="alt text" /></p>
+
+    <p>Pretty great for making new figures for an MBA class!</p>
+  </li>
+</ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>I still use RStudio occasionally, but I find it to be slow to startup and I can’t have multiple projects open at the same time. This is because VS Code actually scales linearly with the number of projects you have open, while RStudio does not. I usually have 10-15 projects left open, and they’re always quick to start back up when I restart VS Code. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>See the discussion <a href="https://marketplace.visualstudio.com/items?itemName=Yeaoh.stataRun">in the extension.</a> To quote the package maintainer: “Installation instructions for Windows basically follows the original Atom stata-exec building manual with some modifications for code.” But the list of instructions looks challenging… I promise you it’s worth it! <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:Thx" role="doc-endnote">
+      <p>Thanks to <a href="https://x.com/joshuafmask">Joshua Mask</a> for introducing this to me! <a href="#fnref:Thx" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>This list is a work-in-progress. I will be adding to it as I think of more examples. If you have any suggestions, please let me know! <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>Often, there are educational discounts or your university pays for an account already! <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </section>
+                <header>
+                    <div class="sidenav">
+                        <a href="/">Home</a>
+                        <a href="/papers/cv.pdf">CV</a>
+                        <a href="/papers.html">Papers</a>
+                        <a href="/blog.html">Blog <br> (A Causal Affair) </a>
+                        <a href="https://github.com/paulgp/applied-methods-phd">Applied Methods PhD Course</a></p>
+                        <img src="/assets/img/circle_cropped.png" alt="Profile">
+                    </div>
+                </header>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,343 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Contamination Bias in Linear Regressions</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/blog.css">
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true
+      },
+      TeX: {
+        equationNumbers: { autoNumber: "AMS" }
+      }
+    });
+    </script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <style>
+        button.accordion2 {
+            font: 14px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            cursor: pointer;
+            padding: 0px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 100%;
+            transition: 0.4s;
+            background-color: #f8f8f8;
+        }
+
+        button.accordion {
+            font: 14px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            cursor: pointer;
+            padding: 0px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 100%;
+            transition: 0.4s;
+            background-color: #f8f8f8;
+        }
+
+        button.accordion.active,
+        button.accordion:hover {
+            background-color: #f8f8f8;
+        }
+
+        button.accordion:after {
+            content: '[+]';
+            font-size: 90%;
+            color: #777;
+            float: left;
+            margin-left: 1px;
+            margin-right: 3px;
+        }
+
+        button.accordion2:after {
+            content: '[#]';
+            font-size: 90%;
+            color: #777;
+            float: left;
+            margin-left: 1px;
+            margin-right: 3px;
+        }
+
+        button.accordion.active:after {
+            content: "[\2212]";
+        }
+
+        div.panel {
+            padding: 0 20px;
+            margin-top: 5px;
+            display: none;
+            background-color: white;
+            font-size: 100%;
+        }
+
+        div.panel.show {
+            display: block !important;
+        }
+    </style>
+    <link rel="alternate" type="application/atom+xml" title="Homepage of the economist Paul Goldsmith-Pinkham" href="/feed.xml">
+</head>
+
+<body>
+    <div class="wrapper">
+        <section>
+            <h1> Contamination Bias in Linear Regressions </h1>
+            <p>Economists love using linear regression to estimate treatment effects — it turns out that there are perils to this method, but also amazing perks. <!-- _includes/sidenote.html -->
+<span class="sidenote-number">[-0-]</span>
+<span class="sidenote">
+    <span class="sidenote-number">[-0-]</span>
+    This post is a synthesis of a Twitter/<a href="https://bsky.app/profile/paulgp.com/post/3lc63v5zytc2i">Bluesky thread</a>.
+</span></p>
+
+<p>In this post, I’ll discuss how…</p>
+<ul>
+  <li>Some of the problems with linear regressions in the recent TWFE/DiD lit generalize to other strategies.</li>
+  <li>Regression can be best for estimating treatment effects when these problems aren’t present.</li>
+  <li>To bring back regression’s mojo when the problems exist.</li>
+</ul>
+
+<h2 id="high-level-intuition">High-level intuition</h2>
+
+<p>To understand this, we need to really understand what’s going on when we use linear regression to estimate a treatment effect when we have both:</p>
+<ol>
+  <li>Heterogeneous effects</li>
+  <li>Controls</li>
+</ol>
+
+<p>Consider a simple example: an randomized control trial (RCT) of a binary intervention $D$ on outcome $Y$, where the intervention $D$ is random conditional on a binary control $W$ (e.g., the propensity score is not the same across $W$).</p>
+
+\[(Y(1), Y(0)) \perp D \; \vert \; W\]
+
+<p>To estimate the effect of the intervention, many economists would run the regression of:</p>
+
+\[Y = \alpha + \beta D + \gamma W + \varepsilon\]
+
+<p>And report the coefficient on $D$, $\beta$, confident that it’s a convex combination of treatment effects
+$\tau(w) = E(Y(1) - Y(0) \vert W=w)$, thanks to <a href="https://www.jstor.org/stable/2998558">Angrist (1998)</a> and Mostly Harmless Econometrics.<!-- _includes/sidenote.html -->
+<span class="sidenote-number">[-1-]</span>
+<span class="sidenote">
+    <span class="sidenote-number">[-1-]</span>
+    Angrist (1998) showed that regression coefficients like $\beta$ identify a convexly-weighted average of within-strata ATEs for a single binary control $W$. Mostly Harmless Econometrics generalized this to multivalued controls, but still focus on binary treatments.
+</span> 
+Formally, this result looks like:</p>
+
+\[\beta=\phi\tau_{1}(0)+(1-\phi)\tau_{1}(1)\]
+
+<p>where</p>
+
+\[\phi= \frac{Var(D_i\mid W_i=0)\Pr(W_i=0)}{\sum_{w=0}^{1}
+  Var(D_i\mid W_i=w)\Pr(W_i=w)}\in [0,1].\]
+
+<p>This result shows how regression avoids some problems of other estimation procedures (e.g., inverse pscore weighting): namely infeasibility or imprecision when the propensity score $p(w) = E(D \vert W = w)$ is extreme. The regression estimate <em>automatically</em> puts less weight on such values of W. This is the ideal case, where we know that we can estimate the causal effect of D on Y!</p>
+
+<figure class="marginfigure">
+  <img src="/assets/img/gphk_abstract.png" alt="Description" />
+  <figcaption>Our paper's abstract in the December 2024 AER issue.</figcaption>
+</figure>
+
+<p><a href="https://arxiv.org/abs/2106.05024">Our paper</a> (with <a href="https://about.peterhull.net/">Peter Hull</a> and <a href="https://www.princeton.edu/~mkolesar/">Michal Kolesár</a>) shows three things:</p>
+
+<ol>
+  <li>This automatic variance weighting gives the estimator that is “easiest” to estimate in the binary treatment case (using OLS achieves a semiparametric bound under homoskedasticity). Basically, OLS picks weights across covariate groups to maximize the variation in the treatment!</li>
+  <li>This automatic variance weighting intuition <em>doesn’t</em> generalize to multiple correlated treatments (which includes multi-armed RCTs, and staggered diff-in-diff!), and can create contamination bias across treatment estimates, even when you have <em>zero</em> omitted variable bias (!) <!-- _includes/sidenote.html -->
+<span class="sidenote-number">[-2-]</span>
+<span class="sidenote">
+ <span class="sidenote-number">[-2-]</span>
+ What we call contamination bias is effectively a spillover of the other treatments into either the control or treatment group for the treatment of interest.
+</span>.</li>
+  <li>We show how you can fix the contamination bias with an estimator which again gives the automatic variance weighting. We also provide a <a href="https://github.com/gphk-metrics/stata-multe">Stata package</a> and an <a href="https://github.com/kolesarm/multe">R package</a> to implement this estimator (and also check for contamination bias).</li>
+</ol>
+
+<h2 id="unpacking-this-further">Unpacking this further</h2>
+<p>Let’s try to unpack what’s going on, and along the way, we can learn new things about estimation with heterogeneous treatment effects and how the difference between design-based identification and model-based identification can lead to different regression weights.</p>
+
+<figure class="marginfigure">
+  <img src="/assets/img/wooldridge_tweet_ate.jpg" alt="Description" />
+  <figcaption>Jeff Wooldridge Tweet complaining that people don't know that regression can recover ATE</figcaption>
+</figure>
+
+<p>First, note that regression <em>can</em> provide you with the ATE, rather than the variance weighted effect, as Jeff Wooldridge alludes to in this tweet. The solution is straightforward – by interacting the demeaned control $W$ with $D$:</p>
+
+\[Y_{i} = \alpha + D_i'\beta  + W_i'\gamma  + D_{i}(W_i -E(W_i))\delta + \varepsilon_i\]
+
+<p>In this regression, the coefficient on $D_{i}$, $\beta$, will recover the ATE! However, this makes OLS susceptible to the same imprecision concerns as propensity score weighting. This solution will be important going forward.</p>
+
+<p>Now, imagine now that $D$ can be <em>two</em> treatments: $D \in {0,1,2}$.</p>
+
+<p>The natural extension of our original regression is</p>
+
+\[Y = \alpha + \beta_{1} X_1  + \beta_2 X_2  + \gamma W + \varepsilon\]
+
+<p>Where the $X$ are dummies for $D =1,2$.</p>
+
+<p>Unlike with a binary D, the estimates of $\beta_1$ and $\beta_2$ are <em>not</em> convex estimates of $\tau_1(w)$ and $\tau_2(w)$, but are instead contaminated by the other treatment effect:</p>
+
+\[\beta_{1}=E[\lambda_{11}(W_i)\tau_{1}(W_i)] +
+    E[\lambda_{12}(W_i)\tau_{2}(W_i)]\]
+
+<p>where 
+$\lambda_{11}(W_i)$ can be shown to be non-negative and to average to one, similar to the $\phi$ weight in Angrist (1998). Thus, this second term is generally present:  $\lambda_{12}(W_i)$ is generally non-zero, complicating the interpretation of $\beta_1$ by including the conditional effects of the other treatment $\tau_{2}(W_i)=E(Y_i(2)-Y_i(0)\mid W_i)$. <!-- _includes/sidenote.html -->
+<span class="sidenote-number">[-3-]</span>
+<span class="sidenote">
+    <span class="sidenote-number">[-3-]</span>
+    See our paper for a fuller discussion of these exact terms.
+</span></p>
+
+<p>Why does this contamination bias occur? Well, this comes back to the role of the controls $W$ in the regression. Controlling for $W$ in your regression is directly analogous to controlling for the pscore $p(W) = Pr(D=1 \vert W)$, thanks to the Frisch-Waugh-Lovell (FWL) theorem. But, now a given treatment ($X_{1}$) is a function of both the conditioning variables ($W$), <em>and</em> the other treatment ($X_2$)! That’s because if you get the first treatment, you can’t get the second treatment. Since we did not interact the treatments and $W$, the propensity score will <em>not</em> be correctly estimated – we will be measuring the “overall” propensity score, but not within a given strata.</p>
+
+<figure class="marginfigure">
+  <img src="/assets/img/cont-bias/example.png" alt="Description" />
+  <figcaption>Stylized example with two treatments and contamination bias</figcaption>
+</figure>
+
+<p>To give a stylized example, if schools vary in their treatment probabilities, the relationship between $\tilde{X}_{1} = X_1 - Pr(X_1 = 1 \vert W)$ and  $\tilde{X}_2$ varies – in some schools, the two are highly negatively correlated (the blue line)  while in others they are uncorrelated. Linear regression assumes the black line relationship, such that variation in $X_1$ after residualizing linearly for $X_2$ and $W$  tends to predict the $X_2$ treatment. This means that “treated”  $X_1$ units  are  picking up “treated” $X_2$ units, thereby contaminating our estimates!</p>
+
+<p>This is a broad result – with any multiple dependent treatments where controls are necessary – multi-armed stratified RCTs, Value-Added Models for teaching, or even group average differences (e.g. industry or race/ethnicity wage gaps) – this type of contamination bias can occur.</p>
+
+<h2 id="what-drives-the-contamination-bias">What drives the contamination bias?</h2>
+
+<figure class="widefigure">
+  <img src="/assets/img/cont-bias/main_theorem1.png" alt="Description" />
+  <figcaption>Proposition 1 of Goldsmith-Pinkham, Hull and Kolesar (2024)</figcaption>
+</figure>
+
+<p>What affects the magnitude and presence of the contamination bias?</p>
+<ol>
+  <li>Heterogeneity in treatment effects</li>
+  <li>Variation in pscores across controls (e.g. W is not correlated with D)</li>
+  <li>Whether the variation in pscores covaries with the heterogeneity in treatments</li>
+</ol>
+
+<p>Strikingly, this last case shows up in our empirical examples – it is interesting to think about heterogeneous TE and what exactly it is correlated with!</p>
+
+<p>Another interesting feature of our main theorem is it highlights two conceptually distinct issues:</p>
+<ol>
+  <li>whether there are negative weights on <em>own</em> treatment</li>
+  <li>whether there is contamination bias.</li>
+</ol>
+
+<p>As it turns out, negative weighting issues arise when the covariate specification in the regression is not flexible enough to correctly specify the propensity score. A simple example: two-way fixed effects cannot correctly approximate the “degenerate” propensity score from most DiD models (since there is no random variation in who is treated!) But the other issue of contamination bias <em>also</em> shows up in the differnece-in-difference literature, as remarked on by papers studying event study estimates in staggered events – when you are looking at multiple event horizons, these are multiple “treatments” which can contaminate one another.</p>
+
+<p>Our paper highlights that the issues in DiD are a broader conceptual issue about</p>
+<ol>
+  <li>the experimental design – having non-degenerate pscores will guarantee non-negative weights on own treatment</li>
+  <li>the impact of multiple treatments in a regression model.</li>
+</ol>
+
+<figure class="widefigure">
+  <img src="/assets/img/cont-bias/model_v_design.jpg" alt="Description" />
+  <figcaption>We found it a particularly useful way of thinking about identifying assumptions as either (13) or (14) above – either a "design-based" approach, modeling the treatment assignment, or a "model-based" approach, modeling the control groups’ outcome.</figcaption>
+</figure>
+
+<p>We flesh out the connection of our contamination bias paper to the new diff-in-diff lit in the Appendix B.</p>
+
+<p>In the Appendix, we discuss four examples of DiD and how our main proposition nests these cases.</p>
+
+<ol>
+  <li>a single intervention</li>
+  <li>a staggered intervention  with a single treatment</li>
+  <li>a dynamic event study</li>
+  <li>a single intervention period with multiple treatments</li>
+</ol>
+
+<p>A single intervention is a la Card and Krueger’s famous minimum wage study, where there’s a single treatment intervention, and a treated and control group. In this case, there’s always positive weights and no bias! (A relief for many doing simple DiD!)</p>
+
+<p>A staggered intervention with a single treatment is like the setting studied in <a href="https://www.aeaweb.org/articles?id=10.1257/aer.20181169">De Chaisemartin and D’Haultfoeuille (2020)</a> and  <a href="https://www.sciencedirect.com/science/article/abs/pii/S0304407621001445">Bacon-Goodman</a>. In this case, you only have one treatment, so no contamination bias! But this is exactly the setting where these authors have shown negative weights can arise (but not always). In fact, we work out a special case with two interventions, three time periods, and one control group, and show that the negative weights <em>only</em> occur if there are more late adopters than never-adopters (the control):</p>
+
+<figure class="widefigure">
+  <img src="/assets/img/cont-bias/staggered_intervention.jpg" alt="Description" />
+  <figcaption>A staggered intervention with a single treatment.</figcaption>
+</figure>
+
+<p>Importantly, we show in our paper that non-negative weights can’t be guaranteed because a “design-based” assumption doesn’t hold – treatment is not randomly assigned in most DiD designs. They are instead “model-based” –  you assume that you correctly specify the control mean (Part (ii) of Assumption 2 above). <!-- _includes/sidenote.html -->
+<span class="sidenote-number">[-4-]</span>
+<span class="sidenote">
+    <span class="sidenote-number">[-4-]</span>
+    The exception to this is in papers considering random assignment of timing of the DiD, as in <a href="https://www.sciencedirect.com/science/article/abs/pii/S0304407621000488">Athey Imbens (2022)</a>
+</span></p>
+
+<p>Next, we consider a dynamic event study with staggered interventions. This setting is notationally a pain in the butt, but it is when you’re estimating leads and lags in a diff-in-diff. What does this do? Well, it creates many more dependent treatments you need to estimate! That implies that there will be contamination bias in our Proposition 1 – exactly in line with the existing DiD lit such as <a href="https://www.sciencedirect.com/science/article/abs/pii/S030440762030378X">Sun and Abraham (2021)</a> and <a href="https://arxiv.org/abs/2108.12419">Borusyak, Hull and Jaravel (2024)</a>.</p>
+
+<p>We also work out a special case following our example with the static treatment, but now allowing for a pre-period effect (a pre-test) and a long-run effect. You can show that in this setting, if the groups are equally sized, the contamination bias for the pre-trend test is almost as big as the own treatment effect weights  for the initial effect period:</p>
+
+\[\beta=
+  \begin{pmatrix}
+    \tau_{L, 1, -2}\\
+    0\\
+    \tau_{E,3, 1}\\
+  \end{pmatrix}+\lambda_{E,0}\tau_{E,2,0}+\lambda_{L,0}\tau_{L,3,0},\]
+
+<p>where
+\(\lambda_{E,0}=
+\frac{1}{\zeta
+    }  \begin{pmatrix}
+    3n_{L}n_{E}+n_{N}n_{E}
+    \\
+    3n_{L}n_{E}+2n_{N}n_{E}
+    \\
+    -n_{L}n_{N}
+  \end{pmatrix},\qquad
+  \lambda_{L, 0}=
+  \frac{1}{\zeta}  \begin{pmatrix}
+    -3n_{L}n_{E} -n_{N}n_{E}
+    \\
+    3n_{E}n_{L} + 2n_{N}n_{L}
+    \\
+    n_{N}n_{L}
+  \end{pmatrix},\)
+and 
+\(\zeta=2(3n_{L}n_{E} + n_{E}n_{N}+n_{L}n_{N}).\)</p>
+
+<p>To quote our appendix:</p>
+
+<blockquote>
+  <p>In other words, the estimand for the two-period-ahead anticipation effect $\beta_{1}$ equals the anticipation effect for late adopters in period 1 (this is the only group we ever observe two periods before treatment) plus a contamination bias term coming from the effect of the treatment on impact.  Similarly, the estimand for the effect of the treatment one period since adoption, $\beta_{3}$, equals the effect for early adopters in period 3 (this is the only group we ever observe one period after treatment) plus a contamination bias term coming from the effect of the treatment on impact. The estimand for the effect of the treatment upon adoption, $\beta_{0}$, has no contamination bias, and equals a weighted average of the effect for early and late adopters. In this example, the own treatment weights are always positive, but the contamination weights can be large.  For instance, with equal-sized groups, $\lambda_{E,0}=(2/5,1/2,-1/10)’$ and $\lambda_{L,0}=(-2/5,1/2,1/10)’$, so the contamination weights in the estimand $\beta_{1}$ are almost as large as the own treatment weights for $\beta_{2}$.</p>
+</blockquote>
+
+<p>Finally, we consider a treatment design with multiple treatments and multiple transitions a la <a href="https://arxiv.org/abs/1804.06721">Hull (2018)</a> and <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3751060">de Chaisemartin and D’Haultfoeuille (2023)</a>. Since there’s multiple treatments, and no random assignment, there is both the possibility of negative weights and there will be contamination bias. The negative weights are solved with random assignment, but not the contamination bias (that requires a different estimator).</p>
+
+<h2 id="solutions">Solutions</h2>
+<p>So how can you solve these issues? It turns out that Imbens and Wooldridge trick is by far the easiest solution, and works even with multiple treatments. But, overlap concerns tend to be more severe with multiple treatments, because some propensity scores necessarily become closer to zero or one as more treatment arms are added.</p>
+
+<p>Can we generalize the logic of regression weighting without contamination bias? Yes! We consider solutions that generalize the intuition from a single binary treatment: place more weight on strata with evenly distributed treatments, less on strata with overlap problem:</p>
+
+\[\hat{\beta}_{\hat{\lambda}^{CW}, k}=
+  \frac{1}{\sum_{i=1}^{N}\frac{\hat{\lambda}^{CW}(W_{i})}{\hat{p}_{k}(W_{i})}X_{ik}}
+  \sum_{i=1}^{N}\frac{\hat{\lambda}^{CW}(W_{i})}{\hat{p}_{k}(W_{i})}X_{ik}Y_{i}
+  -  \frac{1}{\sum_{i=1}^{N}\frac{\hat{\lambda}^{CW}(W_{i})}{\hat{p}_{0}(W_{i})}X_{i0}}
+  \sum_{i=1}^{N}\frac{\hat{\lambda}^{CW}(W_{i})}{\hat{p}_{0}(W_{i})}X_{i0}Y_{i}.\]
+
+<p>When the treatment is binary and $\hat{p}$ is obtained via a linear regression, this weighted regression estimator coincides with the usual (unweighted) regression estimator that regresses $Y_{i}$ onto $D_{i}$ and
+$W_{i}$.</p>
+
+<p>One very nice thing that comes from our results is that if you’re worried about contamination bias, and want a quick and dirty check – simply reduce your comparison down to a single treatment and control, and estimate the effects. This will satisfy the conditions of Angrist (1998) and will also be efficient in the class of estimators, as shown in our paper. If you find similar effects, you can be somewhat reassured that contamination bias is not driving the results.</p>
+
+        </section>
+                <header>
+                    <div class="sidenav">
+                        <a href="/">Home</a>
+                        <a href="/papers/cv.pdf">CV</a>
+                        <a href="/papers.html">Papers</a>
+                        <a href="/blog.html">Blog <br> (A Causal Affair) </a>
+                        <a href="https://github.com/paulgp/applied-methods-phd">Applied Methods PhD Course</a></p>
+                        <img src="/assets/img/circle_cropped.png" alt="Profile">
+                    </div>
+                </header>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+
+</body>
+
+</html>

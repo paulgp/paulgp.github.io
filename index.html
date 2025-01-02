@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Paul Goldsmith-Pinkham</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    
+    <style>
+        button.accordion2 {
+            font: 14px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            cursor: pointer;
+            padding: 0px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 100%;
+            transition: 0.4s;
+            background-color: #f8f8f8;
+        }
+    
+        button.accordion {
+            font: 14px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            cursor: pointer;
+            padding: 0px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 100%;
+            transition: 0.4s;
+            background-color: #f8f8f8;
+        }
+    
+        button.accordion.active,
+        button.accordion:hover {
+            background-color: #f8f8f8;
+        }
+    
+        button.accordion:after {
+            content: '[+]';
+            font-size: 90%;
+            color: #777;
+            float: left;
+            margin-left: 1px;
+            margin-right: 3px;
+        }
+    
+        button.accordion2:after {
+            content: '[#]';
+            font-size: 90%;
+            color: #777;
+            float: left;
+            margin-left: 1px;
+            margin-right: 3px;
+        }
+    
+        button.accordion.active:after {
+            content: "[\2212]";
+        }
+    
+        div.panel {
+            padding: 0 20px;
+            margin-top: 5px;
+            display: none;
+            background-color: white;
+            font-size: 100%;
+        }
+    
+        div.panel.show {
+            display: block !important;
+        }
+    </style>
+    <link rel="alternate" type="application/atom+xml" title="Homepage of the economist Paul Goldsmith-Pinkham" href="/feed.xml">
+
+<script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<script type="module" src="/assets/js/pdf_gallery.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <section>
+            <h1> Paul Goldsmith-Pinkham </h1>
+            <h3 id="associate-professor-of-finance--yale-school-of-management">Associate Professor of Finance <br /> Yale School of Management</h3>
+
+<h3 id="cv">CV</h3>
+<p><a href="papers/cv.pdf">My CV is available here.</a></p>
+
+<h3 id="research">Research</h3>
+<p><a href="papers.html">My research is listed here.</a></p>
+
+<h3 id="teaching-materials">Teaching Materials</h3>
+<p><a href="https://github.com/paulgp/applied-methods-phd">Ph.D. applied empirical methods course materials</a></p>
+
+<h3 id="blog--the-non-substack-version">Blog  (the non-substack version)</h3>
+<p><a href="https://paulgp.github.io/blog.html">I write a blog about causal inference, household finance, and  econometrics.</a></p>
+
+<p>Some useful posts:</p>
+<ol>
+  <li><a href="https://paulgp.github.io/2018/04/30/beamer-tips.html">Beamer Tips</a></li>
+  <li><a href="https://paulgp.github.io/2021/05/27/gary-chamberlain-lectures.html">Gary Chamberlain Lecture Notes</a></li>
+  <li><a href="https://paulgp.github.io/2024/06/24/llm_talk.html">AI in Research and Teaching</a></li>
+  <li>Reader’s Digest of Econometrica Papers – <a href="https://paulgp.github.io/2024/11/06/readers-digest-farrell-et-al-2021.html">Deep Neural Networks for Estimation and Inference</a> and <a href="https://paulgp.github.io/2024/11/06/readers-digest-galeotti-et-al-2020.html">Targeting Interventions in Networks</a></li>
+</ol>
+
+<h3 id="contact">Contact</h3>
+<ul>
+  <li>Email: paul.goldsmith-pinkham@yale.edu</li>
+  <li>Bluesky: <a href="https://bsky.app/profile/paulgp.com">@paulgp.com</a></li>
+  <li>Twitter: I am no longer on Twitter, but you can find me on Bluesky.</li>
+</ul>
+
+        </section>
+        <header>
+            <div class="sidenav">
+                <a href="/">Home</a>
+                <a href="/papers/cv.pdf">CV</a>
+                <a href="/papers.html">Papers</a>
+                <a href="/blog.html">Blog <br> (A Causal Affair) </a>
+                <a href="https://github.com/paulgp/applied-methods-phd">Applied Methods PhD Course</a></p>
+                <img src="/assets/img/circle_cropped.png" alt="Profile">
+            </div>
+        </header>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+
+</body>
+
+</html>

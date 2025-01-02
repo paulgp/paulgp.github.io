@@ -1,0 +1,1513 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="http://paulgp.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="http://paulgp.github.io/" rel="alternate" type="text/html" /><updated>2025-01-02T20:32:25+00:00</updated><id>http://paulgp.github.io/feed.xml</id><title type="html">Paul Goldsmith-Pinkham</title><subtitle>Homepage of the economist Paul Goldsmith-Pinkham</subtitle><entry><title type="html">Testing out a new format: Reader’s Digest of Econometrica Papers [Econometrics Paper]</title><link href="http://paulgp.github.io/2024/11/06/readers-digest-farrell-et-al-2021.html" rel="alternate" type="text/html" title="Testing out a new format: Reader’s Digest of Econometrica Papers [Econometrics Paper]" /><published>2024-11-06T00:00:00+00:00</published><updated>2024-11-06T00:00:00+00:00</updated><id>http://paulgp.github.io/2024/11/06/readers-digest-farrell-et-al-2021</id><content type="html" xml:base="http://paulgp.github.io/2024/11/06/readers-digest-farrell-et-al-2021.html"><![CDATA[<p>Ben Golub had the idea of <a href="https://bsky.app/profile/bengolub.bsky.social/post/3lacwdogwti2w">summarizing technical papers (such as in Econometrica) using AI to be more easily approached by non-technical economists.</a>  These papers were selected from the list of the <a href="https://scholar.google.com/citations?hl=en&amp;vq=bus_economics&amp;view_op=list_hcore&amp;venue=G0hmswRVzmAJ.2024">most prominent recent papers in Econometrica by Google Scholar.</a> First, an econometrics paper. I will also post one for <a href="https://paulgp.github.io/2024/11/06/readers-digest-galeotti-et-al-2020.html">a theory paper.</a></p>
+
+<h2 id="deep-neural-networks-for-estimation-and-inference-a-readers-digest">Deep Neural Networks for Estimation and Inference: A Reader’s Digest</h2>
+<p><a href="https://www.econometricsociety.org/publications/econometrica/2021/01/01/deep-neural-networks-estimation-and-inference"><em>Farrell, Liang, and Misra (Econometrica, 2021)</em></a></p>
+
+<p><strong>Key Takeaway</strong>: This paper proves that deep learning can be safely used as a first step in modern econometric analysis. If you’re using machine learning for things like propensity score matching or predicting treatment effects, you can now confidently use deep neural networks and still get valid statistical inference in your second stage analysis. This fills a crucial gap, as while deep learning has shown impressive empirical performance, economists have been hesitant to adopt it without theoretical guarantees.</p>
+
+<h3 id="what-do-the-researchers-do">What Do The Researchers Do?</h3>
+
+<p>The authors provide formal mathematical proof that deep neural networks can be used as a valid first-step estimator in two-stage econometric procedures. In simpler terms:</p>
+
+<ol>
+  <li>They show that deep neural networks converge to the true function at a rate fast enough to allow valid inference in the second stage</li>
+  <li>They prove this for the most common type of neural network (multilayer perceptron with ReLU activation)</li>
+  <li>They demonstrate how this works in practice with a marketing application where they estimate individual treatment effects of catalog mailings</li>
+</ol>
+
+<p>The results cover both standard regression problems and classification tasks like logistic regression, making them broadly applicable to common econometric settings.</p>
+
+<h3 id="why-does-this-matter">Why Does This Matter?</h3>
+
+<p>This paper matters for three key reasons:</p>
+
+<ol>
+  <li>
+    <p><strong>Bridging Theory and Practice</strong>: Deep learning has shown remarkable empirical success, but economists have been reluctant to adopt it without theoretical foundations. This paper provides those foundations.</p>
+  </li>
+  <li>
+    <p><strong>Validation of Current Methods</strong>: Many researchers are already using neural networks in applications. This paper proves that such applications can be theoretically valid, providing retroactive justification for existing work.</p>
+  </li>
+  <li>
+    <p><strong>Extension of Machine Learning Literature</strong>: Previous work had established similar results for other methods (LASSO, random forests), but deep learning had remained a notable gap in the literature.</p>
+  </li>
+</ol>
+
+<h3 id="key-result-theorem-1">Key Result: Theorem 1</h3>
+
+<p>The paper’s most important result is Theorem 1, which shows that multilayer perceptron networks achieve a convergence rate of approximately n^(-β/(β+d)), where:</p>
+<ul>
+  <li>n is the sample size</li>
+  <li>β measures how smooth the true function is</li>
+  <li>d is the number of input variables</li>
+</ul>
+
+<p>This rate is fast enough to ensure that when you use the neural network predictions in a second stage (e.g., for treatment effect estimation), your standard errors and confidence intervals will still be valid.</p>
+
+<p>The authors demonstrate this in practice with a retail catalog mailing study, where they use deep learning to estimate individual treatment effects. The method performs as well as or better than traditional approaches, while maintaining valid statistical inference.</p>
+
+<h3 id="practical-implications">Practical Implications</h3>
+
+<p>For applied researchers, this paper means you can:</p>
+<ul>
+  <li>Use deep learning in your first-stage predictions</li>
+  <li>Still get valid standard errors and confidence intervals in your second stage</li>
+  <li>Not worry about neural network architecture details beyond basic setup</li>
+  <li>Apply these results to both continuous outcomes (regression) and binary outcomes (classification)</li>
+</ul>
+
+<p>The key constraint is that this only applies to two-stage procedures where the neural network is used in the first stage. The results don’t automatically extend to using neural networks for direct causal inference.</p>
+
+<h2 id="further-discussion-on-deep-neural-networks-for-estimation-and-inference">Further Discussion on “Deep Neural Networks for Estimation and Inference”</h2>
+
+<h3 id="why-was-this-hard">Why Was This Hard?</h3>
+
+<p>The theoretical validation of deep neural networks for econometric inference faced several key challenges:</p>
+
+<ol>
+  <li>
+    <p><strong>Unbounded Parameters</strong>: Traditional statistical theory typically requires bounded parameters, but modern deep learning works best when network weights are allowed to be unbounded. The authors developed new mathematical techniques to handle this reality of how neural networks are actually used.</p>
+  </li>
+  <li>
+    <p><strong>Non-Smooth Activation</strong>: Modern neural networks use ReLU (Rectified Linear Unit) activation functions, which are not smooth - they have a “kink” at zero. Most classical statistical theory relies on smooth functions, requiring new theoretical approaches.</p>
+  </li>
+  <li>
+    <p><strong>Depth Complexity</strong>: Each layer of a neural network transforms the data in non-linear ways, making it extremely difficult to track how errors propagate through the network. Previous work mostly focused on shallow networks (1-2 layers) because they were mathematically tractable.</p>
+  </li>
+  <li>
+    <p><strong>Multiple Sources of Error</strong>: The analysis needed to account for both approximation error (how well can a neural network approximate the true function?) and estimation error (how well can we estimate the network parameters?), while ensuring both are controlled enough for valid second-stage inference.</p>
+  </li>
+</ol>
+
+<h3 id="where-would-this-not-do-well">Where Would This Not Do Well?</h3>
+
+<p>The authors’ results have important limitations:</p>
+
+<ol>
+  <li>
+    <p><strong>Small Sample Sizes</strong>: The convergence rates require large samples to kick in. For small datasets (hundreds of observations), traditional methods might be more reliable.</p>
+  </li>
+  <li>
+    <p><strong>Very High Dimensional Settings</strong>: When the number of features (d) is large relative to sample size, the convergence rate becomes very slow. In such cases, methods that impose more structure (like LASSO) might work better.</p>
+  </li>
+  <li>
+    <p><strong>Direct Causal Effects</strong>: The results only cover using neural networks as a first-step estimator. They don’t automatically extend to using neural networks for direct estimation of causal effects.</p>
+  </li>
+  <li>
+    <p><strong>When Interpretability is Crucial</strong>: While the predictions can be used reliably, the internal workings of the neural network remain a “black box”. In settings where you need to explain exactly how each variable affects the outcome, simpler models might be preferred.</p>
+  </li>
+</ol>
+
+<h3 id="when-to-cite-this-paper">When to Cite this paper:</h3>
+<ol>
+  <li>
+    <p><strong>Methodological Justification</strong>: “We use deep neural networks for our first-stage estimates, following Farrell et al. (2021) who establish the theoretical validity of this approach for subsequent inference.”</p>
+  </li>
+  <li>
+    <p><strong>Literature Context</strong>: “Recent work has established theoretical guarantees for machine learning methods in econometrics, including LASSO (Belloni et al., 2014), random forests (Wager and Athey, 2018), and deep neural networks (Farrell et al., 2021).”</p>
+  </li>
+  <li>
+    <p><strong>Specific Applications</strong>: “For propensity score estimation, we implement a deep neural network, which Farrell et al. (2021) show provides valid first-stage estimates for subsequent causal inference.”</p>
+  </li>
+</ol>
+
+<h3 id="when-not-to-cite-this-paper">When Not to Cite this paper:</h3>
+<ul>
+  <li>Don’t cite this paper merely for using neural networks in economics</li>
+  <li>Don’t cite it for general machine learning applications without inference</li>
+  <li>Don’t cite it for direct causal effect estimation using neural networks</li>
+</ul>
+
+<p>The paper is best positioned as part of the broader literature on valid inference after machine learning, specifically addressing the theoretical gaps for deep learning in econometric applications.</p>
+
+<h2 id="understanding-β-beta-and-d-in-practice">Understanding β (Beta) and d in Practice</h2>
+
+<h2 id="what-these-numbers-mean">What These Numbers Mean</h2>
+
+<ul>
+  <li><strong>d</strong>: Number of features/covariates in your data</li>
+  <li><strong>β</strong>: Smoothness parameter of the true function (roughly, how many continuous derivatives it has)</li>
+</ul>
+
+<h2 id="typical-values-in-economic-applications">Typical Values in Economic Applications</h2>
+
+<h3 id="for-d-dimensions">For d (dimensions):</h3>
+<ul>
+  <li><strong>Small</strong>: d = 4-10</li>
+  <li>Example: Basic wage regression (age, education, experience, gender)</li>
+  <li>
+    <p>Traditional RCT with few controls</p>
+  </li>
+  <li><strong>Medium</strong>: d = 20-50</li>
+  <li>Example: Consumer choice models</li>
+  <li>
+    <p>Policy evaluation with demographic controls</p>
+  </li>
+  <li><strong>Large</strong>: d = 100-500</li>
+  <li>Example: The paper’s retail catalog application (d ≈ 150)</li>
+  <li>Modern marketing applications with customer features</li>
+</ul>
+
+<h3 id="for-β-smoothness">For β (smoothness):</h3>
+<ul>
+  <li><strong>β = 1</strong>: Function is continuous but can have sharp turns</li>
+  <li>
+    <p>Example: Simple threshold effects in policy</p>
+  </li>
+  <li><strong>β = 2</strong>: Function is continuously differentiable</li>
+  <li>Example: Most standard economic relationships</li>
+  <li>
+    <p>This is commonly assumed in practice</p>
+  </li>
+  <li><strong>β = 4</strong>: Function is very smooth</li>
+  <li>Example: Well-behaved utility functions</li>
+  <li>Often used in theoretical work</li>
+</ul>
+
+<h2 id="what-this-means-in-practice">What This Means in Practice</h2>
+
+<p>Let’s look at convergence rate n^(-β/(β+d)) with some examples:</p>
+
+<ol>
+  <li><strong>Simple Case</strong>: β = 2, d = 5
+    <ul>
+      <li>Rate ≈ n^(-2/7) ≈ n^(-0.29)</li>
+      <li>Pretty good! Usable with moderate sample sizes</li>
+    </ul>
+  </li>
+  <li><strong>Marketing Application</strong>: β = 2, d = 150
+    <ul>
+      <li>Rate ≈ n^(-2/152) ≈ n^(-0.013)</li>
+      <li>Much slower - needs very large samples</li>
+      <li>This is why big data applications work well</li>
+    </ul>
+  </li>
+  <li><strong>Best Case</strong>: β = 4, d = 3
+    <ul>
+      <li>Rate ≈ n^(-4/7) ≈ n^(-0.57)</li>
+      <li>Close to parametric rate of n^(-0.5)</li>
+      <li>Rare in practice</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="rule-of-thumb">Rule of Thumb</h2>
+<ul>
+  <li>If d &lt; 20 and β ≥ 2, traditional sample sizes (n = 1000-5000) are often sufficient</li>
+  <li>If d &gt; 100, you typically need n &gt; 100,000 for reliable results</li>
+  <li>When d is large relative to n, consider dimension reduction or feature selection first</li>
+</ul>
+
+<p>This illustrates why the method works well in the paper’s retail application (large n, moderate d) but might struggle in settings with many features and smaller samples.</p>]]></content><author><name></name></author><category term="Research" /><category term="AI" /><category term="Econometrics" /><category term="Readers Digest" /><summary type="html"><![CDATA[Ben Golub had the idea of summarizing technical papers (such as in Econometrica) using AI to be more easily approached by non-technical economists. These papers were selected from the list of the most prominent recent papers in Econometrica by Google Scholar. First, an econometrics paper. I will also post one for a theory paper.]]></summary></entry><entry><title type="html">Testing out a new format: Reader’s Digest of Econometrica Papers [Economic Theory Paper]</title><link href="http://paulgp.github.io/2024/11/06/readers-digest-galeotti-et-al-2020.html" rel="alternate" type="text/html" title="Testing out a new format: Reader’s Digest of Econometrica Papers [Economic Theory Paper]" /><published>2024-11-06T00:00:00+00:00</published><updated>2024-11-06T00:00:00+00:00</updated><id>http://paulgp.github.io/2024/11/06/readers-digest-galeotti-et-al-2020</id><content type="html" xml:base="http://paulgp.github.io/2024/11/06/readers-digest-galeotti-et-al-2020.html"><![CDATA[<p>Ben Golub had the idea of <a href="https://bsky.app/profile/bengolub.bsky.social/post/3lacwdogwti2w">summarizing technical papers (such as in Econometrica) using AI to be more easily approached by non-technical economists.</a>  These papers were selected from the list of the <a href="https://scholar.google.com/citations?hl=en&amp;vq=bus_economics&amp;view_op=list_hcore&amp;venue=G0hmswRVzmAJ.2024">most prominent recent papers in Econometrica by Google Scholar.</a> This is the second post, for an economic theory paper.  I also posted one for an <a href="https://paulgp.github.io/2024/11/06/readers-digest-farrell-et-al-2021.html">econometrics paper.</a></p>
+
+<h2 id="targeting-interventions-in-networks-a-readers-digest">Targeting Interventions in Networks: A Reader’s Digest</h2>
+<p><a href="https://www.econometricsociety.org/publications/econometrica/2020/11/01/targeting-interventions-networks"><em>Galeotti, Golub, and Goyal (Econometrica, 2020)</em></a></p>
+<h3 id="the-one-big-idea">The One Big Idea</h3>
+<p>When trying to influence behavior in a networked system (like encouraging technology adoption among farmers or increasing educational effort in schools), the optimal intervention strategy depends crucially on whether actions are strategic complements (people want to match what their neighbors do) or strategic substitutes (people want to do the opposite of their neighbors). With complementary actions, focus resources on well-connected “central” individuals. With substitute actions, target pairs of individuals who aren’t directly connected. This seemingly complex problem can be solved systematically using network “principal components.”</p>
+
+<h3 id="what-do-they-do">What Do They Do?</h3>
+
+<p>The researchers study how a planner should optimally target interventions when individuals are connected in a network and influence each other’s behavior. Think of:</p>
+
+<ul>
+  <li>A policymaker providing incentives to farmers to adopt new agricultural technologies</li>
+  <li>An educational administrator designing interventions to increase study effort across different school classes</li>
+  <li>A public health official promoting vaccination in communities</li>
+</ul>
+
+<p>The key challenge is that when you incentivize one person to change their behavior, this creates ripple effects through the network. If you encourage one farmer to adopt a technology, this might encourage or discourage their neighbors depending on whether the actions are strategic complements or substitutes.</p>
+
+<p>The paper provides a mathematical framework to determine the optimal targeting strategy given:</p>
+<ol>
+  <li>The network structure</li>
+  <li>Whether actions are strategic complements or substitutes</li>
+  <li>A budget constraint for the intervention</li>
+</ol>
+
+<p>Their clever insight is to break down the targeting problem using “principal components” of the network - these are like fundamental building blocks that capture different patterns of connections, from very global patterns to very local ones.</p>
+
+<h3 id="why-does-the-literature-care">Why Does the Literature Care?</h3>
+
+<p>This paper makes three important contributions:</p>
+
+<ol>
+  <li>
+    <p><strong>Practical Guidance</strong>: It provides clear rules of thumb for practitioners - with complementary actions, focus on network-central individuals; with substitute actions, focus on disconnected pairs. Previous work often provided complex or hard-to-implement solutions.</p>
+  </li>
+  <li>
+    <p><strong>Unified Framework</strong>: It brings together various strands of literature on network interventions under one mathematical framework. Whether you’re studying technology adoption, education, or public health, the same principles apply.</p>
+  </li>
+  <li>
+    <p><strong>Methodological Innovation</strong>: The use of network principal components to analyze intervention strategies is novel and provides a powerful analytical tool that others can build on.</p>
+  </li>
+</ol>
+
+<h3 id="key-result-simple-interventions-proposition-2">Key Result: Simple Interventions (Proposition 2)</h3>
+<!-- Here's some text<span class="sidenote">This is a sidenote that should now appear properly in the margin</span> that continues after the note. -->
+
+<p>The paper’s most practically relevant result (shown in Proposition 2) demonstrates that when the intervention budget is large enough, the optimal strategy becomes remarkably simple:</p>
+
+<ul>
+  <li>For strategic complements (e.g., social media adoption where people want to be on the same platform as friends):
+    <ul>
+      <li>Target individuals in proportion to their “eigenvector centrality” (a measure of how well-connected they are)</li>
+      <li>The intervention looks like a “hub and spoke” pattern, focusing on central nodes</li>
+    </ul>
+  </li>
+  <li>For strategic substitutes (e.g., businesses choosing which market to enter):
+    <ul>
+      <li>Target individuals in proportion to the network’s “last eigenvector”</li>
+      <li>The intervention looks like a checkerboard pattern, targeting alternating nodes</li>
+    </ul>
+  </li>
+</ul>
+
+<p>You can see this illustrated clearly in Figure 2 of the paper, which shows how optimal interventions differ between complement and substitute cases in an example network.</p>
+
+<h3 id="practical-takeaway">Practical Takeaway</h3>
+
+<p>For applied economists working on policy interventions in networked settings, the key lesson is that you need to:</p>
+<ol>
+  <li>Map out the network structure</li>
+  <li>Determine whether actions are strategic complements or substitutes</li>
+  <li>Then follow a simple targeting rule - focus on central players for complements, or alternating players for substitutes</li>
+</ol>
+
+<p>This provides a practical framework for designing targeted interventions that accounts for network effects without getting lost in mathematical complexity.</p>
+
+<h2 id="further-discussion-of-targeting-interventions-in-networks">Further Discussion of “Targeting Interventions in Networks”</h2>
+
+<h3 id="why-was-this-hard">Why Was This Hard?</h3>
+
+<p>The key technical challenges that prevented earlier solutions were:</p>
+
+<ol>
+  <li>
+    <p><strong>Dimensionality</strong>: Network intervention problems are inherently high-dimensional. With n individuals, you need to choose n different intervention levels, and these choices interact in complex ways through the network. Previous approaches often relied on complex numerical methods or focused on special cases.</p>
+  </li>
+  <li>
+    <p><strong>Network Feedback</strong>: When you intervene on one node, it affects their neighbors, which affects neighbors’ neighbors, and so on. These ripple effects are hard to track analytically, especially when the network is complex. The paper’s insight to use principal components cleverly breaks this down into independent pieces that can be analyzed separately.</p>
+  </li>
+  <li>
+    <p><strong>Unified Treatment</strong>: Earlier work often treated strategic complements and substitutes as completely separate cases requiring different analytical tools. This paper shows they’re actually two sides of the same coin - just focus on opposite ends of the eigenvalue spectrum.</p>
+  </li>
+</ol>
+
+<h3 id="where-would-this-not-do-well">Where Would This Not Do Well?</h3>
+
+<p>The approach has several important limitations researchers should consider:</p>
+
+<ol>
+  <li>
+    <p><strong>Binary/Discrete Actions</strong>: The framework assumes continuous actions (like effort or investment levels). It might not work well for binary decisions (like adopt/don’t adopt) or discrete choices (like choosing between specific technologies).</p>
+  </li>
+  <li>
+    <p><strong>Network Uncertainty</strong>: The model assumes the planner knows the network structure perfectly. In practice, network data is often incomplete or measured with error. The paper’s extension to incomplete information only covers uncertainty about individual characteristics, not network structure.</p>
+  </li>
+  <li>
+    <p><strong>Dynamic Settings</strong>: The framework is static - everyone acts simultaneously after the intervention. It might not capture settings where adoption or behavior spreads dynamically over time.</p>
+  </li>
+  <li>
+    <p><strong>Heterogeneous Effects</strong>: The model assumes the nature of strategic interactions (complements/substitutes) is the same throughout the network. In reality, some relationships might be complementary while others are substitutable.</p>
+  </li>
+</ol>
+
+<h3 id="how-to-citereference-this-paper">How to Cite/Reference This Paper</h3>
+
+<p>Researchers might reference this paper in several contexts:</p>
+
+<ol>
+  <li>
+    <p><strong>As a Methodological Framework</strong>:
+“We follow Galeotti et al.’s (2020) principal components approach to analyze optimal targeting in our network setting…”</p>
+  </li>
+  <li>
+    <p><strong>For Policy Design</strong>:
+“Given the strategic complementarities in our setting, we build on Galeotti et al. (2020) to focus interventions on central nodes…”</p>
+  </li>
+  <li>
+    <p><strong>As Theoretical Foundation</strong>:
+“The theoretical literature (e.g., Galeotti et al. 2020) suggests that optimal network interventions differ fundamentally between strategic complements and substitutes…”</p>
+  </li>
+</ol>
+
+<p>Best citation contexts include:</p>
+<ul>
+  <li>Studies of policy interventions in networked settings</li>
+  <li>Empirical analyses of diffusion or peer effects</li>
+  <li>Research on targeted marketing or seeding strategies</li>
+  <li>Studies of technology adoption or educational interventions</li>
+</ul>
+
+<p>The paper is most useful as:</p>
+<ol>
+  <li>A theoretical framework for designing targeted interventions</li>
+  <li>A source of testable predictions about optimal targeting</li>
+  <li>A guide for empirical researchers on how network structure should inform intervention design</li>
+</ol>
+
+<p>Remember that the paper’s key contribution is providing a practical framework for intervention design, not just a theoretical result. Applied researchers should emphasize this aspect when citing.</p>
+
+<h2 id="core-model-setup">Core Model Setup</h2>
+
+<h3 id="players-and-network">Players and Network</h3>
+<ul>
+  <li>Set of players: $N = {1,\ldots,n}$, where $n \geq 2$</li>
+  <li>Network represented by symmetric adjacency matrix $G$</li>
+  <li>Entry $g_{ij} \geq 0$ represents strength of connection between $i$ and $j$</li>
+  <li>No self-links ($g_{ii} = 0$)</li>
+</ul>
+
+<h3 id="player-utilities">Player Utilities</h3>
+<p>Each player $i$’s utility is:</p>
+
+\[U_i(a,G) = a_i(b_i + \beta\sum_{j\in N} g_{ij} a_j) - \frac{1}{2}a_i^2 + P_i(a_{-i},G,b)\]
+
+<p>where:</p>
+<ul>
+  <li>$a_i$ is player $i$’s action (continuous)</li>
+  <li>$b_i$ is standalone marginal return for player $i$</li>
+  <li>$\beta$ captures strategic interactions:
+    <ul>
+      <li>$\beta &gt; 0$: strategic complements</li>
+      <li>$\beta &lt; 0$: strategic substitutes</li>
+    </ul>
+  </li>
+  <li>$P_i$ captures pure externalities that don’t affect best responses</li>
+</ul>
+
+<h3 id="equilibrium">Equilibrium</h3>
+<ul>
+  <li>First order conditions give best responses:</li>
+</ul>
+
+\[a_i = b_i + \beta\sum_{j\in N} g_{ij} a_j\]
+
+<ul>
+  <li>In matrix form: $[I - \beta G]a^* = b$</li>
+  <li>Under assumptions, unique Nash equilibrium exists:</li>
+</ul>
+
+\[a^* = [I - \beta G]^{-1}b\]
+
+<h3 id="planners-problem">Planner’s Problem</h3>
+<p>The planner can modify standalone marginal returns ($b$) to maximize welfare:</p>
+
+<p>\(\max_b W(b,G)\)
+\(\text{s.t. } a^* = [I - \beta G]^{-1}b\)
+\(\sum_{i\in N} (b_i - \hat{b}_i)^2 \leq C\)</p>
+
+<p>where:</p>
+<ul>
+  <li>$\hat{b}$ are status quo marginal returns</li>
+  <li>$C$ is planner’s budget</li>
+  <li>$W(b,G) = w\sum_i(a_i^*)^2$ for some $w \in \mathbb{R}$</li>
+</ul>
+
+<h3 id="key-innovation">Key Innovation</h3>
+<p>The paper analyzes this using principal components:</p>
+<ul>
+  <li>$G = U\Lambda U^T$ where:
+    <ul>
+      <li>$\Lambda$ is diagonal matrix of eigenvalues</li>
+      <li>$U$ contains corresponding eigenvectors</li>
+    </ul>
+  </li>
+  <li>This allows decomposing interventions into components that can be analyzed separately</li>
+  <li>Optimal targeting depends on strategic complement/substitute nature and eigenvalue structure</li>
+</ul>
+
+<p>This setup allows analyzing how network structure interacts with strategic incentives to determine optimal intervention policies.</p>]]></content><author><name></name></author><category term="Research" /><category term="AI" /><category term="Economic Theory" /><category term="Readers Digest" /><summary type="html"><![CDATA[Ben Golub had the idea of summarizing technical papers (such as in Econometrica) using AI to be more easily approached by non-technical economists. These papers were selected from the list of the most prominent recent papers in Econometrica by Google Scholar. This is the second post, for an economic theory paper. I also posted one for an econometrics paper.]]></summary></entry><entry><title type="html">Reader’s Digest of Spatial Unit Roots and Spurious Regression</title><link href="http://paulgp.github.io/2024/11/06/readers-digest-mueller-watson-2024.html" rel="alternate" type="text/html" title="Reader’s Digest of Spatial Unit Roots and Spurious Regression" /><published>2024-11-06T00:00:00+00:00</published><updated>2024-11-06T00:00:00+00:00</updated><id>http://paulgp.github.io/2024/11/06/readers-digest-mueller-watson-2024</id><content type="html" xml:base="http://paulgp.github.io/2024/11/06/readers-digest-mueller-watson-2024.html"><![CDATA[<p><em>Editors Note: This summmary was created using Claude AI. Please send me any comments or corrections.</em></p>
+
+<p><a href="https://www.econometricsociety.org/publications/econometrica/2024/09/01/Spatial-Unit-Roots-and-Spurious-Regression"><em>Mueller and Watson (Econometrica, 2024)</em></a></p>
+
+<p><strong>Key Takeaway</strong>: When analyzing spatial data (like county-level economic indicators), strong spatial correlation can lead to false statistical significance in regressions, even when using clustered standard errors or spatial HAC corrections. Just as economists difference time series data to handle unit roots, spatial data may need special transformations before regression analysis.</p>
+
+<h2 id="what-the-paper-does">What the Paper Does</h2>
+
+<p>Mueller and Watson develop tools for detecting and handling strong spatial dependence in economic data. They:</p>
+
+<ol>
+  <li>Define a spatial equivalent to time series unit roots (extremely persistent spatial correlation)</li>
+  <li>Show how standard regression techniques fail with such data</li>
+  <li>Create tests to detect problematic spatial correlation</li>
+  <li>Propose methods to transform spatial data for valid statistical inference</li>
+</ol>
+
+<p>They illustrate these issues using data from Chetty et al.’s (2014) study of intergenerational mobility across U.S. commuting zones, showing that many socioeconomic variables exhibit strong spatial persistence that could invalidate standard regression analysis.</p>
+
+<h2 id="why-this-matters">Why This Matters</h2>
+
+<p>Prior to this paper, economists knew spatial correlation could be problematic but lacked:</p>
+<ul>
+  <li>A formal framework for thinking about “too much” spatial correlation</li>
+  <li>Tests to detect when spatial correlation invalidates standard inference</li>
+  <li>Clear solutions for handling strongly correlated spatial data</li>
+</ul>
+
+<p>The standard practice of using clustered standard errors or spatial HAC corrections isn’t enough when spatial correlation is very strong. This paper provides practical tools for applied researchers working with spatial data, similar to how unit root tests and first-differencing transformed time series analysis in the 1980s.</p>
+
+<h2 id="key-result-the-spatial-spurious-regression-problem">Key Result: The Spatial Spurious Regression Problem</h2>
+
+<p>Figure 1 in the paper dramatically illustrates the issue. When regressing two completely independent spatial unit root processes against each other (simulated data with strong spatial correlation):</p>
+<ul>
+  <li>The R² is high (0.49)</li>
+  <li>The t-statistic using state-clustered standard errors is 4.71</li>
+  <li>This would incorrectly lead researchers to conclude there’s a significant relationship</li>
+</ul>
+
+<p>The authors show this isn’t just a simulation curiosity. Many real economic variables exhibit this strong spatial persistence. For example, in the Chetty et al. data:</p>
+<ul>
+  <li>19 out of 27 socioeconomic variables fail tests for weak spatial correlation</li>
+  <li>Many pairs of these variables show significant relationships that may be spurious</li>
+  <li>Traditional clustering and HAC corrections don’t solve the problem</li>
+</ul>
+
+<h2 id="practical-implications">Practical Implications</h2>
+
+<p>Applied researchers should:</p>
+<ol>
+  <li>Test their spatial variables for strong persistence using the authors’ spatial unit root tests</li>
+  <li>If strong persistence is detected, transform the data using the paper’s GLS method before running regressions</li>
+  <li>Be especially cautious of significant results between spatial variables when both show signs of strong persistence</li>
+</ol>
+
+<p>The paper provides ready-to-use methods for both testing and transforming spatial data, making these techniques accessible to applied researchers.</p>
+
+<h1 id="further-discussion-on-spatial-unit-roots">Further Discussion on Spatial Unit Roots</h1>
+
+<h2 id="why-was-this-hard">Why Was This Hard?</h2>
+
+<p>The key technical challenge was that spatial data is fundamentally different from time series:</p>
+
+<ol>
+  <li>
+    <p><strong>No Natural Ordering</strong>: Time series has a clear order (past to future), but spatial data doesn’t. You can’t simply define “next” or “previous” for locations like you can with time periods.</p>
+  </li>
+  <li>
+    <p><strong>Irregular Sampling</strong>: Time series typically comes in regular intervals (monthly, quarterly), but spatial observations often have irregular distances and clustering (e.g., cities are clustered, rural areas sparse).</p>
+  </li>
+  <li>
+    <p><strong>Multiple Dimensions</strong>: Spatial correlation works in multiple directions simultaneously (north-south and east-west), making both the theory and estimation more complex than one-dimensional time series.</p>
+  </li>
+</ol>
+
+<p>Previous approaches like Spatial Autoregressive (SAR) models required researchers to specify a “spatial weights matrix” defining relationships between locations. This was often arbitrary and didn’t capture the continuous nature of spatial relationships.</p>
+
+<h2 id="limitations-and-where-it-might-not-work-well">Limitations and Where It Might Not Work Well</h2>
+
+<p>The approach has several potential limitations:</p>
+
+<ol>
+  <li>
+    <p><strong>Small Samples</strong>: The methods are asymptotic, requiring many spatial observations. They may not work well for analyses with few regions (e.g., state-level data with only 50 observations).</p>
+  </li>
+  <li>
+    <p><strong>Border Effects</strong>: The methods may struggle with data near boundaries (e.g., coastal areas, international borders) where the spatial process is truncated.</p>
+  </li>
+  <li>
+    <p><strong>Non-Geographic Space</strong>: While the theory extends to any metric space, it’s less clear how well it works for non-geographic distances (e.g., social network distance, economic distance).</p>
+  </li>
+  <li>
+    <p><strong>Discrete Spatial Units</strong>: The theory assumes underlying continuous spatial processes. It may not be appropriate for inherently discrete spatial units (e.g., school districts where policies create true discontinuities).</p>
+  </li>
+</ol>
+
+<h2 id="how-to-citereference">How to Cite/Reference</h2>
+
+<p>Researchers should cite this paper when:</p>
+
+<ol>
+  <li><strong>Testing Spatial Persistence</strong>:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"Before conducting our spatial analysis, we test for strong spatial persistence using Mueller and Watson's (2024) spatial unit root test..."
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Justifying Spatial Transformations</strong>:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"Given evidence of strong spatial persistence, we apply the GLS transformation suggested by Mueller and Watson (2024) before conducting our regression analysis..."
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Discussing Spurious Regression Concerns</strong>:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"The high significance of our spatial correlations should be interpreted with caution, as Mueller and Watson (2024) show that standard inference methods can produce spuriously significant results when variables exhibit strong spatial persistence..."
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>The paper is most relevant when:</p>
+<ul>
+  <li>Working with continuous geographic data</li>
+  <li>Having many spatial observations</li>
+  <li>Concerned about spatial correlation invalidating standard inference</li>
+  <li>Needing formal tests for “too much” spatial correlation</li>
+</ul>
+
+<p>Researchers should be explicit about which aspect of the paper they’re drawing on (testing, transformation methods, or theoretical results about spurious regression) as each has different requirements and limitations.</p>
+
+<h2 id="how-does-this-differ-from-kelly-2020-understanding-persistence">How does this differ from Kelly (2020) (Understanding Persistence)</h2>
+<p>Kelly (2020) and Mueller and Watson (2024) both tackle issues with spatial persistence regressions but take importantly different approaches:</p>
+
+<p>Key Differences:</p>
+
+<ol>
+  <li><strong>Scope and Purpose</strong>
+    <ul>
+      <li>Kelly (2020) focuses on testing if published persistence results are robust, suggesting many findings may be spurious correlations</li>
+      <li>Mueller-Watson (2024) focuses on developing proper statistical tools for spatial data analysis, providing constructive solutions researchers can use</li>
+    </ul>
+  </li>
+  <li><strong>Technical Approach</strong>
+    <ul>
+      <li>Kelly uses a somewhat ad-hoc approach of adding regional controls and testing sensitivity</li>
+      <li>Mueller-Watson develop formal theory for spatial unit roots and provide rigorous methods for:
+        <ul>
+          <li>Testing for spatial persistence (analogous to time series unit root tests)</li>
+          <li>Proper standard error calculations via a rigorous spatial HAC framework</li>
+          <li>Data transformations to enable valid inference (like the LBM-GLS transformation)</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Solutions Offered</strong>
+    <ul>
+      <li>Kelly mainly points out problems and suggests simple robustness checks</li>
+      <li>Mueller-Watson provide ready-to-use tools for practitioners:
+        <ul>
+          <li>Spatial unit root tests</li>
+          <li>Standard error corrections</li>
+          <li>GLS transformations for persistent spatial data</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>Constructive Value</strong>
+    <ul>
+      <li>Kelly is primarily critical of existing work</li>
+      <li>Mueller-Watson provide a positive research agenda showing how to do spatial analysis correctly going forward</li>
+    </ul>
+  </li>
+</ol>
+
+<p>The key insight is that while Kelly identified important issues, Mueller-Watson provide the formal statistical framework and practical tools needed to actually address these issues in future research. Their work enables researchers to continue doing spatial persistence research but with proper statistical foundations.</p>
+
+<p>In a sense, Kelly pointed out a disease (spurious spatial regression) while Mueller-Watson developed the cure (proper spatial econometric tools). Going forward, researchers should probably use the Mueller-Watson tools while keeping Kelly’s concerns in mind as motivation for why careful spatial analysis is needed.</p>]]></content><author><name></name></author><category term="Research" /><category term="AI" /><category term="Econometrics" /><category term="Readers Digest" /><summary type="html"><![CDATA[Editors Note: This summmary was created using Claude AI. Please send me any comments or corrections.]]></summary></entry><entry><title type="html">Reader’s Digest of Optimal Monetary Policy in Production Networks</title><link href="http://paulgp.github.io/2024/11/06/readers-digest-lao-tahbaz-2022.html" rel="alternate" type="text/html" title="Reader’s Digest of Optimal Monetary Policy in Production Networks" /><published>2024-11-06T00:00:00+00:00</published><updated>2024-11-06T00:00:00+00:00</updated><id>http://paulgp.github.io/2024/11/06/readers-digest-lao-tahbaz-2022</id><content type="html" xml:base="http://paulgp.github.io/2024/11/06/readers-digest-lao-tahbaz-2022.html"><![CDATA[<p><em>Editors Note: This summmary was created using Claude AI. Please send me any comments or corrections.</em></p>
+
+<p><a href="https://www.econometricsociety.org/publications/econometrica/2022/05/01/optimal-monetary-policy-production-networks"><em>La’O and Tahbaz-Salehi (Econometrica, 2022)</em></a></p>
+
+<p><strong>Key Takeaway</strong>: When industries buy and sell from each other in a production network, central banks need to consider not just how sticky prices are in each industry, but also where industries sit in the supply chain. The optimal monetary policy puts more weight on stabilizing prices in industries that are upstream (early in production chains), have sticky prices themselves, and sell to other industries with sticky prices.</p>
+
+<h2 id="what-the-paper-does">What the Paper Does</h2>
+
+<p>La’O and Tahbaz-Salehi examine how central banks should conduct monetary policy when the economy has multiple industries that trade inputs with each other. They start with a model where firms in different industries:</p>
+<ul>
+  <li>Buy inputs from other industries</li>
+  <li>Set prices under incomplete information about economic conditions</li>
+  <li>Have different degrees of price stickiness</li>
+  <li>Are connected in a production network</li>
+</ul>
+
+<p>The authors derive what price index the central bank should target to maximize welfare. Unlike standard one-sector models where price stability is optimal, they show that with production networks, the central bank generally cannot achieve the ideal (flexible price) outcome.</p>
+
+<h2 id="why-this-matters-for-the-literature">Why This Matters for the Literature</h2>
+
+<p>This paper bridges two important streams of research:</p>
+
+<ol>
+  <li>The New Keynesian literature on optimal monetary policy, which typically uses single-sector models where price stability is optimal</li>
+  <li>The growing literature on production networks, which shows how industry linkages matter for how shocks propagate</li>
+</ol>
+
+<p>The key contribution is showing that production networks fundamentally change optimal monetary policy. The central bank needs to consider:</p>
+<ul>
+  <li>An industry’s position in the production chain</li>
+  <li>How price stickiness in one industry affects other industries through input-output relationships</li>
+  <li>The trade-off between stabilizing prices within industries vs. between industries</li>
+</ul>
+
+<h2 id="key-result-the-optimal-price-index">Key Result: The Optimal Price Index</h2>
+
+<p>The paper’s core theoretical result (Theorem 2) shows that the optimal policy targets a price index where each industry’s weight depends on:</p>
+
+<ol>
+  <li>Size - larger industries (measured by sales) get more weight</li>
+  <li>Price stickiness - industries with stickier prices get more weight</li>
+  <li>Position in network:
+    <ul>
+      <li>More upstream industries get more weight</li>
+      <li>Industries with flexible-price suppliers but sticky-price customers get more weight</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Applied to U.S. data, the authors find significant welfare gains from targeting their optimal price index versus a consumption-weighted index like CPI. However, they find that simply putting more weight on sticky-price industries approximately achieves the gains of the fully optimal policy.</p>
+
+<p>This means central bankers should pay special attention to price movements in:</p>
+<ul>
+  <li>Large upstream industries (like raw materials)</li>
+  <li>Industries that are both sticky-priced and important input suppliers</li>
+  <li>Service sectors that are both sticky-priced and widely used as inputs</li>
+</ul>
+
+<p>The paper’s findings help explain why central banks often focus on “core” price measures that put more weight on sticky-price sectors, while suggesting refinements based on production network position.</p>
+
+<h2 id="why-was-this-hard">Why Was This Hard?</h2>
+
+<p>The technical challenge was combining two complex frameworks:</p>
+
+<ol>
+  <li>
+    <p><strong>Network Equilibrium</strong>: Production networks create intricate strategic interactions - when one firm changes prices, it affects costs for all downstream firms. With n industries, you need to track n² possible interactions.</p>
+  </li>
+  <li>
+    <p><strong>Nominal Rigidities</strong>: Price stickiness creates a role for monetary policy. But with networks, each firm’s optimal price depends on their expectations about:</p>
+    <ul>
+      <li>Their own costs</li>
+      <li>Their customers’ demand</li>
+      <li>Their suppliers’ prices</li>
+    </ul>
+  </li>
+</ol>
+
+<p>The authors solve this by recasting the problem as a “beauty contest” game over networks, where firms must coordinate prices while facing different information sets.</p>
+
+<h2 id="limitations-and-where-it-might-not-apply">Limitations and Where It Might Not Apply</h2>
+
+<ol>
+  <li>
+    <p><strong>Static Framework</strong>: The model is static, so it can’t address dynamics like inflation persistence or interest rate policy. It’s best for understanding long-run targeting, not quarter-to-quarter decisions.</p>
+  </li>
+  <li>
+    <p><strong>Efficiency Assumption</strong>: The model assumes the flexible-price equilibrium is efficient. In reality, markup variations and other distortions might create additional trade-offs for monetary policy.</p>
+  </li>
+  <li>
+    <p><strong>Information Structure</strong>: The model uses incomplete information to generate price stickiness. While this captures similar effects to menu costs or Calvo pricing, the specific mechanism matters for some results.</p>
+  </li>
+  <li>
+    <p><strong>Measurement Challenges</strong>: Implementing the optimal policy requires measuring:</p>
+    <ul>
+      <li>Industry-level price stickiness</li>
+      <li>The full input-output structure</li>
+      <li>Position of industries in production chains
+These can be hard to measure precisely in practice.</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="how-to-cite-and-use-this-paper">How to Cite and Use This Paper</h2>
+
+<p>This paper is useful for researchers working on:</p>
+
+<ol>
+  <li>
+    <p><strong>Monetary Policy Design</strong>: Cite when arguing that central banks should consider production structure, not just price stickiness, in designing target indices.</p>
+  </li>
+  <li>
+    <p><strong>Network Effects</strong>: Use as evidence that nominal rigidities interact with production networks to amplify shocks - sticky prices upstream matter more than downstream.</p>
+  </li>
+  <li>
+    <p><strong>Price Setting</strong>: Reference for how strategic complementarities in price setting work through input-output linkages.</p>
+  </li>
+</ol>
+
+<p>Key empirical predictions to test:</p>
+<ul>
+  <li>Price changes should propagate more strongly downstream than upstream</li>
+  <li>Industries with sticky-price customers should have more stable prices</li>
+  <li>Monetary shocks should have larger effects on industries that are further downstream</li>
+</ul>
+
+<p>The authors’ decomposition of welfare losses into within-industry, across-industry, and output gap components provides a framework for quantifying the costs of different monetary policies in networked economies.</p>
+
+<h2 id="model-sketch-optimal-monetary-policy-in-production-networks">Model Sketch: Optimal Monetary Policy in Production Networks</h2>
+
+<h3 id="basic-structure">Basic Structure</h3>
+
+<p>The economy has $n$ industries indexed by $i$. Each industry has:</p>
+<ul>
+  <li>A unit mass of monopolistically competitive firms (indexed by $k \in [0,1]$)</li>
+  <li>A competitive aggregator that combines firms’ output into the industry good</li>
+</ul>
+
+<h3 id="production">Production</h3>
+
+<p>Each firm $k$ in industry $i$ has technology:
+\(y_{ik} = z_i F_i(l_{ik}, x_{i1k}, ..., x_{ink})\)</p>
+
+<p>where:</p>
+<ul>
+  <li>$y_{ik}$ is output</li>
+  <li>$z_i$ is industry-specific productivity</li>
+  <li>$l_{ik}$ is labor input</li>
+  <li>$x_{ijk}$ is input from industry $j$</li>
+  <li>$F_i$ is constant returns to scale</li>
+</ul>
+
+<h3 id="nominal-rigidities">Nominal Rigidities</h3>
+
+<p>Key friction: Firms set prices under incomplete information about productivity shocks.</p>
+
+<p>Each firm $k$ in industry $i$:</p>
+<ul>
+  <li>Observes signal $\omega_{ik}$ about the economy’s state</li>
+  <li>Sets nominal price $p_{ik}(\omega_{ik})$ based on this signal</li>
+  <li>Cannot condition price on full state $s = (z,\omega)$</li>
+</ul>
+
+<h3 id="policy-tools">Policy Tools</h3>
+
+<p>The government has two tools:</p>
+<ol>
+  <li>Industry-specific taxes $\tau_i$ (non-state-contingent)</li>
+  <li>Nominal aggregate demand $m(s)$ (can vary with state)</li>
+</ol>
+
+<h3 id="key-special-case">Key Special Case</h3>
+
+<p>For explicit solutions, paper focuses on:</p>
+<ul>
+  <li>Cobb-Douglas technologies: $F_i(l,x) = z_i l^{\alpha_i} \prod_j x_{ij}^{a_{ij}}$</li>
+  <li>Log-normal productivity: $\log z_i \sim N(0,\delta^2\sigma^2_z)$</li>
+  <li>Firm signals: $\omega_{ijk} = \log z_j + \epsilon_{ijk}$, $\epsilon_{ijk} \sim N(0,\delta^2\sigma^2_{ik})$</li>
+</ul>
+
+<h3 id="optimal-policy">Optimal Policy</h3>
+
+<p>The optimal policy targets a price index:
+\(\sum_{i=1}^n \psi_i^* \log p_i = 0\)</p>
+
+<p>where weights $\psi_i^*$ depend on:</p>
+<ul>
+  <li>Industry’s sales share ($\lambda_i$)</li>
+  <li>Price flexibility ($\phi_i$)</li>
+  <li>Position in network (via Leontief inverse)</li>
+  <li>Upstream/downstream relationships</li>
+</ul>
+
+<p>This provides a tractable framework for analyzing how network structure and nominal rigidities jointly determine optimal monetary policy.</p>]]></content><author><name></name></author><category term="Research" /><category term="AI" /><category term="Econometrics" /><category term="Readers Digest" /><summary type="html"><![CDATA[Editors Note: This summmary was created using Claude AI. Please send me any comments or corrections.]]></summary></entry><entry><title type="html">Contamination Bias in Linear Regressions</title><link href="http://paulgp.github.io/2024/11/06/contamination-bias-thread.html" rel="alternate" type="text/html" title="Contamination Bias in Linear Regressions" /><published>2024-11-06T00:00:00+00:00</published><updated>2024-11-06T00:00:00+00:00</updated><id>http://paulgp.github.io/2024/11/06/contamination-bias-thread</id><content type="html" xml:base="http://paulgp.github.io/2024/11/06/contamination-bias-thread.html"><![CDATA[<p>Economists love using linear regression to estimate treatment effects — it turns out that there are perils to this method, but also amazing perks. <!-- _includes/sidenote.html -->
+<span class="sidenote-number">[-0-]</span>
+<span class="sidenote">
+    <span class="sidenote-number">[-0-]</span>
+    This post is a synthesis of a Twitter/<a href="https://bsky.app/profile/paulgp.com/post/3lc63v5zytc2i">Bluesky thread</a>.
+</span></p>
+
+<p>In this post, I’ll discuss how…</p>
+<ul>
+  <li>Some of the problems with linear regressions in the recent TWFE/DiD lit generalize to other strategies.</li>
+  <li>Regression can be best for estimating treatment effects when these problems aren’t present.</li>
+  <li>To bring back regression’s mojo when the problems exist.</li>
+</ul>
+
+<h2 id="high-level-intuition">High-level intuition</h2>
+
+<p>To understand this, we need to really understand what’s going on when we use linear regression to estimate a treatment effect when we have both:</p>
+<ol>
+  <li>Heterogeneous effects</li>
+  <li>Controls</li>
+</ol>
+
+<p>Consider a simple example: an randomized control trial (RCT) of a binary intervention $D$ on outcome $Y$, where the intervention $D$ is random conditional on a binary control $W$ (e.g., the propensity score is not the same across $W$).</p>
+
+\[(Y(1), Y(0)) \perp D \; \vert \; W\]
+
+<p>To estimate the effect of the intervention, many economists would run the regression of:</p>
+
+\[Y = \alpha + \beta D + \gamma W + \varepsilon\]
+
+<p>And report the coefficient on $D$, $\beta$, confident that it’s a convex combination of treatment effects
+$\tau(w) = E(Y(1) - Y(0) \vert W=w)$, thanks to <a href="https://www.jstor.org/stable/2998558">Angrist (1998)</a> and Mostly Harmless Econometrics.<!-- _includes/sidenote.html -->
+<span class="sidenote-number">[-1-]</span>
+<span class="sidenote">
+    <span class="sidenote-number">[-1-]</span>
+    Angrist (1998) showed that regression coefficients like $\beta$ identify a convexly-weighted average of within-strata ATEs for a single binary control $W$. Mostly Harmless Econometrics generalized this to multivalued controls, but still focus on binary treatments.
+</span> 
+Formally, this result looks like:</p>
+
+\[\beta=\phi\tau_{1}(0)+(1-\phi)\tau_{1}(1)\]
+
+<p>where</p>
+
+\[\phi= \frac{Var(D_i\mid W_i=0)\Pr(W_i=0)}{\sum_{w=0}^{1}
+  Var(D_i\mid W_i=w)\Pr(W_i=w)}\in [0,1].\]
+
+<p>This result shows how regression avoids some problems of other estimation procedures (e.g., inverse pscore weighting): namely infeasibility or imprecision when the propensity score $p(w) = E(D \vert W = w)$ is extreme. The regression estimate <em>automatically</em> puts less weight on such values of W. This is the ideal case, where we know that we can estimate the causal effect of D on Y!</p>
+
+<figure class="marginfigure">
+  <img src="/assets/img/gphk_abstract.png" alt="Description" />
+  <figcaption>Our paper's abstract in the December 2024 AER issue.</figcaption>
+</figure>
+
+<p><a href="https://arxiv.org/abs/2106.05024">Our paper</a> (with <a href="https://about.peterhull.net/">Peter Hull</a> and <a href="https://www.princeton.edu/~mkolesar/">Michal Kolesár</a>) shows three things:</p>
+
+<ol>
+  <li>This automatic variance weighting gives the estimator that is “easiest” to estimate in the binary treatment case (using OLS achieves a semiparametric bound under homoskedasticity). Basically, OLS picks weights across covariate groups to maximize the variation in the treatment!</li>
+  <li>This automatic variance weighting intuition <em>doesn’t</em> generalize to multiple correlated treatments (which includes multi-armed RCTs, and staggered diff-in-diff!), and can create contamination bias across treatment estimates, even when you have <em>zero</em> omitted variable bias (!) <!-- _includes/sidenote.html -->
+<span class="sidenote-number">[-2-]</span>
+<span class="sidenote">
+ <span class="sidenote-number">[-2-]</span>
+ What we call contamination bias is effectively a spillover of the other treatments into either the control or treatment group for the treatment of interest.
+</span>.</li>
+  <li>We show how you can fix the contamination bias with an estimator which again gives the automatic variance weighting. We also provide a <a href="https://github.com/gphk-metrics/stata-multe">Stata package</a> and an <a href="https://github.com/kolesarm/multe">R package</a> to implement this estimator (and also check for contamination bias).</li>
+</ol>
+
+<h2 id="unpacking-this-further">Unpacking this further</h2>
+<p>Let’s try to unpack what’s going on, and along the way, we can learn new things about estimation with heterogeneous treatment effects and how the difference between design-based identification and model-based identification can lead to different regression weights.</p>
+
+<figure class="marginfigure">
+  <img src="/assets/img/wooldridge_tweet_ate.jpg" alt="Description" />
+  <figcaption>Jeff Wooldridge Tweet complaining that people don't know that regression can recover ATE</figcaption>
+</figure>
+
+<p>First, note that regression <em>can</em> provide you with the ATE, rather than the variance weighted effect, as Jeff Wooldridge alludes to in this tweet. The solution is straightforward – by interacting the demeaned control $W$ with $D$:</p>
+
+\[Y_{i} = \alpha + D_i'\beta  + W_i'\gamma  + D_{i}(W_i -E(W_i))\delta + \varepsilon_i\]
+
+<p>In this regression, the coefficient on $D_{i}$, $\beta$, will recover the ATE! However, this makes OLS susceptible to the same imprecision concerns as propensity score weighting. This solution will be important going forward.</p>
+
+<p>Now, imagine now that $D$ can be <em>two</em> treatments: $D \in {0,1,2}$.</p>
+
+<p>The natural extension of our original regression is</p>
+
+\[Y = \alpha + \beta_{1} X_1  + \beta_2 X_2  + \gamma W + \varepsilon\]
+
+<p>Where the $X$ are dummies for $D =1,2$.</p>
+
+<p>Unlike with a binary D, the estimates of $\beta_1$ and $\beta_2$ are <em>not</em> convex estimates of $\tau_1(w)$ and $\tau_2(w)$, but are instead contaminated by the other treatment effect:</p>
+
+\[\beta_{1}=E[\lambda_{11}(W_i)\tau_{1}(W_i)] +
+    E[\lambda_{12}(W_i)\tau_{2}(W_i)]\]
+
+<p>where 
+$\lambda_{11}(W_i)$ can be shown to be non-negative and to average to one, similar to the $\phi$ weight in Angrist (1998). Thus, this second term is generally present:  $\lambda_{12}(W_i)$ is generally non-zero, complicating the interpretation of $\beta_1$ by including the conditional effects of the other treatment $\tau_{2}(W_i)=E(Y_i(2)-Y_i(0)\mid W_i)$. <!-- _includes/sidenote.html -->
+<span class="sidenote-number">[-3-]</span>
+<span class="sidenote">
+    <span class="sidenote-number">[-3-]</span>
+    See our paper for a fuller discussion of these exact terms.
+</span></p>
+
+<p>Why does this contamination bias occur? Well, this comes back to the role of the controls $W$ in the regression. Controlling for $W$ in your regression is directly analogous to controlling for the pscore $p(W) = Pr(D=1 \vert W)$, thanks to the Frisch-Waugh-Lovell (FWL) theorem. But, now a given treatment ($X_{1}$) is a function of both the conditioning variables ($W$), <em>and</em> the other treatment ($X_2$)! That’s because if you get the first treatment, you can’t get the second treatment. Since we did not interact the treatments and $W$, the propensity score will <em>not</em> be correctly estimated – we will be measuring the “overall” propensity score, but not within a given strata.</p>
+
+<figure class="marginfigure">
+  <img src="/assets/img/cont-bias/example.png" alt="Description" />
+  <figcaption>Stylized example with two treatments and contamination bias</figcaption>
+</figure>
+
+<p>To give a stylized example, if schools vary in their treatment probabilities, the relationship between $\tilde{X}_{1} = X_1 - Pr(X_1 = 1 \vert W)$ and  $\tilde{X}_2$ varies – in some schools, the two are highly negatively correlated (the blue line)  while in others they are uncorrelated. Linear regression assumes the black line relationship, such that variation in $X_1$ after residualizing linearly for $X_2$ and $W$  tends to predict the $X_2$ treatment. This means that “treated”  $X_1$ units  are  picking up “treated” $X_2$ units, thereby contaminating our estimates!</p>
+
+<p>This is a broad result – with any multiple dependent treatments where controls are necessary – multi-armed stratified RCTs, Value-Added Models for teaching, or even group average differences (e.g. industry or race/ethnicity wage gaps) – this type of contamination bias can occur.</p>
+
+<h2 id="what-drives-the-contamination-bias">What drives the contamination bias?</h2>
+
+<figure class="widefigure">
+  <img src="/assets/img/cont-bias/main_theorem1.png" alt="Description" />
+  <figcaption>Proposition 1 of Goldsmith-Pinkham, Hull and Kolesar (2024)</figcaption>
+</figure>
+
+<p>What affects the magnitude and presence of the contamination bias?</p>
+<ol>
+  <li>Heterogeneity in treatment effects</li>
+  <li>Variation in pscores across controls (e.g. W is not correlated with D)</li>
+  <li>Whether the variation in pscores covaries with the heterogeneity in treatments</li>
+</ol>
+
+<p>Strikingly, this last case shows up in our empirical examples – it is interesting to think about heterogeneous TE and what exactly it is correlated with!</p>
+
+<p>Another interesting feature of our main theorem is it highlights two conceptually distinct issues:</p>
+<ol>
+  <li>whether there are negative weights on <em>own</em> treatment</li>
+  <li>whether there is contamination bias.</li>
+</ol>
+
+<p>As it turns out, negative weighting issues arise when the covariate specification in the regression is not flexible enough to correctly specify the propensity score. A simple example: two-way fixed effects cannot correctly approximate the “degenerate” propensity score from most DiD models (since there is no random variation in who is treated!) But the other issue of contamination bias <em>also</em> shows up in the differnece-in-difference literature, as remarked on by papers studying event study estimates in staggered events – when you are looking at multiple event horizons, these are multiple “treatments” which can contaminate one another.</p>
+
+<p>Our paper highlights that the issues in DiD are a broader conceptual issue about</p>
+<ol>
+  <li>the experimental design – having non-degenerate pscores will guarantee non-negative weights on own treatment</li>
+  <li>the impact of multiple treatments in a regression model.</li>
+</ol>
+
+<figure class="widefigure">
+  <img src="/assets/img/cont-bias/model_v_design.jpg" alt="Description" />
+  <figcaption>We found it a particularly useful way of thinking about identifying assumptions as either (13) or (14) above – either a "design-based" approach, modeling the treatment assignment, or a "model-based" approach, modeling the control groups’ outcome.</figcaption>
+</figure>
+
+<p>We flesh out the connection of our contamination bias paper to the new diff-in-diff lit in the Appendix B.</p>
+
+<p>In the Appendix, we discuss four examples of DiD and how our main proposition nests these cases.</p>
+
+<ol>
+  <li>a single intervention</li>
+  <li>a staggered intervention  with a single treatment</li>
+  <li>a dynamic event study</li>
+  <li>a single intervention period with multiple treatments</li>
+</ol>
+
+<p>A single intervention is a la Card and Krueger’s famous minimum wage study, where there’s a single treatment intervention, and a treated and control group. In this case, there’s always positive weights and no bias! (A relief for many doing simple DiD!)</p>
+
+<p>A staggered intervention with a single treatment is like the setting studied in <a href="https://www.aeaweb.org/articles?id=10.1257/aer.20181169">De Chaisemartin and D’Haultfoeuille (2020)</a> and  <a href="https://www.sciencedirect.com/science/article/abs/pii/S0304407621001445">Bacon-Goodman</a>. In this case, you only have one treatment, so no contamination bias! But this is exactly the setting where these authors have shown negative weights can arise (but not always). In fact, we work out a special case with two interventions, three time periods, and one control group, and show that the negative weights <em>only</em> occur if there are more late adopters than never-adopters (the control):</p>
+
+<figure class="widefigure">
+  <img src="/assets/img/cont-bias/staggered_intervention.jpg" alt="Description" />
+  <figcaption>A staggered intervention with a single treatment.</figcaption>
+</figure>
+
+<p>Importantly, we show in our paper that non-negative weights can’t be guaranteed because a “design-based” assumption doesn’t hold – treatment is not randomly assigned in most DiD designs. They are instead “model-based” –  you assume that you correctly specify the control mean (Part (ii) of Assumption 2 above). <!-- _includes/sidenote.html -->
+<span class="sidenote-number">[-4-]</span>
+<span class="sidenote">
+    <span class="sidenote-number">[-4-]</span>
+    The exception to this is in papers considering random assignment of timing of the DiD, as in <a href="https://www.sciencedirect.com/science/article/abs/pii/S0304407621000488">Athey Imbens (2022)</a>
+</span></p>
+
+<p>Next, we consider a dynamic event study with staggered interventions. This setting is notationally a pain in the butt, but it is when you’re estimating leads and lags in a diff-in-diff. What does this do? Well, it creates many more dependent treatments you need to estimate! That implies that there will be contamination bias in our Proposition 1 – exactly in line with the existing DiD lit such as <a href="https://www.sciencedirect.com/science/article/abs/pii/S030440762030378X">Sun and Abraham (2021)</a> and <a href="https://arxiv.org/abs/2108.12419">Borusyak, Hull and Jaravel (2024)</a>.</p>
+
+<p>We also work out a special case following our example with the static treatment, but now allowing for a pre-period effect (a pre-test) and a long-run effect. You can show that in this setting, if the groups are equally sized, the contamination bias for the pre-trend test is almost as big as the own treatment effect weights  for the initial effect period:</p>
+
+\[\beta=
+  \begin{pmatrix}
+    \tau_{L, 1, -2}\\
+    0\\
+    \tau_{E,3, 1}\\
+  \end{pmatrix}+\lambda_{E,0}\tau_{E,2,0}+\lambda_{L,0}\tau_{L,3,0},\]
+
+<p>where
+\(\lambda_{E,0}=
+\frac{1}{\zeta
+    }  \begin{pmatrix}
+    3n_{L}n_{E}+n_{N}n_{E}
+    \\
+    3n_{L}n_{E}+2n_{N}n_{E}
+    \\
+    -n_{L}n_{N}
+  \end{pmatrix},\qquad
+  \lambda_{L, 0}=
+  \frac{1}{\zeta}  \begin{pmatrix}
+    -3n_{L}n_{E} -n_{N}n_{E}
+    \\
+    3n_{E}n_{L} + 2n_{N}n_{L}
+    \\
+    n_{N}n_{L}
+  \end{pmatrix},\)
+and 
+\(\zeta=2(3n_{L}n_{E} + n_{E}n_{N}+n_{L}n_{N}).\)</p>
+
+<p>To quote our appendix:</p>
+
+<blockquote>
+  <p>In other words, the estimand for the two-period-ahead anticipation effect $\beta_{1}$ equals the anticipation effect for late adopters in period 1 (this is the only group we ever observe two periods before treatment) plus a contamination bias term coming from the effect of the treatment on impact.  Similarly, the estimand for the effect of the treatment one period since adoption, $\beta_{3}$, equals the effect for early adopters in period 3 (this is the only group we ever observe one period after treatment) plus a contamination bias term coming from the effect of the treatment on impact. The estimand for the effect of the treatment upon adoption, $\beta_{0}$, has no contamination bias, and equals a weighted average of the effect for early and late adopters. In this example, the own treatment weights are always positive, but the contamination weights can be large.  For instance, with equal-sized groups, $\lambda_{E,0}=(2/5,1/2,-1/10)’$ and $\lambda_{L,0}=(-2/5,1/2,1/10)’$, so the contamination weights in the estimand $\beta_{1}$ are almost as large as the own treatment weights for $\beta_{2}$.</p>
+</blockquote>
+
+<p>Finally, we consider a treatment design with multiple treatments and multiple transitions a la <a href="https://arxiv.org/abs/1804.06721">Hull (2018)</a> and <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3751060">de Chaisemartin and D’Haultfoeuille (2023)</a>. Since there’s multiple treatments, and no random assignment, there is both the possibility of negative weights and there will be contamination bias. The negative weights are solved with random assignment, but not the contamination bias (that requires a different estimator).</p>
+
+<h2 id="solutions">Solutions</h2>
+<p>So how can you solve these issues? It turns out that Imbens and Wooldridge trick is by far the easiest solution, and works even with multiple treatments. But, overlap concerns tend to be more severe with multiple treatments, because some propensity scores necessarily become closer to zero or one as more treatment arms are added.</p>
+
+<p>Can we generalize the logic of regression weighting without contamination bias? Yes! We consider solutions that generalize the intuition from a single binary treatment: place more weight on strata with evenly distributed treatments, less on strata with overlap problem:</p>
+
+\[\hat{\beta}_{\hat{\lambda}^{CW}, k}=
+  \frac{1}{\sum_{i=1}^{N}\frac{\hat{\lambda}^{CW}(W_{i})}{\hat{p}_{k}(W_{i})}X_{ik}}
+  \sum_{i=1}^{N}\frac{\hat{\lambda}^{CW}(W_{i})}{\hat{p}_{k}(W_{i})}X_{ik}Y_{i}
+  -  \frac{1}{\sum_{i=1}^{N}\frac{\hat{\lambda}^{CW}(W_{i})}{\hat{p}_{0}(W_{i})}X_{i0}}
+  \sum_{i=1}^{N}\frac{\hat{\lambda}^{CW}(W_{i})}{\hat{p}_{0}(W_{i})}X_{i0}Y_{i}.\]
+
+<p>When the treatment is binary and $\hat{p}$ is obtained via a linear regression, this weighted regression estimator coincides with the usual (unweighted) regression estimator that regresses $Y_{i}$ onto $D_{i}$ and
+$W_{i}$.</p>
+
+<p>One very nice thing that comes from our results is that if you’re worried about contamination bias, and want a quick and dirty check – simply reduce your comparison down to a single treatment and control, and estimate the effects. This will satisfy the conditions of Angrist (1998) and will also be efficient in the class of estimators, as shown in our paper. If you find similar effects, you can be somewhat reassured that contamination bias is not driving the results.</p>]]></content><author><name></name></author><category term="Research" /><category term="Econometrics" /><category term="Econsky Thread" /><summary type="html"><![CDATA[Economists love using linear regression to estimate treatment effects — it turns out that there are perils to this method, but also amazing perks. [-0-] [-0-] This post is a synthesis of a Twitter/Bluesky thread.]]></summary></entry><entry><title type="html">Using AI in Research and Teaching: A Practical Guide</title><link href="http://paulgp.github.io/2024/06/24/llm_talk.html" rel="alternate" type="text/html" title="Using AI in Research and Teaching: A Practical Guide" /><published>2024-06-24T00:00:00+00:00</published><updated>2024-06-24T00:00:00+00:00</updated><id>http://paulgp.github.io/2024/06/24/llm_talk</id><content type="html" xml:base="http://paulgp.github.io/2024/06/24/llm_talk.html"><![CDATA[<p><em>[N.B. I gave a version of this post for an internal discussion at SOM. I’ve modified it for general consumption. Many of the examples I walked through live – I will try to add videos for those, in the future, but for now they will just sit as “examples” in the text.]</em></p>
+
+<p>The goal for today’s post is to highlight a number of useful ways that you can use AI in your research and teaching. I’m using AI super loosely here – what I really mean is the relatively new innovations of Large Language Models that have sprung up following the release of ChatGPT 3.</p>
+
+<p>Today, I will cover a few topics:</p>
+<ol>
+  <li>VS Code + Copilot installation</li>
+  <li>Examples using Chat LLMs for research and teaching</li>
+  <li>Images from Midjourney</li>
+  <li>Running your own LLM locally</li>
+</ol>
+
+<h2 id="vs-code--copilot">VS Code + Copilot</h2>
+
+<p>A big chunk of what I want to show you revolves around <a href="https://code.visualstudio.com/">VS Code</a>. This is a free code editor that is quite powerful and has a lot of extensions that make it a great choice for coding. Benefits include:</p>
+
+<ol>
+  <li>Free</li>
+  <li>Good IDE with broad support</li>
+  <li>Built-in Git that is quite good (see next post)</li>
+  <li>Great remote access for servers</li>
+  <li>Copilot (LLM for inline code suggestions and chat program)</li>
+  <li>Extensions with open community (good for many software platforms, also alows extensions in CodeGPT)</li>
+</ol>
+
+<p><a href="https://paulgp.substack.com/p/setting-up-github-copilot-and-vscode">I wrote a blog post</a> last year on setting this up, but I’ll walk through it here as well. Much of my version is in Mac, so sorry if you’re a Windows user!</p>
+
+<ol>
+  <li>Install VS Code
+    <ul>
+      <li><a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>
+ <img src="/assets/img/vscode_install.webp" alt="img" width="600" /></li>
+    </ul>
+  </li>
+  <li>
+    <p>Setup <em>Extensions</em></p>
+
+    <p>Extensions are first- and third-party additions to VS Code that give additional functionality. Often, these will give improved code highlighting such as for Stata, R, or LaTeX. And, as we will see in a second, they also open up a collaborative LLM that helps you code (and will chat with you to fix and explain code). Some useful language-specific extensions:</p>
+    <ul>
+      <li><strong>LaTeX</strong>
+        <ul>
+          <li>Latex Workshop</li>
+          <li><a href="https://vkuhlmann.com/latex/configuration/fixingVSCode#fixing-using-the-wizard">This package sometimes can’t find latex compiler, see here for a fix and discussion</a></li>
+        </ul>
+
+        <p><img src="/assets/img/vscode_latex1.webp" alt="img" width="600" /></p>
+
+        <p>Then you’ll have a similar LaTeX environment to many of the LaTeX editors, but with the added benefit of being able to use an LLM to help you write LaTeX code.</p>
+
+        <p><img src="/assets/img/vscode_latex2.webp" alt="img" width="600" /></p>
+      </li>
+      <li><strong>Python</strong>
+        <ul>
+          <li>Python, Pylance, Python Debugger, autopep8, Jupyter</li>
+        </ul>
+      </li>
+      <li><strong>R</strong> I now use this instead of RStudio<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> (which has its own LLM, but I prefer the VS Code environment)
+        <ul>
+          <li><a href="https://github.com/randy3k/radian">radian</a> – a console with multiline editing and rich syntax highlighting</li>
+          <li><a href="https://aeturrell.com/blog/posts/setting-up-r-in-vscode/">https://aeturrell.com/blog/posts/setting-up-r-in-vscode/</a></li>
+          <li>Useful keystrokes:
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">shift+Enter: Run Selection</code> → To run a given selection.</li>
+              <li><code class="language-plaintext highlighter-rouge">shift+cmd+S: Source file</code> → Run the whole file</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>Stata</strong>
+        <ul>
+          <li>stataRun, Stata Enhanced</li>
+          <li>This works in Mac OS well, not so well in Windows<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup></li>
+          <li>
+            <p>Only modifications that I had to do to get this working was to go into the stataRun extension and change the program from StataSE to StataMP (you can edit your preferences for an extension by going to the extension and clicking the little gear next to where the install/uninstall button is):</p>
+
+            <p><img src="/assets/img/vscode_stata.webp" alt="stataRun" width="800" /></p>
+          </li>
+          <li>Historically, Stata was not as good in LLMs as other language. <a href="https://blogs.worldbank.org/en/impactevaluations/can-ai-write-your-stata-code">Owen Ozier wrote about this</a> but my sense is that has changed a lot in the last year.</li>
+          <li>Useful keystrokes:
+            <ul>
+              <li><code class="language-plaintext highlighter-rouge">shift+cmd+a: Run All Lines</code> → This will run the entire file</li>
+              <li><code class="language-plaintext highlighter-rouge">shift+cmd+s: Run Selection</code> → To run a given selection. If no selection is made it default to Run All</li>
+              <li><code class="language-plaintext highlighter-rouge">shift+cmd+c: Run Current Line</code> → This will run the current line code</li>
+              <li><code class="language-plaintext highlighter-rouge">shift+cmd+d: Run Downward Lines</code> → from current line to end</li>
+              <li><code class="language-plaintext highlighter-rouge">shift+cmd+f: Run Frontward Lines</code> → from first line to current line</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><strong>Remote</strong>
+        <ul>
+          <li>Makes it very easy to work on remote servers, like high performance clusters</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Install Copilot + Chat
+    <ul>
+      <li><a href="https://github.com/features/copilot/plans">https://github.com/features/copilot/plans</a></li>
+      <li>
+        <p>You should be able to get this for free <a href="https://github.com/edu/teachers">if you have a .edu email address</a>
+This will seem to do nothing to your editor, but will add this little icon on the bottom of your editor:</p>
+
+        <p><img src="/assets/img/vscode_copilot1.webp" alt="alt text" width="600" /></p>
+      </li>
+    </ul>
+  </li>
+  <li>[Optional] You can setup other preferences such as:
+    <ul>
+      <li>Theme</li>
+      <li>Font</li>
+      <li>Keybindings</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="some-examples-of-how-copilot-is-awesome">Some examples of how Copilot is awesome</h3>
+
+<ol>
+  <li>
+    <p><strong>R</strong></p>
+
+    <p>One easy task is to define a scripted program that does a particular task, such as downloading the population for states and making a plot. To try this out, write the following in a comment at the top of a blank R script:</p>
+
+    <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="c1">## This program downloads population counts for all states in the US in 2018.</span><span class="w">
+
+ </span><span class="c1">## It then makes a bar chart for each state, with states on the y-axis, </span><span class="w">
+ </span><span class="c1">## and population on the x-axis, from largest to smallest state.</span><span class="w">
+
+ </span><span class="c1">## It uses the tidycensus package to download the data, </span><span class="w">
+ </span><span class="c1">## and ggplot2 to make the bar charts.</span><span class="w">
+</span></code></pre></div>    </div>
+
+    <p>This approach requires the tidycensus package installed (and ggplot2).</p>
+
+    <p>After you enter this comment, hit return twice, and wait for Copilot to propose a line of code. Then hit tab to accept the proposals. As you move across lines, it will write out the code.</p>
+
+    <p>One interesting fact — you will have to hit return more than once, because it wants the proper line breaks!</p>
+
+    <p><img src="/assets/img/vscode_R_example1.webp" alt="alt text" /></p>
+  </li>
+  <li>
+    <p><strong>Latex</strong></p>
+
+    <p>This is where things got even more amazing. Consider the writing from <a href="https://academic.oup.com/rfs/article/36/11/4588/7156853?guestAccessKey=2de5aec0-8cff-492f-be02-2695c8744589&amp;login=true&amp;utm_source=authortollfreelink&amp;utm_campaign=rfs&amp;utm_medium=email">a recent paper that we just got published</a>. I can open a new latex document, and enter our opening paragraph, and then the first two sentences. Github Copilot proposes the rest of the paragraph. It’s not even a totally unreasonable proposal! [It’s not correct, in our setting, but it’s still a remarkable attempt!]</p>
+
+    <p><img src="/assets/img/vscode_latex_example1.webp" alt="alt text" /></p>
+
+    <p>I’ve had other settings where it will propose explanations for regression tables that are not even half-bad. It’s a pretty killer tool to have for someone who struggles to get words down on the page (like me) — the words may not be great, but then you can edit them and fix it up. Pretty remarkable.</p>
+  </li>
+  <li>
+    <p><strong>Explaining code</strong></p>
+
+    <p>Often, you’ll inherit code (or read coauthors’ code) that you don’t understand. Copilot can help explain what the code is doing. For example, consider the following SAS code (from WRDS):</p>
+
+    <div class="language-sas highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="cm">/* ************************************************************ */</span>
+ <span class="cm">/* This code calculates Bond Returns using FISD and Trace Data  */</span>
+ <span class="cm">/* Should Run "Clean_Trace_Standard" and "Clean_Trace_Enhanced" */</span> 
+ <span class="cm">/*             prior to running this code 			            */</span>
+ <span class="cm">/* Author: Rabih Moussawi, Qingyi (Freda) Drechsler             */</span> 
+ <span class="cm">/* Date: November 2018											*/</span>
+ <span class="cm">/* Updated: April 2022                                          */</span>
+ <span class="cm">/* Current Version: v9                                          */</span>
+ <span class="cm">/* ************************************************************ */</span><span class="p">;</span>
+
+ <span class="o">&lt;</span><span class="n">Comments</span> <span class="n">removed</span> <span class="k">by</span> <span class="n">PGP</span><span class="o">&gt;</span>
+
+ <span class="cm">/* ************************************************ */</span>
+ <span class="cm">/* Step 1:                                          */</span>  
+ <span class="cm">/* Combine cleaned Standard and Enhanced TRACE Data */</span>
+ <span class="cm">/* ************************************************ */</span>
+
+ <span class="cm">/* Get Trace Enhanced Cutoff Date */</span>
+ <span class="k">proc</span> <span class="k">sql</span> <span class="n">noprint</span><span class="p">;</span>
+ <span class="k">select</span> <span class="k">distinct</span> <span class="k">max</span><span class="p">(</span><span class="n">TRD_EXCTN_DT</span><span class="p">)</span> <span class="k">format</span> <span class="n">date9</span><span class="p">.</span> <span class="k">into</span> <span class="p">:</span><span class="n">cutoffdate</span>
+ <span class="k">from</span> <span class="n">tracee</span><span class="p">.</span><span class="n">trace_enhanced</span><span class="p">;</span>
+ <span class="k">quit</span><span class="p">;</span>
+
+ <span class="k">%put</span> <span class="nv">&amp;cutoffdate</span><span class="p">;</span>
+
+ <span class="cm">/* Enhanced TRACE has an 18m lag and post the CutOffDate use data directly from standard TRACE */</span>
+ <span class="k">data</span> <span class="nv">trace_std</span><span class="p">;</span> <span class="k">set</span> <span class="n">trace_standard_clean</span><span class="p">;</span> 
+ <span class="k">where</span> <span class="n">trd_exctn_dt</span> <span class="o">&gt;</span> <span class="s2">"</span><span class="si">&amp;cutoffdate</span><span class="s2">"</span><span class="n">d</span> <span class="ow">and</span> <span class="n">cmsn_trd</span> <span class="ow">ne</span> <span class="s1">'Y'</span> <span class="ow">and</span> <span class="n">rptd_pr</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">;</span>
+ <span class="n">SEQNUM</span> <span class="o">=</span> <span class="n">msg_seq_nb</span><span class="p">;</span>
+ <span class="k">drop</span> <span class="n">msg_seq_nb</span> <span class="n">orig_msg_seq_nb</span><span class="p">;</span>
+ <span class="k">run</span><span class="p">;</span>
+
+ <span class="k">data</span> <span class="nv">trace_enh</span><span class="p">;</span> <span class="k">set</span> <span class="n">trace_enhanced_clean</span><span class="p">;</span>
+ <span class="k">where</span> <span class="n">cmsn_trd</span> <span class="ow">ne</span> <span class="s1">'Y'</span> <span class="ow">and</span> <span class="n">rptd_pr</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">;</span>
+ <span class="n">SEQNUM</span><span class="o">=</span><span class="k">input</span><span class="p">(</span><span class="n">msg_seq_nb</span><span class="p">,</span><span class="n">best12</span><span class="p">.);</span> 
+ <span class="k">label</span> <span class="n">SEQNUM</span><span class="o">=</span><span class="s2">"Message Sequence Number"</span><span class="p">;</span>
+ <span class="k">drop</span> <span class="n">msg_seq_nb</span> <span class="n">orig_msg_seq_nb</span><span class="p">;</span>
+ <span class="k">run</span><span class="p">;</span>
+</code></pre></div>    </div>
+
+    <p>You may not know SAS very well (or at all). You can ask Copilot to explain what this code does by selecting the text
+ <img src="/assets/img/vs_code_explainsas.png" alt="alt text" /></p>
+
+    <p>Then, you can even ask it to write similar code in Python’s Pandas (or whatever language you like):
+ <img src="/assets/img/vs_code_explainsas2.png" alt="alt text" /></p>
+  </li>
+</ol>
+
+<p>Some more examples  (videos to come):</p>
+<ol>
+  <li>Example prompt/script for scraping data</li>
+  <li>Converting HTML to markdown</li>
+  <li>Creating comments for code</li>
+</ol>
+
+<h3 id="copilot-vs-codegpt">Copilot vs. CodeGPT</h3>
+<ul>
+  <li>Copilot is the official Microsoft LLM product, and quite good</li>
+  <li><a href="https://codegpt.co/">CodeGPT</a><sup id="fnref:Thx" role="doc-noteref"><a href="#fn:Thx" class="footnote" rel="footnote">3</a></sup> is an extension by a third-party that uses other LLMs as their backend.</li>
+  <li>Key benefit from CodeGPT – ability to use other LLMs (such as more cutting edge LLMs like Claude 3.5 Sonnet)</li>
+  <li>More importantly – can use open source LLMs run locally
+    <ul>
+      <li>This can be helpful for people trying to set things up in sensitive environments!</li>
+    </ul>
+  </li>
+  <li>Available in the VS Code Extensions</li>
+</ul>
+
+<h3 id="known-issues-ive-had-with-vs-code">Known issues I’ve had with VS Code</h3>
+<ol>
+  <li>For Mac users, launch vscode from the command line rather than from Applications – the <code class="language-plaintext highlighter-rouge">PATH</code> variable isn’t the same for each, and many of the relevant programs are on the command line <code class="language-plaintext highlighter-rouge">PATH</code> variable. <a href="https://code.visualstudio.com/docs/setup/mac">You need to install the <code class="language-plaintext highlighter-rouge">code</code> command for VS Code for this.</a></li>
+  <li>Sometimes the LaTeX compiler or Python interpreter can’t be found. This is a <code class="language-plaintext highlighter-rouge">PATH</code> issue.</li>
+  <li>Sometimes httpgd messes up inside VS Code. I often will have the graphs in a separate window, instead, but can be annoying.</li>
+</ol>
+
+<h2 id="chat-llms-for-research-and-teaching-living-document">Chat LLMs for Research and Teaching [Living Document]<sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote" rel="footnote">4</a></sup></h2>
+
+<p>I am going to walk through a number of use cases here. There are many more, and I still don’t use these LLMs as effectively as I should. For any of these tasks below, I have in mind that you would use the chat interface for <a href="https://chatgpt.com/?model=gpt-4o">ChatGPT</a> or <a href="https://claude.ai/new">Claude</a>. I pay for both (!) because I find them useful for different things. You should pay for it!<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote" rel="footnote">5</a></sup> There are a few things below that are distinctive (Midjourney, for example) that are separate from ChatGPT and Claude.</p>
+
+<ol>
+  <li><strong>Write script to scrape data</strong>
+    <ul>
+      <li>Example: Pull NBER Working paper codes</li>
+      <li>Example: pull all journal of finance brattle prize winners. Look at how citation counts correlate with probability of winning</li>
+    </ul>
+  </li>
+  <li><strong>Construct a make file for a project</strong>
+    <ul>
+      <li>Use example  <a href="http://paulgp.github.io/files/README_bartik.pdf">README  from Bartik paper</a> + Claude</li>
+    </ul>
+  </li>
+  <li><strong>Quiz questions for class -&gt; mapping to qualtrics</strong>
+ Prompt for class:
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code> I'm writing a multiple choice short quiz for a class called 
+ "Investment Management" for MBA students.
+ You're going to help me write the quizzes. 
+ My questions look like this:
+
+ <span class="sb">`latex
+
+ \question The CAPM model is a single factor model. What is the factor? 
+ \begin{choices}
+ \choice The risk-free rate
+ \correctchoice The market risk premium
+ \choice The market return
+ \choice The market volatility
+ \end{choices} 
+ `</span>
+
+ Generally, I want you to ask questions that probe understanding and
+ require students to use logic, not just memory. Feel free to use 
+ situational questions like "Imagine that...". Please acknowledge.
+</code></pre></div>    </div>
+
+    <p>Now we’ll give it my materials from a day of class:</p>
+
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Let's write five questions evaluating the material 
+ in these slides that are attached.
+</code></pre></div>    </div>
+
+    <p>I currently manually copy this into a Qualtrics survey, but figuring out how to automate that process as well (takes about 3 minutes, not a huge deal, but would be nice to do automatically). Would be even easier to do with Canvas, as it allows for QTI format (which can be converted from <a href="https://pypi.org/project/text2qti/">Markdown</a>).</p>
+  </li>
+  <li>
+    <p><strong>Making clip art for slides</strong></p>
+
+    <p>Often, it is nice to make “clip art” for slides. Either title slides, or simply decoration to make your slides nicer (and more engaging) without adding text.<br />
+ I use <a href="https://docs.midjourney.com/docs/quick-start">Midjourney</a> to construct this type of “art.”</p>
+
+    <p>An example prompt:</p>
+
+    <p><code class="language-plaintext highlighter-rouge">a researcher being helped by a robot to do programming in sepia tone --ar 1:1 </code></p>
+
+    <p><img src="/assets/img/midjourney.webp" alt="alt text" width="600" /></p>
+
+    <p>Example slides <a href="https://paulgp.github.io/presentations/saffran_lecture.pdf">here</a></p>
+
+    <p>Here are some tutorials on how to use Midjourney:</p>
+    <ul>
+      <li><a href="https://www.youtube.com/watch?v=5deYUaqwreo">https://www.youtube.com/watch?v=5deYUaqwreo</a></li>
+      <li><a href="https://docs.midjourney.com/docs/quick-start">https://docs.midjourney.com/docs/quick-start</a></li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Chatbots and their various forms</strong></p>
+
+    <p>Open AI has ChatGPT.</p>
+
+    <p>Anthropic has Claude.</p>
+
+    <p>Others include Gemini, Mixtral, and many alternatives (open source too). There are many to use. If you want to use your own, you need to set it up locally. This can be non-trivial, especially for the powerful ones. Would be good to have more of an expert chime in, but here are a few fun exmaples:</p>
+
+    <ol>
+      <li><a href="https://ollama.com/">https://ollama.com/</a></li>
+      <li><a href="https://github.com/simonw/llm">https://github.com/simonw/llm</a></li>
+      <li><a href="https://github.com/npiv/chatblade">https://github.com/npiv/chatblade</a></li>
+    </ol>
+
+    <p>For example, here’s an LLM running locally with minimal setup thanks to Ollama:</p>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> $ ollama run llama3
+ &gt;&gt;&gt; What are the four horsemen of the apocalypse for an economist?
+ What a great question!
+
+ In economics, the "Four Horsemen of the Apocalypse" refers to four major economic crises that had significant impacts on the global economy in the 20th century. These crises were:
+
+ 1. **The Great Depression (1929-1939)**: A severe and prolonged downturn in economic activity that affected many countries worldwide, leading to widespread unemployment, business failures, and a significant decline in international trade.
+ 2. **The Oil Shock of 1973 (1973-1974)**: A sudden and sharp increase in oil prices, triggered by an Arab-Israeli war, which led to a global energy crisis, high inflation, and a recession in many countries.
+ 3. **The Latin American Debt Crisis (1980s)**: A widespread default on international debts by several Latin American countries, which was exacerbated by high interest rates, currency fluctuations, and structural adjustment policies imposed by the
+ International Monetary Fund (IMF).
+ 4. **The Asian Financial Crisis (1997-1998)**: A rapid and severe decline in asset values and a collapse of currencies in several East Asian economies, particularly Thailand, Indonesia, Malaysia, and South Korea, triggered by poor economic
+ management, excessive debt, and capital flight.
+
+ These crises were characterized by:
+
+ * Sharp declines in economic activity
+ * High levels of uncertainty and volatility
+ * Significant changes in monetary and fiscal policies
+ * International coordination and cooperation to address the crises
+
+ Economists often use these four crises as case studies to analyze and learn from the causes, consequences, and responses to such events.
+</code></pre></div>    </div>
+
+    <p>But there are good and real research applications that you should consider, especially once combined with tuning.</p>
+  </li>
+  <li>
+    <p><strong>Making your evaluations more paletable (and making evals more useful than just scores)</strong></p>
+
+    <p>Here’s two sets of evals from my courses: <a href="https://s3.amazonaws.com/file.paulgp.com/30d/28807_spring_2024_mgt_544_01-investment_management.pdf">Investment Management</a> and <a href="https://s3.amazonaws.com/file.paulgp.com/30d/31357_spring_2024_econ_574_01mgmt_737_01-applied_empirical_methods.pdf">Applied Empirical Methods</a>.</p>
+
+    <p>Let’s go through an evaluation and ask it to digest it for us:</p>
+
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     I just got course evaluations for my class, Investment Management. I've attached the PDF of the reviews. Can you summarize and read through and give me the highlights? I'd like to hear positive stuff, to feel good, and also any constructive feedback I can take.
+</code></pre></div>    </div>
+
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Any particularly nice comments that I should add to my file of "feel good" comments?
+</code></pre></div>    </div>
+
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Can you give me any suggestions on how I can address the concerns raised by the students?
+</code></pre></div>    </div>
+
+    <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Can you do the same now for these reviews for my PhD class?
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>Converting math to code</strong></p>
+
+    <p>Let’s write some math on the board and ask it to convert it to LaTeX code.</p>
+  </li>
+  <li>
+    <p><strong>Convert tables in papers to graphs (almost) instantly</strong></p>
+
+    <p>Let’s take a table from <a href="https://www.sciencedirect.com/science/article/pii/S0304405X19301680">a paper</a> and ask it to convert it to a graph.
+ <img src="/assets/img/claude_table_graph_table.png" alt="alt text" />
+ <img src="/assets/img/claude_table_graph.png" alt="alt text" />
+ <img src="/assets/img/claude_table_graph2.png" alt="alt text" />
+ <img src="/assets/img/claude_table_graph3.png" alt="alt text" />
+ <img src="/assets/img/claude_table_graph4.png" alt="alt text" /></p>
+
+    <p>I then futzed around with it in Claude (asked it to rotate, etc.) and got this:
+ <img src="/assets/img/Table7.png" alt="alt text" /></p>
+
+    <p>Pretty great for making new figures for an MBA class!</p>
+  </li>
+</ol>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>I still use RStudio occasionally, but I find it to be slow to startup and I can’t have multiple projects open at the same time. This is because VS Code actually scales linearly with the number of projects you have open, while RStudio does not. I usually have 10-15 projects left open, and they’re always quick to start back up when I restart VS Code. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>See the discussion <a href="https://marketplace.visualstudio.com/items?itemName=Yeaoh.stataRun">in the extension.</a> To quote the package maintainer: “Installation instructions for Windows basically follows the original Atom stata-exec building manual with some modifications for code.” But the list of instructions looks challenging… I promise you it’s worth it! <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:Thx" role="doc-endnote">
+      <p>Thanks to <a href="https://x.com/joshuafmask">Joshua Mask</a> for introducing this to me! <a href="#fnref:Thx" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3" role="doc-endnote">
+      <p>This list is a work-in-progress. I will be adding to it as I think of more examples. If you have any suggestions, please let me know! <a href="#fnref:3" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4" role="doc-endnote">
+      <p>Often, there are educational discounts or your university pays for an account already! <a href="#fnref:4" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name></name></author><category term="AI" /><category term="Teaching" /><category term="Research" /><category term="VS Code" /><category term="Copilot" /><category term="ChatGPT" /><summary type="html"><![CDATA[[N.B. I gave a version of this post for an internal discussion at SOM. I’ve modified it for general consumption. Many of the examples I walked through live – I will try to add videos for those, in the future, but for now they will just sit as “examples” in the text.]]]></summary></entry><entry><title type="html">Presidential Lectures</title><link href="http://paulgp.github.io/2023/11/23/aea-presidential-speeches.html" rel="alternate" type="text/html" title="Presidential Lectures" /><published>2023-11-23T00:00:00+00:00</published><updated>2023-11-23T00:00:00+00:00</updated><id>http://paulgp.github.io/2023/11/23/aea-presidential-speeches</id><content type="html" xml:base="http://paulgp.github.io/2023/11/23/aea-presidential-speeches.html"><![CDATA[<p>I wanted to put together a list of AEA (and other Economics groups) Presidential speeches for my own perusal. I thought I’d share it here in case it’s useful for others.</p>
+
+<p>(Cites as of 11/23/23)</p>
+<h2 id="aea-presidential-speeches">AEA Presidential Speeches</h2>
+
+<ul>
+  <li><strong>Allyn A. Young (1926)</strong>: <a href="https://paulgp.github.io/speeches/young_1926_aea.pdf">Economics and War</a> - GS Cites: 19</li>
+  <li><strong>Robert Solow (1980)</strong>: <a href="https://paulgp.github.io/speeches/solow_1980_aea.pdf">On Theories of Unemployment</a> - GS Cites: 707</li>
+  <li><strong>Peter A. Diamond (2004)</strong>: <a href="https://paulgp.github.io/speeches/diamond_2004_aea.pdf">Social Security</a> - GS Cites: 278</li>
+  <li><strong>Martin Feldstein (2005)</strong>: <a href="https://paulgp.github.io/speeches/feldstein_2005_aea.pdf">Rethinking Social Insurance</a> - GS Cites: 414</li>
+  <li><strong>Daniel McFadden (2006)</strong>: <a href="https://paulgp.github.io/speeches/mcfadden_2006_aea.pdf">Free Markets and Fettered Consumers</a> - GS Cites: 214</li>
+  <li><strong>George A. Akerlof (2007)</strong>: <a href="https://paulgp.github.io/speeches/akerlof_2007_aea.pdf">The Missing Motivation in Macroeconomics</a> - GS Cites: 835</li>
+  <li><strong>Thomas J. Sargent (2008)</strong>: <a href="https://paulgp.github.io/speeches/sargent_2008_aea.pdf">Evolution and Intelligent Design</a> - GS Cites: 189</li>
+  <li><strong>Avinash K. Dixit (2009)</strong>: <a href="https://paulgp.github.io/speeches/dixit_2009_aea.pdf">Governance Institutions and Economic Activity</a> - GS Cites: 859</li>
+  <li><strong>Angus Deaton (2010)</strong>: <a href="https://paulgp.github.io/speeches/deaton_2010_aea.pdf">Price Indexes, Inequality, and the Measurement of World Poverty</a> - GS Cites: 535</li>
+  <li><strong>Robert E. Hall (2011)</strong>: <a href="https://paulgp.github.io/speeches/hall_2011_aea.pdf">The Long Slump</a> - GS Cites: 528</li>
+  <li><strong>Orley Ashenfelter (2012)</strong>: <a href="https://paulgp.github.io/speeches/ashenfelter_2012_aea.pdf">Comparing Real Wage Rates</a> - GS Cites: 65</li>
+  <li><strong>Christopher A. Sims (2013)</strong>: <a href="https://paulgp.github.io/speeches/sims_2013_aea.pdf">Paper Money</a> - GS Cites: 226</li>
+  <li><strong>Claudia Goldin (2014)</strong>: <a href="https://paulgp.github.io/speeches/goldin_2014_aea.pdf">A Grand Gender Convergence: Its Last Chapter</a> - GS Cites: 2723</li>
+  <li><strong>William D. Nordhaus (2015)</strong>: <a href="https://paulgp.github.io/speeches/nordhaus_2015_aea.pdf">Climate Clubs: Overcoming Free-riding in International Climate Policy</a> - GS Cites: 1314</li>
+  <li><strong>Richard Thaler (2016)</strong>: <a href="https://paulgp.github.io/speeches/thaler_2016_aea.pdf">Behavioral Economics: Past, Present, and Future</a> - GS Cites: 995</li>
+  <li><strong>Robert Shiller (2017)</strong>: <a href="https://paulgp.github.io/speeches/shiller_2017_aea.pdf">Narrative Economics</a> - GS Cites: 1077</li>
+  <li><strong>Alvin E. Roth (2018)</strong>: <a href="https://paulgp.github.io/speeches/roth_2018_aea.pdf">Marketplaces, Markets, and Market Design</a> - GS Cites: 167</li>
+  <li><strong>Olivier Blanchard (2019)</strong>: <a href="https://paulgp.github.io/speeches/blanchard_2019_aea.pdf">Public Debt and Low Interest Rates</a> - GS Cites: 1112</li>
+  <li><strong>Ben Bernanke (2020)</strong>: <a href="https://paulgp.github.io/speeches/bernanke_2020_aea.pdf">The New Tools of Monetary Policy</a> - GS Cites: 459</li>
+  <li><strong>Janet L. Yellen (2021)</strong>: (couldn’t find this, please let me know if you know!)</li>
+  <li><strong>David Card (2022)</strong>: <a href="https://paulgp.github.io/speeches/card_2022_aea.pdf">“Who Set Your Wage?”</a> - GS Cites: 93</li>
+  <li><strong>Christina Romer (2023)</strong>: <a href="https://paulgp.github.io/speeches/romer_2023_aea.pdf">“Does Monetary Policy Matter? The Narrative Approach after 35 Years”</a> - GS Cites: 5</li>
+</ul>
+
+<h2 id="afa-presidential-lectures">AFA Presidential Lectures</h2>
+
+<p><a href="https://www.malcolmwardlaw.info/afa-presidential-addresses">Malcolm Wardlaw has them all listed here!</a></p>
+
+<p>A few selected choices:</p>
+
+<ul>
+  <li><strong>John Campbell (2006)</strong>: <a href="https://paulgp.github.io/speeches/campbell_2006_afa.pdf">Household Finance</a> - GS Cites: 3806</li>
+  <li><strong>John Cochrane (2011)</strong>: <a href="https://paulgp.github.io/speeches/cochrane_2011_afa.pdf">Discount Rates</a> - GS Cites: 2389</li>
+  <li><strong>Luigi Zingales (2015)</strong>: <a href="https://paulgp.github.io/speeches/zingales_2015_afa.pdf">Does Finance Benefit Society?</a> - GS Cites: 582</li>
+</ul>
+
+<h2 id="econometrics-society-special-lectures">Econometrics Society Special Lectures</h2>
+<p><a href="https://www.econometricsociety.org/society/special-lectures/fisher-schultz-lecture">Fischer-Schulz Lectures</a></p>
+
+<p>The Fisher-Schultz Lecture is an annual lecture given by a non-European member at the European meeting or, in World Congress years, at the World Congress. The lecturer is chosen by the meeting program chairs.</p>
+
+<p>A few selected choices:</p>
+
+<ul>
+  <li><strong>Goldberger (1972),</strong> <a href="https://paulgp.github.io/speeches/goldberger_1972_fischer.pdf">Structural Equation Methods in the Social Sciences</a></li>
+  <li><strong>Griliches (1974),</strong> <a href="https://paulgp.github.io/speeches/griliches_1974_fischer.pdf">Errors in Variables and Other Unobservables</a></li>
+  <li><strong>Zellner (1985),</strong> <a href="https://paulgp.github.io/speeches/zellner_1985_fischer.pdf">Bayesian Econometrics</a></li>
+  <li><strong>Card (2001),</strong> <a href="https://paulgp.github.io/speeches/card_2001_fischer.pdf">Estimating the Return to Schooling: Progress on Some Persistent Econometric Problems</a></li>
+  <li><strong>Heckman and Vytlacil (2005),</strong> <a href="https://paulgp.github.io/speeches/heckman_2005_fischer.pdf">Structural Equations, Treatment Effects, and Econometric Policy Evaluation</a></li>
+  <li><strong>Manski (2004),</strong> <a href="https://paulgp.github.io/speeches/manski_2004_fischer.pdf">Measuring Expectations</a></li>
+  <li><strong>Horowitz (2011),</strong> <a href="https://paulgp.github.io/speeches/horowitz_2011_fischer.pdf">Applied Nonparametric Instrumental Variables Estimation</a></li>
+</ul>]]></content><author><name></name></author><summary type="html"><![CDATA[I wanted to put together a list of AEA (and other Economics groups) Presidential speeches for my own perusal. I thought I’d share it here in case it’s useful for others.]]></summary></entry><entry><title type="html">Gary Chamberlain Lecture Notes from Harvard’s Econ 2120 Course</title><link href="http://paulgp.github.io/2021/05/27/gary-chamberlain-lectures.html" rel="alternate" type="text/html" title="Gary Chamberlain Lecture Notes from Harvard’s Econ 2120 Course" /><published>2021-05-27T00:00:00+00:00</published><updated>2021-05-27T00:00:00+00:00</updated><id>http://paulgp.github.io/2021/05/27/gary-chamberlain-lectures</id><content type="html" xml:base="http://paulgp.github.io/2021/05/27/gary-chamberlain-lectures.html"><![CDATA[<p>Gary Chamberlain’s family granted approval for me to post the
+collected set of lecture notes from the late Gary Chamberlain’s 2010
+Econometrics class (EC2120) that I took during my economics Ph.D. at
+Harvard University. Gary was a remarkable teacher and this class was
+an amazing experience for me as a young economist. I hope you find
+these lectures as enthralling as I did!</p>
+
+<p><a href="https://github.com/paulgp/GaryChamberlainLectureNotes/">Gary Chamberlain Lecture Notes</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[Gary Chamberlain’s family granted approval for me to post the collected set of lecture notes from the late Gary Chamberlain’s 2010 Econometrics class (EC2120) that I took during my economics Ph.D. at Harvard University. Gary was a remarkable teacher and this class was an amazing experience for me as a young economist. I hope you find these lectures as enthralling as I did!]]></summary></entry><entry><title type="html">Beamer Tips</title><link href="http://paulgp.github.io/2018/04/30/beamer-tips.html" rel="alternate" type="text/html" title="Beamer Tips" /><published>2018-04-30T00:00:00+00:00</published><updated>2018-04-30T00:00:00+00:00</updated><id>http://paulgp.github.io/2018/04/30/beamer-tips</id><content type="html" xml:base="http://paulgp.github.io/2018/04/30/beamer-tips.html"><![CDATA[<p>I recently wrote up some tips and tricks for beamer. You can find the <a href="https://paulgp.github.io/files/beamer_tips.pdf">slides here</a> and the <a href="https://github.com/paulgp/beamer-tips">source code on Github.</a></p>]]></content><author><name></name></author><summary type="html"><![CDATA[I recently wrote up some tips and tricks for beamer. You can find the slides here and the source code on Github.]]></summary></entry><entry><title type="html">Best Figures from Economics Papers</title><link href="http://paulgp.github.io/2018/03/12/best-figures.html" rel="alternate" type="text/html" title="Best Figures from Economics Papers" /><published>2018-03-12T00:00:00+00:00</published><updated>2018-03-12T00:00:00+00:00</updated><id>http://paulgp.github.io/2018/03/12/best-figures</id><content type="html" xml:base="http://paulgp.github.io/2018/03/12/best-figures.html"><![CDATA[<p>Matt Notowidigdo prompted a <a href="https://twitter.com/ProfNoto/status/973319310700699649">great thread of peoples’ suggestions of their favorite figures</a>. I thought I would give a resting place for the nominees:</p>
+
+<ol>
+  <li><a href="http://www.jstor.org/stable/1905380">Griliches (1957)</a> 
+<img src="http://paulgp.github.io/best_figures/griliches1957.jpg" alt="Griliches" /></li>
+  <li><a href="https://academic.oup.com/qje/article-abstract/122/3/879/1879540">Jensen (2007)</a>
+<img src="http://paulgp.github.io/best_figures/jensen2007.jpg" alt="Jensen" /></li>
+  <li><a href="http://www.jstor.org/stable/2117574">Jacobson, Lalonde, Sullivan (1993)</a>, nominated twice! 
+<img src="http://paulgp.github.io/best_figures/JacobsonLalondeSullivan.jpg" alt="Jacobson et al." /> 
+<img src="http://paulgp.github.io/best_figures/JacobsonLalondeSullivan_take2.jpg" alt="Jacobson et al." /></li>
+  <li><a href="https://www.princeton.edu/~davidlee/wp/RDrand.pdf">David S. Lee (2007)</a>
+ <img src="http://paulgp.github.io/best_figures/LeeVoting.jpg" alt="Lee" /></li>
+  <li><a href="http://www.jstor.org/stable/10.1086/507154">Almond (2006)</a>
+ <img src="http://paulgp.github.io/best_figures/Almond2006.jpg" alt="Almond" /></li>
+  <li><a href="https://academic.oup.com/qje/article-abstract/121/1/267/1849020">Stevenson and Wolfers (2006)</a> 
+<img src="http://paulgp.github.io/best_figures/StevensonWolfers.jpg" alt="S&amp;W" /></li>
+  <li><a href="https://academic.oup.com/qje/article-abstract/126/2/749/1870394">Chetty, Friedman, Olsen and Pistaferri (2011)</a>
+<br /><img src="http://paulgp.github.io/best_figures/ChettyFriedmanOlsenPistaferri.jpg" alt="Chetty1" /></li>
+  <li><a href="https://www.aeaweb.org/articles?id=10.1257/aer.104.9.2593">Chetty, Friedman, and Rockoff (2014)</a> 
+<img src="http://paulgp.github.io/best_figures/ChettyFriedmanRockoff.jpg" alt="Chetty2" /></li>
+  <li><a href="http://www.nber.org/papers/w23001">Chetty and Hendren (2016)</a>
+<img src="http://paulgp.github.io/best_figures/ChettyHendren.jpg" alt="Chetty3" /></li>
+  <li><a href="https://www.aeaweb.org/articles?id=10.1257/aer.103.7.2683">Chetty, Friedman and Saez (2013)</a> <img src="http://paulgp.github.io/best_figures/ChettyFriedmanSaez.jpg" alt="Chetty4" /></li>
+  <li><a href="https://www.aeaweb.org/articles?id=10.1257/aer.p20171126">Sarsons (2017)</a> <img src="http://paulgp.github.io/best_figures/Sarsons2017.jpg" alt="Sarsons" /></li>
+  <li><a href="https://www.aeaweb.org/articles?id=10.1257/aer.20130098">Yagan (2015)</a> <img src="http://paulgp.github.io/best_figures/Yagan2015.jpg" alt="Yagan" /></li>
+  <li><a href="http://www.jstor.org/stable/1804094">Manning, Newhouse, Duan, Keeler and Leibowitz (1987)</a> <img src="http://paulgp.github.io/best_figures/ManningNewhouseDuanKeelerLeibowitz1987.jpg" alt="Manning" /></li>
+  <li><a href="https://academic.oup.com/qje/article-abstract/126/2/987/1868417">Malamud and Pop-Eleches (2011)</a> <img src="http://paulgp.github.io/best_figures/MalamudPopEleches.jpg" alt="Malamud" /></li>
+  <li>Playfair (1821) <img src="http://paulgp.github.io/best_figures/Playfair1821.jpg" alt="Playfair" /></li>
+  <li><a href="https://academic.oup.com/qje/article-abstract/130/1/111/2338025">Agarwal, Chomisisengphet, Mahoney and Stroebel (2015)</a> <img src="http://paulgp.github.io/best_figures/Mahoney2014.jpg" alt="Agarwal" /></li>
+  <li><a href="http://www.nber.org/papers/w24219">Kleven, Soogard, and Landais (2018)</a> <img src="http://paulgp.github.io/best_figures/KlevenSoogardLandais.jpg" alt="Kleven" /></li>
+  <li><a href="http://www.jstor.org/stable/1885326">Rothschild &amp; Stiglitz (1978)</a> <img src="http://paulgp.github.io/best_figures/RothschildStiglitz.jpg" alt="Stiglitz" /></li>
+  <li><a href="https://www.aeaweb.org/articles?id=10.1257/002205102320161311">Frederick, Loewenstein &amp; O’Donoghue (2002)</a> <img src="http://paulgp.github.io/best_figures/FrederickLoewensteinODonoghue.jpg" alt="FLO" /></li>
+  <li><a href="https://academic.oup.com/qje/article-abstract/106/4/979/1873496">Angrist and Krueger (2002)</a> <img src="http://paulgp.github.io/best_figures/AngristKrueger.jpg" alt="FLO" /></li>
+  <li>Krugman and Obstfeld Textbook <img src="http://paulgp.github.io/best_figures/KrugmanObstfeld.jpg" alt="KO" /></li>
+  <li><a href="https://academic.oup.com/qje/article-abstract/128/3/967/1848785">Card, Heining and Kline (2013)</a> <img src="http://paulgp.github.io/best_figures/CardHeiningKline.jpg" alt="FLO" /></li>
+  <li><a href="https://www.aeaweb.org/articles?id=10.1257/aer.20141297">Hall (2017)</a> <br />
+<img src="http://paulgp.github.io/best_figures/Hall.jpg" alt="FLO" /></li>
+  <li><a href="https://economics.mit.edu/files/12732">Burgess, Costa and Olken (2017)</a> <img src="http://paulgp.github.io/best_figures/BurgessCostaOlken.jpg" alt="FLO" /></li>
+  <li><a href="http://www.ericzwick.com/fthb/stim.pdf">Berger, Turner and Zwick (2018)</a> <img src="http://paulgp.github.io/best_figures/Zwick.jpg" alt="FLO" /></li>
+  <li><a href="https://www.urban.org/research/publication/road-school-how-far-students-travel-school-choice-rich-cities-denver-detroit-new-orleans-new-york-city-and-washington-dc">Blagg et al. (2018)</a> DC students who live in Ward 7 commute to middle schools all over the city. Read the full story (<a href="https://t.co/jGudS5dqFY">https://t.co/jGudS5dqFY</a>) and 5-city empirical study (<a href="https://t.co/vDVdZXaYZQ">https://t.co/vDVdZXaYZQ</a>). <img src="https://t.co/TCYTaz7DiU" alt="pic.twitter.com/TCYTaz7DiU" /></li>
+</ol>]]></content><author><name></name></author><summary type="html"><![CDATA[Matt Notowidigdo prompted a great thread of peoples’ suggestions of their favorite figures. I thought I would give a resting place for the nominees:]]></summary></entry></feed>

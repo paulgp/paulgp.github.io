@@ -1,0 +1,147 @@
+/*
+    https://github.com/cademirci/jekyll-code-style
+
+    Author: Caglayan Demirci (cademirci.com)
+    GitHub: cademirci
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+
+.language-terminal pre.highlight {
+    background: #101010;
+}
+
+pre.highlight {
+    /* CODE BLOCK STYLE */
+    background: #1a1a1a;
+    margin: 18px 18px;
+    padding: 25px 10px;
+    font-size: 0.9em;
+    border: 1px solid #666;
+    border-radius: 5px;
+    tab-size: 2;
+    -moz-tab-size: 2;
+    -o-tab-size: 2;
+    tab-size: 2;
+	white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    letter-spacing: 0;
+} @media only screen and (max-width: 900px) {
+    .language-terminal pre.highlight {
+        border-radius: 0;
+    }
+    pre.highlight {
+        font-size: 0.8em;
+        border: none;
+        margin: 35px -18px;
+    }
+}
+
+pre.highlight::before {
+    content: attr(data-before);
+    margin-top: -15px;
+    float: right;
+
+    /* LANGUAGE NAME STYLE */
+    font-family: 'Roboto Mono', monospace;
+    font-size: .8em;
+    letter-spacing: 1px;
+    color: #3bc47f;
+}
+
+code {
+    /* FONT OF ALL CODES */
+    font-family: 'Roboto Mono', monospace;
+
+    /* INLINE CODE STYLE */
+    /* background: #0b0e0b; */
+    color: #dd828c;
+    font-size: .9em;
+    padding: 0 3px;
+    /* border: 1px solid #666; */
+    border-radius: 3px;
+}
+
+/* seperating inline code and multiline code */
+/* by neutrailizing the style */
+pre.highlight code,
+figure.highlight code {
+    padding: 0;
+    color: #d6d6d6;
+    font-size: .8em;
+    border: none;
+    background: none;
+}
+figure.highlight pre {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+span.ln { /* line numbers */
+    user-select: none;
+    color: #666;
+}
+
+/* syntax highlighting */
+
+.c     { color: #999; font-style: italic } /* Comment */
+.err   { color: #a61717; background-color: #000; } /* Error */
+.k     { color: #4287f5; } /* Keyword */
+.o     { color: #ff4d4d; } /* Operator */
+.cm    { color: #999; font-style: italic } /* Comment.Multiline */
+.cp    { color: #999;    } /* Comment.Preproc */
+.c1    { color: #999; font-style: italic } /* Comment.Single */
+.cs    { color: #999; font-style: italic } /* Comment.Special */
+.gd    { color: #000; background-color: #ddd; } /* Generic.Deleted */
+.gd .x { color: #000; background-color: #ddd; } /* Generic.Deleted.Specific */
+.ge    { font-style: italic; } /* Generic.Emph */
+.gr    { color: #a00;    } /* Generic.Error */
+.gh    { color: #999;    } /* Generic.Heading */
+.gi    { color: #000; background-color: #ddd; } /* Generic.Inserted */
+.gi .x { color: #000; background-color: #ddd; } /* Generic.Inserted.Specific */
+.go    { color: #ddd;    } /* Generic.Output */
+.gp    { color: #aaa;    } /* Generic.Prompt */
+.gs    { color: #4287f5; } /* Generic.Strong */
+.gu    { color: #aaa;    } /* Generic.Subheading */
+.gt    { color: #a00;    } /* Generic.Traceback */
+.kc    { color: #6ea6ff; } /* Keyword.Constant */
+.kd    { color: #6ea6ff; } /* Keyword.Declaration */
+.kp    { color: #6ea6ff; } /* Keyword.Pseudo */
+.kr    { color: #6ea6ff; } /* Keyword.Reserved */
+.kt    { color: #aa66ff; } /* Keyword.Type */
+.m     { color: orange;  } /* Literal.Number */
+.s     { color: #78db57; } /* Literal.String */
+.na    { color: #00a0a0; } /* Name.Attribute */
+.nb    { color: #0086B3; } /* Name.Builtin */
+.nc    { color: #f5bf89; } /* Name.Class */
+.no    { color: #008080; } /* Name.Constant */
+.ni    { color: #800080; } /* Name.Entity */
+.ne    { color: #900;    } /* Name.Exception */
+.nf    { color: #edda5e; } /* Name.Function */
+.nn    { color: #ccc;    } /* Name.Namespace */
+.nt    { color: #66d9ff; } /* Name.Tag */
+.nv    { color: #008080; } /* Name.Variable */
+.ow    { color: #ff4d4d; } /* Operator.Word */
+.w     { color: #bbb;    } /* Text.Whitespace */
+.mf    { color: orange;  } /* Literal.Number.Float */
+.mh    { color: orange;  } /* Literal.Number.Hex */
+.mi    { color: orange;  } /* Literal.Number.Integer */
+.mo    { color: orange;  } /* Literal.Number.Oct */
+.sb    { color: #78db57; } /* Literal.String.Backtick */
+.sc    { color: #78db57; } /* Literal.String.Char */
+.sd    { color: #78db57; } /* Literal.String.Doc */
+.s2    { color: #78db57; } /* Literal.String.Double */
+.se    { color: #78db57; } /* Literal.String.Escape */
+.sh    { color: #78db57; } /* Literal.String.Heredoc */
+.si    { color: #78db57; } /* Literal.String.Interpol */
+.sx    { color: #78db57; } /* Literal.String.Other */
+.sr    { color: #009926; } /* Literal.String.Regex */
+.s1    { color: #78db57; } /* Literal.String.Single */
+.ss    { color: #78db57; } /* Literal.String.Symbol */
+.bp    { color: #aaa;    } /* Name.Builtin.Pseudo */
+.vc    { color: #008080; } /* Name.Variable.Class */
+.vg    { color: #008080; } /* Name.Variable.Global */
+.vi    { color: #008080; } /* Name.Variable.Instance */
+.il    { color: orange;  } /* Literal.Number.Integer.Long */

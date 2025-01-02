@@ -1,0 +1,308 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Reader's Digest of Optimal Monetary Policy in Production Networks</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/blog.css">
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true
+      },
+      TeX: {
+        equationNumbers: { autoNumber: "AMS" }
+      }
+    });
+    </script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <style>
+        button.accordion2 {
+            font: 14px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            cursor: pointer;
+            padding: 0px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 100%;
+            transition: 0.4s;
+            background-color: #f8f8f8;
+        }
+
+        button.accordion {
+            font: 14px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            cursor: pointer;
+            padding: 0px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 100%;
+            transition: 0.4s;
+            background-color: #f8f8f8;
+        }
+
+        button.accordion.active,
+        button.accordion:hover {
+            background-color: #f8f8f8;
+        }
+
+        button.accordion:after {
+            content: '[+]';
+            font-size: 90%;
+            color: #777;
+            float: left;
+            margin-left: 1px;
+            margin-right: 3px;
+        }
+
+        button.accordion2:after {
+            content: '[#]';
+            font-size: 90%;
+            color: #777;
+            float: left;
+            margin-left: 1px;
+            margin-right: 3px;
+        }
+
+        button.accordion.active:after {
+            content: "[\2212]";
+        }
+
+        div.panel {
+            padding: 0 20px;
+            margin-top: 5px;
+            display: none;
+            background-color: white;
+            font-size: 100%;
+        }
+
+        div.panel.show {
+            display: block !important;
+        }
+    </style>
+    <link rel="alternate" type="application/atom+xml" title="Homepage of the economist Paul Goldsmith-Pinkham" href="/feed.xml">
+</head>
+
+<body>
+    <div class="wrapper">
+        <section>
+            <h1> Reader's Digest of Optimal Monetary Policy in Production Networks </h1>
+            <p><em>Editors Note: This summmary was created using Claude AI. Please send me any comments or corrections.</em></p>
+
+<p><a href="https://www.econometricsociety.org/publications/econometrica/2022/05/01/optimal-monetary-policy-production-networks"><em>La’O and Tahbaz-Salehi (Econometrica, 2022)</em></a></p>
+
+<p><strong>Key Takeaway</strong>: When industries buy and sell from each other in a production network, central banks need to consider not just how sticky prices are in each industry, but also where industries sit in the supply chain. The optimal monetary policy puts more weight on stabilizing prices in industries that are upstream (early in production chains), have sticky prices themselves, and sell to other industries with sticky prices.</p>
+
+<h2 id="what-the-paper-does">What the Paper Does</h2>
+
+<p>La’O and Tahbaz-Salehi examine how central banks should conduct monetary policy when the economy has multiple industries that trade inputs with each other. They start with a model where firms in different industries:</p>
+<ul>
+  <li>Buy inputs from other industries</li>
+  <li>Set prices under incomplete information about economic conditions</li>
+  <li>Have different degrees of price stickiness</li>
+  <li>Are connected in a production network</li>
+</ul>
+
+<p>The authors derive what price index the central bank should target to maximize welfare. Unlike standard one-sector models where price stability is optimal, they show that with production networks, the central bank generally cannot achieve the ideal (flexible price) outcome.</p>
+
+<h2 id="why-this-matters-for-the-literature">Why This Matters for the Literature</h2>
+
+<p>This paper bridges two important streams of research:</p>
+
+<ol>
+  <li>The New Keynesian literature on optimal monetary policy, which typically uses single-sector models where price stability is optimal</li>
+  <li>The growing literature on production networks, which shows how industry linkages matter for how shocks propagate</li>
+</ol>
+
+<p>The key contribution is showing that production networks fundamentally change optimal monetary policy. The central bank needs to consider:</p>
+<ul>
+  <li>An industry’s position in the production chain</li>
+  <li>How price stickiness in one industry affects other industries through input-output relationships</li>
+  <li>The trade-off between stabilizing prices within industries vs. between industries</li>
+</ul>
+
+<h2 id="key-result-the-optimal-price-index">Key Result: The Optimal Price Index</h2>
+
+<p>The paper’s core theoretical result (Theorem 2) shows that the optimal policy targets a price index where each industry’s weight depends on:</p>
+
+<ol>
+  <li>Size - larger industries (measured by sales) get more weight</li>
+  <li>Price stickiness - industries with stickier prices get more weight</li>
+  <li>Position in network:
+    <ul>
+      <li>More upstream industries get more weight</li>
+      <li>Industries with flexible-price suppliers but sticky-price customers get more weight</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Applied to U.S. data, the authors find significant welfare gains from targeting their optimal price index versus a consumption-weighted index like CPI. However, they find that simply putting more weight on sticky-price industries approximately achieves the gains of the fully optimal policy.</p>
+
+<p>This means central bankers should pay special attention to price movements in:</p>
+<ul>
+  <li>Large upstream industries (like raw materials)</li>
+  <li>Industries that are both sticky-priced and important input suppliers</li>
+  <li>Service sectors that are both sticky-priced and widely used as inputs</li>
+</ul>
+
+<p>The paper’s findings help explain why central banks often focus on “core” price measures that put more weight on sticky-price sectors, while suggesting refinements based on production network position.</p>
+
+<h2 id="why-was-this-hard">Why Was This Hard?</h2>
+
+<p>The technical challenge was combining two complex frameworks:</p>
+
+<ol>
+  <li>
+    <p><strong>Network Equilibrium</strong>: Production networks create intricate strategic interactions - when one firm changes prices, it affects costs for all downstream firms. With n industries, you need to track n² possible interactions.</p>
+  </li>
+  <li>
+    <p><strong>Nominal Rigidities</strong>: Price stickiness creates a role for monetary policy. But with networks, each firm’s optimal price depends on their expectations about:</p>
+    <ul>
+      <li>Their own costs</li>
+      <li>Their customers’ demand</li>
+      <li>Their suppliers’ prices</li>
+    </ul>
+  </li>
+</ol>
+
+<p>The authors solve this by recasting the problem as a “beauty contest” game over networks, where firms must coordinate prices while facing different information sets.</p>
+
+<h2 id="limitations-and-where-it-might-not-apply">Limitations and Where It Might Not Apply</h2>
+
+<ol>
+  <li>
+    <p><strong>Static Framework</strong>: The model is static, so it can’t address dynamics like inflation persistence or interest rate policy. It’s best for understanding long-run targeting, not quarter-to-quarter decisions.</p>
+  </li>
+  <li>
+    <p><strong>Efficiency Assumption</strong>: The model assumes the flexible-price equilibrium is efficient. In reality, markup variations and other distortions might create additional trade-offs for monetary policy.</p>
+  </li>
+  <li>
+    <p><strong>Information Structure</strong>: The model uses incomplete information to generate price stickiness. While this captures similar effects to menu costs or Calvo pricing, the specific mechanism matters for some results.</p>
+  </li>
+  <li>
+    <p><strong>Measurement Challenges</strong>: Implementing the optimal policy requires measuring:</p>
+    <ul>
+      <li>Industry-level price stickiness</li>
+      <li>The full input-output structure</li>
+      <li>Position of industries in production chains
+These can be hard to measure precisely in practice.</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="how-to-cite-and-use-this-paper">How to Cite and Use This Paper</h2>
+
+<p>This paper is useful for researchers working on:</p>
+
+<ol>
+  <li>
+    <p><strong>Monetary Policy Design</strong>: Cite when arguing that central banks should consider production structure, not just price stickiness, in designing target indices.</p>
+  </li>
+  <li>
+    <p><strong>Network Effects</strong>: Use as evidence that nominal rigidities interact with production networks to amplify shocks - sticky prices upstream matter more than downstream.</p>
+  </li>
+  <li>
+    <p><strong>Price Setting</strong>: Reference for how strategic complementarities in price setting work through input-output linkages.</p>
+  </li>
+</ol>
+
+<p>Key empirical predictions to test:</p>
+<ul>
+  <li>Price changes should propagate more strongly downstream than upstream</li>
+  <li>Industries with sticky-price customers should have more stable prices</li>
+  <li>Monetary shocks should have larger effects on industries that are further downstream</li>
+</ul>
+
+<p>The authors’ decomposition of welfare losses into within-industry, across-industry, and output gap components provides a framework for quantifying the costs of different monetary policies in networked economies.</p>
+
+<h2 id="model-sketch-optimal-monetary-policy-in-production-networks">Model Sketch: Optimal Monetary Policy in Production Networks</h2>
+
+<h3 id="basic-structure">Basic Structure</h3>
+
+<p>The economy has $n$ industries indexed by $i$. Each industry has:</p>
+<ul>
+  <li>A unit mass of monopolistically competitive firms (indexed by $k \in [0,1]$)</li>
+  <li>A competitive aggregator that combines firms’ output into the industry good</li>
+</ul>
+
+<h3 id="production">Production</h3>
+
+<p>Each firm $k$ in industry $i$ has technology:
+\(y_{ik} = z_i F_i(l_{ik}, x_{i1k}, ..., x_{ink})\)</p>
+
+<p>where:</p>
+<ul>
+  <li>$y_{ik}$ is output</li>
+  <li>$z_i$ is industry-specific productivity</li>
+  <li>$l_{ik}$ is labor input</li>
+  <li>$x_{ijk}$ is input from industry $j$</li>
+  <li>$F_i$ is constant returns to scale</li>
+</ul>
+
+<h3 id="nominal-rigidities">Nominal Rigidities</h3>
+
+<p>Key friction: Firms set prices under incomplete information about productivity shocks.</p>
+
+<p>Each firm $k$ in industry $i$:</p>
+<ul>
+  <li>Observes signal $\omega_{ik}$ about the economy’s state</li>
+  <li>Sets nominal price $p_{ik}(\omega_{ik})$ based on this signal</li>
+  <li>Cannot condition price on full state $s = (z,\omega)$</li>
+</ul>
+
+<h3 id="policy-tools">Policy Tools</h3>
+
+<p>The government has two tools:</p>
+<ol>
+  <li>Industry-specific taxes $\tau_i$ (non-state-contingent)</li>
+  <li>Nominal aggregate demand $m(s)$ (can vary with state)</li>
+</ol>
+
+<h3 id="key-special-case">Key Special Case</h3>
+
+<p>For explicit solutions, paper focuses on:</p>
+<ul>
+  <li>Cobb-Douglas technologies: $F_i(l,x) = z_i l^{\alpha_i} \prod_j x_{ij}^{a_{ij}}$</li>
+  <li>Log-normal productivity: $\log z_i \sim N(0,\delta^2\sigma^2_z)$</li>
+  <li>Firm signals: $\omega_{ijk} = \log z_j + \epsilon_{ijk}$, $\epsilon_{ijk} \sim N(0,\delta^2\sigma^2_{ik})$</li>
+</ul>
+
+<h3 id="optimal-policy">Optimal Policy</h3>
+
+<p>The optimal policy targets a price index:
+\(\sum_{i=1}^n \psi_i^* \log p_i = 0\)</p>
+
+<p>where weights $\psi_i^*$ depend on:</p>
+<ul>
+  <li>Industry’s sales share ($\lambda_i$)</li>
+  <li>Price flexibility ($\phi_i$)</li>
+  <li>Position in network (via Leontief inverse)</li>
+  <li>Upstream/downstream relationships</li>
+</ul>
+
+<p>This provides a tractable framework for analyzing how network structure and nominal rigidities jointly determine optimal monetary policy.</p>
+
+        </section>
+                <header>
+                    <div class="sidenav">
+                        <a href="/">Home</a>
+                        <a href="/papers/cv.pdf">CV</a>
+                        <a href="/papers.html">Papers</a>
+                        <a href="/blog.html">Blog <br> (A Causal Affair) </a>
+                        <a href="https://github.com/paulgp/applied-methods-phd">Applied Methods PhD Course</a></p>
+                        <img src="/assets/img/circle_cropped.png" alt="Profile">
+                    </div>
+                </header>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,315 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Testing out a new format: Reader's Digest of Econometrica Papers [Econometrics Paper]</title>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/blog.css">
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\\[','\\]']],
+        processEscapes: true
+      },
+      TeX: {
+        equationNumbers: { autoNumber: "AMS" }
+      }
+    });
+    </script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <style>
+        button.accordion2 {
+            font: 14px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            cursor: pointer;
+            padding: 0px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 100%;
+            transition: 0.4s;
+            background-color: #f8f8f8;
+        }
+
+        button.accordion {
+            font: 14px/1.5 "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            cursor: pointer;
+            padding: 0px;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 100%;
+            transition: 0.4s;
+            background-color: #f8f8f8;
+        }
+
+        button.accordion.active,
+        button.accordion:hover {
+            background-color: #f8f8f8;
+        }
+
+        button.accordion:after {
+            content: '[+]';
+            font-size: 90%;
+            color: #777;
+            float: left;
+            margin-left: 1px;
+            margin-right: 3px;
+        }
+
+        button.accordion2:after {
+            content: '[#]';
+            font-size: 90%;
+            color: #777;
+            float: left;
+            margin-left: 1px;
+            margin-right: 3px;
+        }
+
+        button.accordion.active:after {
+            content: "[\2212]";
+        }
+
+        div.panel {
+            padding: 0 20px;
+            margin-top: 5px;
+            display: none;
+            background-color: white;
+            font-size: 100%;
+        }
+
+        div.panel.show {
+            display: block !important;
+        }
+    </style>
+    <link rel="alternate" type="application/atom+xml" title="Homepage of the economist Paul Goldsmith-Pinkham" href="/feed.xml">
+</head>
+
+<body>
+    <div class="wrapper">
+        <section>
+            <h1> Testing out a new format: Reader's Digest of Econometrica Papers [Econometrics Paper] </h1>
+            <p>Ben Golub had the idea of <a href="https://bsky.app/profile/bengolub.bsky.social/post/3lacwdogwti2w">summarizing technical papers (such as in Econometrica) using AI to be more easily approached by non-technical economists.</a>  These papers were selected from the list of the <a href="https://scholar.google.com/citations?hl=en&amp;vq=bus_economics&amp;view_op=list_hcore&amp;venue=G0hmswRVzmAJ.2024">most prominent recent papers in Econometrica by Google Scholar.</a> First, an econometrics paper. I will also post one for <a href="https://paulgp.github.io/2024/11/06/readers-digest-galeotti-et-al-2020.html">a theory paper.</a></p>
+
+<h2 id="deep-neural-networks-for-estimation-and-inference-a-readers-digest">Deep Neural Networks for Estimation and Inference: A Reader’s Digest</h2>
+<p><a href="https://www.econometricsociety.org/publications/econometrica/2021/01/01/deep-neural-networks-estimation-and-inference"><em>Farrell, Liang, and Misra (Econometrica, 2021)</em></a></p>
+
+<p><strong>Key Takeaway</strong>: This paper proves that deep learning can be safely used as a first step in modern econometric analysis. If you’re using machine learning for things like propensity score matching or predicting treatment effects, you can now confidently use deep neural networks and still get valid statistical inference in your second stage analysis. This fills a crucial gap, as while deep learning has shown impressive empirical performance, economists have been hesitant to adopt it without theoretical guarantees.</p>
+
+<h3 id="what-do-the-researchers-do">What Do The Researchers Do?</h3>
+
+<p>The authors provide formal mathematical proof that deep neural networks can be used as a valid first-step estimator in two-stage econometric procedures. In simpler terms:</p>
+
+<ol>
+  <li>They show that deep neural networks converge to the true function at a rate fast enough to allow valid inference in the second stage</li>
+  <li>They prove this for the most common type of neural network (multilayer perceptron with ReLU activation)</li>
+  <li>They demonstrate how this works in practice with a marketing application where they estimate individual treatment effects of catalog mailings</li>
+</ol>
+
+<p>The results cover both standard regression problems and classification tasks like logistic regression, making them broadly applicable to common econometric settings.</p>
+
+<h3 id="why-does-this-matter">Why Does This Matter?</h3>
+
+<p>This paper matters for three key reasons:</p>
+
+<ol>
+  <li>
+    <p><strong>Bridging Theory and Practice</strong>: Deep learning has shown remarkable empirical success, but economists have been reluctant to adopt it without theoretical foundations. This paper provides those foundations.</p>
+  </li>
+  <li>
+    <p><strong>Validation of Current Methods</strong>: Many researchers are already using neural networks in applications. This paper proves that such applications can be theoretically valid, providing retroactive justification for existing work.</p>
+  </li>
+  <li>
+    <p><strong>Extension of Machine Learning Literature</strong>: Previous work had established similar results for other methods (LASSO, random forests), but deep learning had remained a notable gap in the literature.</p>
+  </li>
+</ol>
+
+<h3 id="key-result-theorem-1">Key Result: Theorem 1</h3>
+
+<p>The paper’s most important result is Theorem 1, which shows that multilayer perceptron networks achieve a convergence rate of approximately n^(-β/(β+d)), where:</p>
+<ul>
+  <li>n is the sample size</li>
+  <li>β measures how smooth the true function is</li>
+  <li>d is the number of input variables</li>
+</ul>
+
+<p>This rate is fast enough to ensure that when you use the neural network predictions in a second stage (e.g., for treatment effect estimation), your standard errors and confidence intervals will still be valid.</p>
+
+<p>The authors demonstrate this in practice with a retail catalog mailing study, where they use deep learning to estimate individual treatment effects. The method performs as well as or better than traditional approaches, while maintaining valid statistical inference.</p>
+
+<h3 id="practical-implications">Practical Implications</h3>
+
+<p>For applied researchers, this paper means you can:</p>
+<ul>
+  <li>Use deep learning in your first-stage predictions</li>
+  <li>Still get valid standard errors and confidence intervals in your second stage</li>
+  <li>Not worry about neural network architecture details beyond basic setup</li>
+  <li>Apply these results to both continuous outcomes (regression) and binary outcomes (classification)</li>
+</ul>
+
+<p>The key constraint is that this only applies to two-stage procedures where the neural network is used in the first stage. The results don’t automatically extend to using neural networks for direct causal inference.</p>
+
+<h2 id="further-discussion-on-deep-neural-networks-for-estimation-and-inference">Further Discussion on “Deep Neural Networks for Estimation and Inference”</h2>
+
+<h3 id="why-was-this-hard">Why Was This Hard?</h3>
+
+<p>The theoretical validation of deep neural networks for econometric inference faced several key challenges:</p>
+
+<ol>
+  <li>
+    <p><strong>Unbounded Parameters</strong>: Traditional statistical theory typically requires bounded parameters, but modern deep learning works best when network weights are allowed to be unbounded. The authors developed new mathematical techniques to handle this reality of how neural networks are actually used.</p>
+  </li>
+  <li>
+    <p><strong>Non-Smooth Activation</strong>: Modern neural networks use ReLU (Rectified Linear Unit) activation functions, which are not smooth - they have a “kink” at zero. Most classical statistical theory relies on smooth functions, requiring new theoretical approaches.</p>
+  </li>
+  <li>
+    <p><strong>Depth Complexity</strong>: Each layer of a neural network transforms the data in non-linear ways, making it extremely difficult to track how errors propagate through the network. Previous work mostly focused on shallow networks (1-2 layers) because they were mathematically tractable.</p>
+  </li>
+  <li>
+    <p><strong>Multiple Sources of Error</strong>: The analysis needed to account for both approximation error (how well can a neural network approximate the true function?) and estimation error (how well can we estimate the network parameters?), while ensuring both are controlled enough for valid second-stage inference.</p>
+  </li>
+</ol>
+
+<h3 id="where-would-this-not-do-well">Where Would This Not Do Well?</h3>
+
+<p>The authors’ results have important limitations:</p>
+
+<ol>
+  <li>
+    <p><strong>Small Sample Sizes</strong>: The convergence rates require large samples to kick in. For small datasets (hundreds of observations), traditional methods might be more reliable.</p>
+  </li>
+  <li>
+    <p><strong>Very High Dimensional Settings</strong>: When the number of features (d) is large relative to sample size, the convergence rate becomes very slow. In such cases, methods that impose more structure (like LASSO) might work better.</p>
+  </li>
+  <li>
+    <p><strong>Direct Causal Effects</strong>: The results only cover using neural networks as a first-step estimator. They don’t automatically extend to using neural networks for direct estimation of causal effects.</p>
+  </li>
+  <li>
+    <p><strong>When Interpretability is Crucial</strong>: While the predictions can be used reliably, the internal workings of the neural network remain a “black box”. In settings where you need to explain exactly how each variable affects the outcome, simpler models might be preferred.</p>
+  </li>
+</ol>
+
+<h3 id="when-to-cite-this-paper">When to Cite this paper:</h3>
+<ol>
+  <li>
+    <p><strong>Methodological Justification</strong>: “We use deep neural networks for our first-stage estimates, following Farrell et al. (2021) who establish the theoretical validity of this approach for subsequent inference.”</p>
+  </li>
+  <li>
+    <p><strong>Literature Context</strong>: “Recent work has established theoretical guarantees for machine learning methods in econometrics, including LASSO (Belloni et al., 2014), random forests (Wager and Athey, 2018), and deep neural networks (Farrell et al., 2021).”</p>
+  </li>
+  <li>
+    <p><strong>Specific Applications</strong>: “For propensity score estimation, we implement a deep neural network, which Farrell et al. (2021) show provides valid first-stage estimates for subsequent causal inference.”</p>
+  </li>
+</ol>
+
+<h3 id="when-not-to-cite-this-paper">When Not to Cite this paper:</h3>
+<ul>
+  <li>Don’t cite this paper merely for using neural networks in economics</li>
+  <li>Don’t cite it for general machine learning applications without inference</li>
+  <li>Don’t cite it for direct causal effect estimation using neural networks</li>
+</ul>
+
+<p>The paper is best positioned as part of the broader literature on valid inference after machine learning, specifically addressing the theoretical gaps for deep learning in econometric applications.</p>
+
+<h2 id="understanding-β-beta-and-d-in-practice">Understanding β (Beta) and d in Practice</h2>
+
+<h2 id="what-these-numbers-mean">What These Numbers Mean</h2>
+
+<ul>
+  <li><strong>d</strong>: Number of features/covariates in your data</li>
+  <li><strong>β</strong>: Smoothness parameter of the true function (roughly, how many continuous derivatives it has)</li>
+</ul>
+
+<h2 id="typical-values-in-economic-applications">Typical Values in Economic Applications</h2>
+
+<h3 id="for-d-dimensions">For d (dimensions):</h3>
+<ul>
+  <li><strong>Small</strong>: d = 4-10</li>
+  <li>Example: Basic wage regression (age, education, experience, gender)</li>
+  <li>
+    <p>Traditional RCT with few controls</p>
+  </li>
+  <li><strong>Medium</strong>: d = 20-50</li>
+  <li>Example: Consumer choice models</li>
+  <li>
+    <p>Policy evaluation with demographic controls</p>
+  </li>
+  <li><strong>Large</strong>: d = 100-500</li>
+  <li>Example: The paper’s retail catalog application (d ≈ 150)</li>
+  <li>Modern marketing applications with customer features</li>
+</ul>
+
+<h3 id="for-β-smoothness">For β (smoothness):</h3>
+<ul>
+  <li><strong>β = 1</strong>: Function is continuous but can have sharp turns</li>
+  <li>
+    <p>Example: Simple threshold effects in policy</p>
+  </li>
+  <li><strong>β = 2</strong>: Function is continuously differentiable</li>
+  <li>Example: Most standard economic relationships</li>
+  <li>
+    <p>This is commonly assumed in practice</p>
+  </li>
+  <li><strong>β = 4</strong>: Function is very smooth</li>
+  <li>Example: Well-behaved utility functions</li>
+  <li>Often used in theoretical work</li>
+</ul>
+
+<h2 id="what-this-means-in-practice">What This Means in Practice</h2>
+
+<p>Let’s look at convergence rate n^(-β/(β+d)) with some examples:</p>
+
+<ol>
+  <li><strong>Simple Case</strong>: β = 2, d = 5
+    <ul>
+      <li>Rate ≈ n^(-2/7) ≈ n^(-0.29)</li>
+      <li>Pretty good! Usable with moderate sample sizes</li>
+    </ul>
+  </li>
+  <li><strong>Marketing Application</strong>: β = 2, d = 150
+    <ul>
+      <li>Rate ≈ n^(-2/152) ≈ n^(-0.013)</li>
+      <li>Much slower - needs very large samples</li>
+      <li>This is why big data applications work well</li>
+    </ul>
+  </li>
+  <li><strong>Best Case</strong>: β = 4, d = 3
+    <ul>
+      <li>Rate ≈ n^(-4/7) ≈ n^(-0.57)</li>
+      <li>Close to parametric rate of n^(-0.5)</li>
+      <li>Rare in practice</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="rule-of-thumb">Rule of Thumb</h2>
+<ul>
+  <li>If d &lt; 20 and β ≥ 2, traditional sample sizes (n = 1000-5000) are often sufficient</li>
+  <li>If d &gt; 100, you typically need n &gt; 100,000 for reliable results</li>
+  <li>When d is large relative to n, consider dimension reduction or feature selection first</li>
+</ul>
+
+<p>This illustrates why the method works well in the paper’s retail application (large n, moderate d) but might struggle in settings with many features and smaller samples.</p>
+
+        </section>
+                <header>
+                    <div class="sidenav">
+                        <a href="/">Home</a>
+                        <a href="/papers/cv.pdf">CV</a>
+                        <a href="/papers.html">Papers</a>
+                        <a href="/blog.html">Blog <br> (A Causal Affair) </a>
+                        <a href="https://github.com/paulgp/applied-methods-phd">Applied Methods PhD Course</a></p>
+                        <img src="/assets/img/circle_cropped.png" alt="Profile">
+                    </div>
+                </header>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+
+</body>
+
+</html>
