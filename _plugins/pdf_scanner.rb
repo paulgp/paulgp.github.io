@@ -63,8 +63,13 @@ module Jekyll
     def initialize(site, base, category, pdfs)
       @site = site
       @base = base
-      @dir = 'assets/data'  # This will put the JSON in /assets/data/
+      @dir = 'assets/data'  # Keep this as is
       @name = "#{category}_pdfs.json"
+      
+      # Also write directly to a versioned directory
+      static_dir = File.join(site.source, 'assets', 'data')
+      FileUtils.mkdir_p(static_dir)
+      File.write(File.join(static_dir, "#{category}_pdfs.json"), JSON.generate({ pdfs: pdfs }))
       
       self.process(@name)
       self.content = JSON.generate({ pdfs: pdfs })
@@ -72,5 +77,4 @@ module Jekyll
         'layout' => nil
       }
     end
-  end
 end
