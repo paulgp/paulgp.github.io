@@ -1,3 +1,5 @@
+require 'json'
+require 'pathname'
 require 'pdf-reader'
 
 module Jekyll
@@ -14,42 +16,37 @@ module Jekyll
         next unless Dir.exist?(pdf_dir)
         
         pdfs = scan_directory(pdf_dir, category)
-        # Create a new page for the JSON data
         site.pages << JsonPage.new(site, site.source, category, pdfs)
       end
     end
-    
+
     private
     
-def parse_pdf_date(date_string)
- return nil unless date_string
- puts "Parsing date: #{date_string}"
- if date_string =~ /D:(\d{4})(\d{2})(\d{2})/
-   timestamp = Date.new($1.to_i, $2.to_i, $3.to_i)
-   puts "Converted to timestamp: #{timestamp}"
-   timestamp
- else
-   puts "Failed to parse date"
-   Time.now
- end
-end
+    def scan_directory(dir, category)
+      pdfs = []
+      Dir.glob(File.join(dir, '*.pdf')).each do |file|
+        path = Pathname.new(file)
+        reader = PDF::Reader.new(file)
+        creation_date = parse_pdf_date(reader.info[:CreationDate])
+        
+        pdfs << {
+          name: path.basename.to_s,
+          url: "/assets/#{category}/#{path.basename}",
+          size: format_size(File.size(file)),
+          modified: creation_date
+        }
+      end
+      pdfs.sort_by { |pdf| pdf[:modified] }.reverse
+    end
 
-def scan_directory(dir, category)
-  pdfs = []
-  Dir.glob(File.join(dir, '*.pdf')).each do |file|
-    path = Pathname.new(file)
-    reader = PDF::Reader.new(file)
-    creation_date = parse_pdf_date(reader.info[:CreationDate])
-    
-    pdfs << {
-      name: path.basename.to_s,
-      url: "/assets/#{category}/#{path.basename}",
-      size: format_size(File.size(file)),
-      modified: creation_date
-    }
-  end
-  pdfs.sort_by { |pdf| pdf[:modified] }.reverse
-end
+    def parse_pdf_date(date_string)
+      return nil unless date_string
+      if date_string =~ /D:(\d{4})(\d{2})(\d{2})/
+        Time.new($1.to_i, $2.to_i, $3.to_i).to_i * 1000
+      else
+        Time.now.to_i * 1000
+      end
+    end
 
     def format_size(size)
       units = ['B', 'KB', 'MB', 'GB']
@@ -66,7 +63,7 @@ end
     def initialize(site, base, category, pdfs)
       @site = site
       @base = base
-      @dir = ''
+      @dir = 'assets/data'  # This will put the JSON in /assets/data/
       @name = "#{category}_pdfs.json"
       
       self.process(@name)
