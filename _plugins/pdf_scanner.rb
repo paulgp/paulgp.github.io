@@ -57,19 +57,14 @@ module Jekyll
       end
       "#{size.round(1)} #{units[unit_index]}"
     end
-  end
+  end  # End of PDFScanner class
 
   class JsonPage < Page
     def initialize(site, base, category, pdfs)
       @site = site
       @base = base
-      @dir = 'assets/data'  # Keep this as is
+      @dir = 'assets/data'
       @name = "#{category}_pdfs.json"
-      
-      # Also write directly to a versioned directory
-      static_dir = File.join(site.source, 'assets', 'data')
-      FileUtils.mkdir_p(static_dir)
-      File.write(File.join(static_dir, "#{category}_pdfs.json"), JSON.generate({ pdfs: pdfs }))
       
       self.process(@name)
       self.content = JSON.generate({ pdfs: pdfs })
@@ -77,4 +72,5 @@ module Jekyll
         'layout' => nil
       }
     end
-end
+  end  # End of JsonPage class
+end  # End of Jekyll module
