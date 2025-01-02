@@ -1,9 +1,6 @@
 name: Build and deploy Jekyll site
-
-on:
-  push:
-    branches:
-      - main  # or master, depending on your default branch
+run-name: ${{ github.actor }} updating website
+on: [push]
 
 jobs:
   github-pages:
