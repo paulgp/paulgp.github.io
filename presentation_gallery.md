@@ -17,7 +17,7 @@ title: Paul Goldsmith-Pinkham
         const page = await pdfDoc.getPage(1);
         const viewport = page.getViewport({ scale: 1 });
         
-        canvasElement.width = 500;
+        canvasElement.width = 600;
         canvasElement.height = 300;
         const context = canvasElement.getContext('2d');
         
