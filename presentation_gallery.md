@@ -37,7 +37,7 @@ title: Paul Goldsmith-Pinkham
       React.useEffect(() => {
         const loadPDFs = async () => {
           try {
-            const response = await fetch(`/assets/data/${category}_pdfs.json`);
+            const response = await fetch(`/${category}_pdfs.json`);
             const data = await response.json();
             setPdfs(data.pdfs);
           } catch (error) {

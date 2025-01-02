@@ -63,7 +63,7 @@ module Jekyll
     def initialize(site, base, category, pdfs)
       @site = site
       @base = base
-      @dir = 'assets/data'
+      @dir = ''
       @name = "#{category}_pdfs.json"
       
       self.process(@name)
