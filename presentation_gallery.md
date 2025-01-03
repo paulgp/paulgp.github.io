@@ -42,7 +42,6 @@ title: Paul Goldsmith-Pinkham
             setPdfs(data.pdfs);
           } catch (error) {
             setError(`Error loading ${category} PDFs`);
-            console.error('Error:', error);
           }
         };
         loadPDFs();
