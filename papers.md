@@ -126,7 +126,7 @@ with Adam Ashcraft and James Vickery <button class="accordion"> Abstract </butto
 ### Covid-19 Publications
 
 1. [Can a Trusted Messenger Change Behavior when Information is Plentiful? Evidence from the First Months of the COVID-19 Pandemic in West Bengal](https://economics.mit.edu/sites/default/files/2022-08/wb_manuscript_final.pdf)  <br>
-with Abhijit Banerjee, Marcella Alsan, Emily Breza, Arun G. Chandrasekhar, Abhijit Chowdhury, Esther Duflo, and Benjamin A. Olken (Forthcoming, **Review of Economics and Statistics**)
+with Abhijit Banerjee, Marcella Alsan, Emily Breza, Arun G. Chandrasekhar, Abhijit Chowdhury, Esther Duflo, and Benjamin A. Olken (September 2024, **Review of Economics and Statistics**)
 <button class="accordion">
     Abstract
 </button>
