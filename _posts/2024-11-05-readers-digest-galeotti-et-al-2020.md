@@ -42,7 +42,7 @@ This paper makes three important contributions:
 3. **Methodological Innovation**: The use of network principal components to analyze intervention strategies is novel and provides a powerful analytical tool that others can build on.
 
 ### Key Result: Simple Interventions (Proposition 2) 
-Here's some text<span class="sidenote">This is a sidenote that should now appear properly in the margin</span> that continues after the note.
+<!-- Here's some text<span class="sidenote">This is a sidenote that should now appear properly in the margin</span> that continues after the note. -->
 
 The paper's most practically relevant result (shown in Proposition 2) demonstrates that when the intervention budget is large enough, the optimal strategy becomes remarkably simple:
 

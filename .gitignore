@@ -9,3 +9,5 @@ cv.aux
 *.aux
 *.synctex.gz
 .vscode/settings.json
+
+.codegpt

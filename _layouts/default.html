@@ -73,6 +73,10 @@
         }
     </style>
     <link rel="alternate" type="application/atom+xml" title="{{ site.description }}" href="/feed.xml">
+
+<script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+<script type="module" src="/assets/js/pdf_gallery.js"></script>
 </head>
 
 <body>
@@ -86,9 +90,9 @@
                 <a href="/">Home</a>
                 <a href="/papers/cv.pdf">CV</a>
                 <a href="/papers.html">Papers</a>
-                <a href="/blog.html">Blog (A Causal Affair) </a>
+                <a href="/blog.html">Blog <br> (A Causal Affair) </a>
                 <a href="https://github.com/paulgp/applied-methods-phd">Applied Methods PhD Course</a></p>
-                <img src="{{ '/assets/img/circle_cropped.png' | relative_url }}" width=250 height=250>
+                <img src="{{ '/assets/img/circle_cropped.png' | relative_url }}" alt="Profile">
             </div>
         </header>
     </div>
