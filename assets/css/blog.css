@@ -233,6 +233,8 @@ section {
     clear: both;
 }
 
+
+
 .widefigure img {
     width: 100%;
     height: auto;
@@ -245,6 +247,24 @@ section {
     color: #666;
     margin-top: 0.5rem;
     font-style: italic;
+}
+
+.boxnote {
+    float: none;
+    position: relative;
+    display: block;
+    margin: 1rem 0;
+    width: 100%;
+    background: #F1F1F1;
+    /* Light gray background to match abstracts */
+    color: #666;
+    /* Gray text color */
+    padding: 10px;
+    /* Match abstract padding */
+    border-left: 3px solid #2b6cb0;
+    /* Blue left border */
+    font-style: normal;
+    /* Remove italic style if any */
 }
 
 /* Mobile adjustments */
@@ -277,6 +297,8 @@ section {
         /* Slightly larger for better mobile readability */
     }
 }
+
+
 
 /* Extra small screens */
 @media (max-width: 640px) {
