@@ -19,10 +19,9 @@ The goal of this set of posts is to give you a sense of my workflow. My workflow
 Today's post will begin by highlighting how to get started using `git` for version control, but the various accoutrement that go along wiht it. With all things, there's no **one** software tool that gets used in isolation -- they all mix together. It's your job to figure out how to mix them together in a way that works for you.
 
 # The Basics (Skip if not a beginner)
-1. Install `git` on your computer. You can do this by going to the [git website](https://git-scm.com/).
-2. Create a Github account. You can do this by going to the [Github website](https://www.github.com/)
+1. Create a Github account. You can do this by going to the [Github website](https://www.github.com/)
    This is free, and will be useful going forward.
-3. Install [VS Code](https://code.visualstudio.com/download). If you haven't used VS Code, see [my discussion about why it and Github Copilot are so great.](https://paulgp.github.io/2024/06/24/llm_talk.html)
+2. Install [VS Code](https://code.visualstudio.com/download). If you haven't used VS Code, see [my discussion about why it and Github Copilot are so great.](https://paulgp.github.io/2024/06/24/llm_talk.html)
 
 I'm going to assume you have a vague sense of what `git` is.[^4] It's a version control software that keeps track of your work. It lets you work collaboratively with others, managing places where you may be in conflict. It also lets you try out new things without fully committing to it -- think of it as the sophisticated version of "Track Changes" in Word, or creating a new copy of a file with `_V2` appended at the end.
 
