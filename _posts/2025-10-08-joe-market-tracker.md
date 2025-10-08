@@ -5,7 +5,9 @@ date: 2025-10-08
 tags: [Economics, Job Market, Data Visualization]
 ---
 
-I've been tracking job postings from the American Economic Association's Job Openings for Economists (JOE) over the past decade. The interactive visualizations below show how the economics job market has evolved from 2015 to 2025.
+The interactive visualizations below show how the economics job market has evolved from 2015 to 2025 using data downloaded from [JOE on the AEA website](https://www.aeaweb.org/joe/listings). This is following work done by [lots of folks](https://open.substack.com/pub/globaldev/p/twilight-of-the-econs?r=2iog7&utm_medium=ios), most notably [John Cawley's reports on thr state of the market](https://www.aeaweb.org/joe/communications/joe-by-sector-10-2024).
+
+I wanted an updated sense of these graphs and provide the [code and data publicly.](https://github.com/paulgp/joe-tracker) 
 
 ## The Data
 
@@ -56,5 +58,4 @@ The code and data is here: https://github.com/paulgp/joe-tracker
 
 ---
 
-*Data source: American Economic Association Job Openings for Economists (JOE)*
 *Last updated: October 8, 2025*
