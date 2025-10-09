@@ -59,6 +59,7 @@ The visualizations below show the same analysis but filtered for finance positio
 Here's a breakdown by academic year:
 
 ### All Jobs
+
 | Year | Total Postings | Avg per Week | Notes |
 |------|---------------|--------------|--------|
 | 2015 | 1,543 | 49.8 | |
@@ -74,6 +75,7 @@ Here's a breakdown by academic year:
 | 2025 | 433 | 39.4 | Partial year |
 
 ### Finance Jobs Only
+
 | Year | Finance Postings | % of Total |
 |------|-----------------|------------|
 | 2015 | 153 | 9.9% |
@@ -109,6 +111,7 @@ The visualizations below show positions at the Federal Reserve System (Board and
 
 
 ### Fed/Regulator Jobs by Year
+
 | Year | Fed/Regulator Postings | % of Total |
 |------|------------------------|------------|
 | 2015 | 30 | 1.9% |
