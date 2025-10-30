@@ -72,7 +72,7 @@ Here's a breakdown by academic year:
 | 2022 | 1,502 | 46.9 | |
 | 2023 | 1,297 | 41.8 | |
 | 2024 | 1,221 | 37.0 | |
-| 2025 | 433 | 39.4 | Partial year |
+| 2025 | 604 | 43.1 | Partial year |
 
 ### Finance Jobs Only
 
@@ -88,7 +88,7 @@ Here's a breakdown by academic year:
 | 2022 | 103 | 6.9% |
 | 2023 | 93 | 7.2% |
 | 2024 | 102 | 8.3% |
-| 2025 | 46 | 10.6% |
+| 2025 | 65 | 10.8% |
 
 ## Federal Reserve & Bank Regulator Jobs
 
@@ -99,7 +99,7 @@ The visualizations below show positions at the Federal Reserve System (Board and
         'Federal Deposit Insurance Corporation',
         'Office of the Comptroller of the Currency'" %}
 
-**There have been ZERO Federal Reserve or bank regulator postings in 2025 so far, compared to the typical 25-33 per year.**
+**Federal Reserve and bank regulator postings remain at zero in 2025 so far, compared to the typical 24-33 per year.**
 
 ### Cumulative Fed/Regulator Job Postings
 
@@ -128,4 +128,4 @@ The visualizations below show positions at the Federal Reserve System (Board and
 
 ---
 
-*Last updated: October 8, 2025*
+*Last updated: October 30, 2025*
