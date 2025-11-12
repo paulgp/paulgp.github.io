@@ -17,36 +17,57 @@ from pathlib import Path
 import re
 from atproto import Client
 
-def parse_structured_post(text):
+def parse_structured_post(text, facets=None):
     """
     Parse structured post format: "<LINK TEXT> - <commentary> #linkoftheday\n<URL>"
+
+    Args:
+        text: Post text (may have truncated URLs)
+        facets: Post facets from Bluesky API (contains full URLs)
 
     Returns:
         dict with 'link_text', 'commentary', 'url', or None if parsing fails
     """
-    # Remove the hashtag first
-    text_clean = re.sub(r'#linkoftheday\b', '', text, flags=re.IGNORECASE).strip()
+    # Extract full URL from facets if available
+    url = None
+    if facets:
+        for facet in facets:
+            for feature in facet.features:
+                # Check if this is a link feature
+                if hasattr(feature, 'uri'):
+                    url = feature.uri
+                    break
+            if url:
+                break
 
-    # Extract URL (should be on its own line or at the end)
-    url_pattern = r'https?://[^\s<>"{}|\\^`\[\]]+'
-    url_match = re.search(url_pattern, text_clean)
+    # Fallback: try to extract URL from text
+    if not url:
+        url_pattern = r'https?://[^\s<>"{}|\\^`\[\]]+'
+        url_match = re.search(url_pattern, text)
+        if url_match:
+            url = url_match.group(0)
 
-    if not url_match:
+    if not url:
         return None
 
-    url = url_match.group(0)
-
-    # Get the text before the URL
-    text_before_url = text_clean[:url_match.start()].strip()
+    # Remove the hashtag first
+    text_clean = re.sub(r'#linkoftheday\b', '', text, flags=re.IGNORECASE)
+    # Remove all URL patterns (both full and truncated) - be aggressive
+    text_clean = re.sub(r'https?://[^\s]+', '', text_clean)  # Full URLs
+    text_clean = re.sub(r'\b[a-z0-9][a-z0-9-]*\.[a-z0-9][a-z0-9-]*\.[a-z0-9][a-z0-9-./~]*', '', text_clean)  # domain.tld/path patterns
+    text_clean = re.sub(r'\b[a-z0-9-]+\.[a-z]+/[^\s]*', '', text_clean)  # Any remaining domain/path
+    # Clean up multiple spaces and trim
+    text_clean = ' '.join(text_clean.split())
+    text_clean = text_clean.strip()
 
     # Try to split on " - " to get link text and commentary
-    if ' - ' in text_before_url:
-        parts = text_before_url.split(' - ', 1)
+    if ' - ' in text_clean:
+        parts = text_clean.split(' - ', 1)
         link_text = parts[0].strip().strip('"').strip("'")  # Remove quotes if present
         commentary = parts[1].strip() if len(parts) > 1 else None
     else:
         # If no " - " separator, use the whole text as link text
-        link_text = text_before_url.strip().strip('"').strip("'")
+        link_text = text_clean.strip().strip('"').strip("'")
         commentary = None
 
     return {
@@ -77,16 +98,12 @@ def fetch_bluesky_links(handle, app_password, hashtag='linkoftheday'):
         today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
         today_end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
 
-        print(f"Searching for posts from {today_start} to {today_end}")
-        print(f"Current time: {now}")
-
         # Fetch user's posts
         # Note: We'll fetch recent posts and filter by date and hashtag
         cursor = None
         links = []
         max_iterations = 10  # Prevent infinite loops
         iterations = 0
-        posts_checked = 0
 
         while iterations < max_iterations:
             params = {'actor': did, 'limit': 100}
@@ -100,7 +117,6 @@ def fetch_bluesky_links(handle, app_password, hashtag='linkoftheday'):
 
             for feed_view in response.feed:
                 post = feed_view.post
-                posts_checked += 1
 
                 # Parse post timestamp
                 post_time = datetime.fromisoformat(post.record.created_at.replace('Z', '+00:00'))
@@ -108,29 +124,25 @@ def fetch_bluesky_links(handle, app_password, hashtag='linkoftheday'):
                 # Check if post is from today
                 if post_time < today_start:
                     # We've gone too far back, stop searching
-                    print(f"Checked {posts_checked} posts total")
                     iterations = max_iterations
                     break
 
                 if today_start <= post_time <= today_end:
                     # Check if post contains the hashtag
                     text = post.record.text
-                    print(f"Post from today at {post_time}: {text[:100]}...")
                     if f'#{hashtag}' in text.lower():
-                        print(f"Found #{hashtag} in post!")
+                        # Get facets (contains full URLs)
+                        facets = post.record.facets if hasattr(post.record, 'facets') else None
                         # Parse structured post format
-                        parsed = parse_structured_post(text)
+                        parsed = parse_structured_post(text, facets)
 
                         if parsed:
-                            print(f"Successfully parsed: {parsed['link_text']}")
                             links.append({
                                 'url': parsed['url'],
                                 'link_text': parsed['link_text'],
                                 'commentary': parsed['commentary'],
                                 'timestamp': post_time
                             })
-                        else:
-                            print(f"Failed to parse post: {text}")
 
             # Check if there are more posts to fetch
             cursor = response.cursor if hasattr(response, 'cursor') and response.cursor else None
