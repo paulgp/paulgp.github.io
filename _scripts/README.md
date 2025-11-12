@@ -64,25 +64,47 @@ python _scripts/fetch_bluesky_links.py
 
 ## Usage
 
-Simply post links to Bluesky with the `#linkoftheday` hashtag. Examples:
+Post links to Bluesky using this **required structured format**:
 
 ```
-Check out this great paper on causal inference #linkoftheday
+<LINK TEXT> - <your commentary> #linkoftheday
+<URL>
+```
+
+### Examples:
+
+**With commentary:**
+```
+Great paper on causal inference - This explains the identification strategy really well #linkoftheday
 https://example.com/paper.pdf
 ```
 
-or
-
+**Without commentary (just the link text):**
 ```
 Interesting blog post about econometrics #linkoftheday
 https://example.com/blog
-This explains difference-in-differences really well!
 ```
 
-The script will:
-- Extract the URL(s) from your post
-- Use your commentary as the description
-- Remove the URL and hashtag from the commentary for cleaner output
+**Another example:**
+```
+"New DiD Estimator Paper" - Must read for applied economists #linkoftheday
+https://arxiv.org/example
+```
+
+### What the script does:
+
+- Extracts the link text (what appears before the ` - `)
+- Extracts your commentary (what appears after the ` - `)
+- Extracts the URL
+- Formats it as: `- [Link Text](URL) - Your commentary`
+
+### Format Rules:
+
+1. Include `#linkoftheday` hashtag (case insensitive)
+2. Put the URL on its own line or after your text
+3. Use ` - ` (space-dash-space) to separate link text from commentary
+4. If you don't include ` - `, the text before the URL becomes the link text
+5. You can use quotes around link text if you want, they'll be removed
 
 ## Customization
 

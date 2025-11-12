@@ -17,31 +17,50 @@ from pathlib import Path
 import re
 from atproto import Client
 
-def extract_links_from_text(text):
-    """Extract URLs from post text."""
-    # Match URLs in the text
-    url_pattern = r'https?://[^\s<>"{}|\\^`\[\]]+'
-    urls = re.findall(url_pattern, text)
-    return urls
+def parse_structured_post(text):
+    """
+    Parse structured post format: "<LINK TEXT> - <commentary> #linkoftheday\n<URL>"
 
-def clean_commentary(text, urls):
-    """Remove URLs and hashtags from text to get clean commentary."""
-    commentary = text
-    # Remove URLs
-    for url in urls:
-        commentary = commentary.replace(url, '')
-    # Remove #linkoftheday hashtag
-    commentary = re.sub(r'#linkoftheday\b', '', commentary, flags=re.IGNORECASE)
-    # Clean up extra whitespace
-    commentary = ' '.join(commentary.split())
-    return commentary.strip()
+    Returns:
+        dict with 'link_text', 'commentary', 'url', or None if parsing fails
+    """
+    # Remove the hashtag first
+    text_clean = re.sub(r'#linkoftheday\b', '', text, flags=re.IGNORECASE).strip()
+
+    # Extract URL (should be on its own line or at the end)
+    url_pattern = r'https?://[^\s<>"{}|\\^`\[\]]+'
+    url_match = re.search(url_pattern, text_clean)
+
+    if not url_match:
+        return None
+
+    url = url_match.group(0)
+
+    # Get the text before the URL
+    text_before_url = text_clean[:url_match.start()].strip()
+
+    # Try to split on " - " to get link text and commentary
+    if ' - ' in text_before_url:
+        parts = text_before_url.split(' - ', 1)
+        link_text = parts[0].strip().strip('"').strip("'")  # Remove quotes if present
+        commentary = parts[1].strip() if len(parts) > 1 else None
+    else:
+        # If no " - " separator, use the whole text as link text
+        link_text = text_before_url.strip().strip('"').strip("'")
+        commentary = None
+
+    return {
+        'link_text': link_text if link_text else url,
+        'commentary': commentary,
+        'url': url
+    }
 
 def fetch_bluesky_links(handle, app_password, hashtag='linkoftheday'):
     """
     Fetch posts from Bluesky with the specified hashtag from the previous day.
 
     Returns:
-        list: List of dicts with 'url', 'commentary', and 'timestamp'
+        list: List of dicts with 'url', 'link_text', 'commentary', and 'timestamp'
     """
     client = Client()
 
@@ -91,18 +110,16 @@ def fetch_bluesky_links(handle, app_password, hashtag='linkoftheday'):
                     # Check if post contains the hashtag
                     text = post.record.text
                     if f'#{hashtag}' in text.lower():
-                        # Extract URLs from the post
-                        urls = extract_links_from_text(text)
+                        # Parse structured post format
+                        parsed = parse_structured_post(text)
 
-                        if urls:
-                            commentary = clean_commentary(text, urls)
-
-                            for url in urls:
-                                links.append({
-                                    'url': url,
-                                    'commentary': commentary if commentary else None,
-                                    'timestamp': post_time
-                                })
+                        if parsed:
+                            links.append({
+                                'url': parsed['url'],
+                                'link_text': parsed['link_text'],
+                                'commentary': parsed['commentary'],
+                                'timestamp': post_time
+                            })
 
             # Check if there are more posts to fetch
             cursor = response.cursor if hasattr(response, 'cursor') and response.cursor else None
@@ -146,12 +163,13 @@ tags: [Links, Daily Digest]
     content = []
     for link in links:
         url = link['url']
+        link_text = link['link_text']
         commentary = link['commentary']
 
         if commentary:
-            content.append(f"- [{url}]({url}) - {commentary}")
+            content.append(f"- [{link_text}]({url}) - {commentary}")
         else:
-            content.append(f"- [{url}]({url})")
+            content.append(f"- [{link_text}]({url})")
 
     return frontmatter + '\n'.join(content) + '\n'
 
