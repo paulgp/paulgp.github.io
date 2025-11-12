@@ -4,9 +4,9 @@ This directory contains automation scripts for generating "Links of the Day" blo
 
 ## How It Works
 
-1. **You post links to Bluesky** with the hashtag `#linkoftheday` and your commentary
+1. **You post links to Bluesky** with the hashtag `#linkoftheday` and your commentary throughout the day
 2. **GitHub Actions runs daily** at 9 PM UTC to check for new links
-3. **Script fetches yesterday's posts** that contain #linkoftheday
+3. **Script fetches today's posts** that contain #linkoftheday
 4. **Generates a blog post** if links are found (does nothing if no links)
 5. **Auto-commits and deploys** via existing Jekyll workflow
 
@@ -139,7 +139,7 @@ Edit the `generate_post()` function in `_scripts/fetch_bluesky_links.py` to cust
 
 ### No post is created
 
-This is normal! The script only creates a post if you posted links with `#linkoftheday` yesterday. Check the workflow logs to see what happened.
+This is normal! The script only creates a post if you posted links with `#linkoftheday` today. Check the workflow logs to see what happened.
 
 ### Authentication errors
 

@@ -57,7 +57,7 @@ def parse_structured_post(text):
 
 def fetch_bluesky_links(handle, app_password, hashtag='linkoftheday'):
     """
-    Fetch posts from Bluesky with the specified hashtag from the previous day.
+    Fetch posts from Bluesky with the specified hashtag from today.
 
     Returns:
         list: List of dicts with 'url', 'link_text', 'commentary', and 'timestamp'
@@ -72,10 +72,10 @@ def fetch_bluesky_links(handle, app_password, hashtag='linkoftheday'):
         profile = client.get_profile(handle)
         did = profile.did
 
-        # Calculate yesterday's date range
+        # Calculate today's date range
         now = datetime.now(timezone.utc)
-        yesterday_start = (now - timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
-        yesterday_end = (now - timedelta(days=1)).replace(hour=23, minute=59, second=59, microsecond=999999)
+        today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+        today_end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
 
         # Fetch user's posts
         # Note: We'll fetch recent posts and filter by date and hashtag
@@ -100,13 +100,13 @@ def fetch_bluesky_links(handle, app_password, hashtag='linkoftheday'):
                 # Parse post timestamp
                 post_time = datetime.fromisoformat(post.record.created_at.replace('Z', '+00:00'))
 
-                # Check if post is from yesterday
-                if post_time < yesterday_start:
+                # Check if post is from today
+                if post_time < today_start:
                     # We've gone too far back, stop searching
                     iterations = max_iterations
                     break
 
-                if yesterday_start <= post_time <= yesterday_end:
+                if today_start <= post_time <= today_end:
                     # Check if post contains the hashtag
                     text = post.record.text
                     if f'#{hashtag}' in text.lower():
@@ -183,22 +183,22 @@ def main():
               file=sys.stderr)
         sys.exit(1)
 
-    # Fetch links from yesterday
+    # Fetch links from today
     print("Fetching links from Bluesky...")
     links = fetch_bluesky_links(handle, app_password)
 
     if not links:
-        print("No links found for yesterday. Exiting without creating a post.")
+        print("No links found for today. Exiting without creating a post.")
         sys.exit(0)
 
     print(f"Found {len(links)} link(s)")
 
-    # Generate post for yesterday's date
-    yesterday = datetime.now(timezone.utc) - timedelta(days=1)
-    post_content = generate_post(links, yesterday)
+    # Generate post for today's date
+    today = datetime.now(timezone.utc)
+    post_content = generate_post(links, today)
 
     # Write to _posts directory
-    date_str = yesterday.strftime('%Y-%m-%d')
+    date_str = today.strftime('%Y-%m-%d')
     posts_dir = Path(__file__).parent.parent / '_posts'
     posts_dir.mkdir(exist_ok=True)
 
