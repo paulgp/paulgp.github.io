@@ -77,12 +77,16 @@ def fetch_bluesky_links(handle, app_password, hashtag='linkoftheday'):
         today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
         today_end = now.replace(hour=23, minute=59, second=59, microsecond=999999)
 
+        print(f"Searching for posts from {today_start} to {today_end}")
+        print(f"Current time: {now}")
+
         # Fetch user's posts
         # Note: We'll fetch recent posts and filter by date and hashtag
         cursor = None
         links = []
         max_iterations = 10  # Prevent infinite loops
         iterations = 0
+        posts_checked = 0
 
         while iterations < max_iterations:
             params = {'actor': did, 'limit': 100}
@@ -96,6 +100,7 @@ def fetch_bluesky_links(handle, app_password, hashtag='linkoftheday'):
 
             for feed_view in response.feed:
                 post = feed_view.post
+                posts_checked += 1
 
                 # Parse post timestamp
                 post_time = datetime.fromisoformat(post.record.created_at.replace('Z', '+00:00'))
@@ -103,23 +108,29 @@ def fetch_bluesky_links(handle, app_password, hashtag='linkoftheday'):
                 # Check if post is from today
                 if post_time < today_start:
                     # We've gone too far back, stop searching
+                    print(f"Checked {posts_checked} posts total")
                     iterations = max_iterations
                     break
 
                 if today_start <= post_time <= today_end:
                     # Check if post contains the hashtag
                     text = post.record.text
+                    print(f"Post from today at {post_time}: {text[:100]}...")
                     if f'#{hashtag}' in text.lower():
+                        print(f"Found #{hashtag} in post!")
                         # Parse structured post format
                         parsed = parse_structured_post(text)
 
                         if parsed:
+                            print(f"Successfully parsed: {parsed['link_text']}")
                             links.append({
                                 'url': parsed['url'],
                                 'link_text': parsed['link_text'],
                                 'commentary': parsed['commentary'],
                                 'timestamp': post_time
                             })
+                        else:
+                            print(f"Failed to parse post: {text}")
 
             # Check if there are more posts to fetch
             cursor = response.cursor if hasattr(response, 'cursor') and response.cursor else None
