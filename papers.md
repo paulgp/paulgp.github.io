@@ -8,7 +8,7 @@ My papers are listed below. I have separated my Covid-19 work into a separate se
 ### Working Papers 
 
 1. [Leniency Designs: An Operator's Manual](https://arxiv.org/abs/2511.03572)  <br>
-with Peter Hull and Michal Kolesár  (Solicited, **Journal of Economic Perspectives**) <button class="accordion"> Abstract </button> 
+with Peter Hull and Michal Kolesár  (Solicited, **Journal of Economic Perspectives**) [Code](https://github.com/paulgp/GPHK_JEP_Replication_Package) <button class="accordion"> Abstract </button> 
     <div class="panel" style="background-color: #F1F1F1; color: #666; padding: 10px;"> We develop a step-by-step guide to leniency (a.k.a. judge or examiner instrument) designs, drawing on recent econometric literatures. The unbiased jackknife instrumental variables estimator (UJIVE) is purpose-built for leveraging exogenous leniency variation, avoiding subtle biases even in the presence of many decision-makers or controls. We show how UJIVE can also be used to assess key assumptions underlying leniency designs, including quasi-random assignment and average first-stage monotonicity, and to probe the external validity of treatment effect estimates. We further discuss statistical inference, arguing that non-clustered standard errors are often appropriate. A reanalysis of Farre-Mensa et al. (2020), using quasi-random examiner assignment to estimate the value of patents to startups, illustrates our checklist. </div> 
 1. [Anonymity and Identity Online](https://arxiv.org/abs/2409.15948) [[slides](https://florianederer.github.io/ejmr_slides.pdf)] <br>
 with Florian Ederer and Kyle Jensen  (Revise and Resubmit, **Review of Economic Studies**) <button class="accordion"> Abstract </button> 
