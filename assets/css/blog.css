@@ -307,3 +307,40 @@ section {
         padding: 8px;
     }
 }
+
+/* Links of the Day posts styling */
+.links-post {
+    background: linear-gradient(135deg, #faf8f3 0%, #f5f0e8 100%);
+    border-left: 4px solid #d4a574;
+    padding: 1.2rem 1.5rem;
+    margin: 1.2rem 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.links-post:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.links-post b a {
+    color: #8b5a3c;
+}
+
+.links-post b a:hover {
+    color: #6d4428;
+    border-bottom-color: #d4a574;
+}
+
+.links-post p {
+    color: #6b5d52;
+    font-style: italic;
+}
+
+/* Add icon/badge for Links posts */
+.links-post b::before {
+    content: "🔗 ";
+    opacity: 0.7;
+    margin-right: 0.3rem;
+}
