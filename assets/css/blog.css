@@ -81,8 +81,8 @@
 
 .blog-content figure {
     margin: 2rem 0;
-    max-width: 100%;
-    /* Ensure figures stay within content area */
+    max-width: 650px;
+    /* Match text width to stay consistent with content */
 }
 
 .blog-content figcaption {
@@ -130,6 +130,11 @@
 
     .blog-content h3 {
         font-size: 1.25rem;
+    }
+
+    .blog-content figure {
+        max-width: 100%;
+        /* Allow figures to use full width on narrow screens */
     }
 }
 
