@@ -81,6 +81,8 @@
 
 .blog-content figure {
     margin: 2rem 0;
+    max-width: 100%;
+    /* Ensure figures stay within content area */
 }
 
 .blog-content figcaption {
@@ -227,10 +229,20 @@ section {
 /* Wide figure spanning main text and margin */
 .widefigure {
     margin: 2rem 0;
-    width: calc(100% + 60%);
-    /* Extends into margin area */
+    width: 100%;
+    max-width: 100%;
+    /* Stay within content area on narrow screens */
     position: relative;
     clear: both;
+}
+
+/* Only extend into margin on larger screens */
+@media (min-width: 1201px) {
+    .widefigure {
+        width: calc(100% + 200px);
+        /* Extend into margin area where sidenotes would be */
+        max-width: calc(100% + 200px);
+    }
 }
 
 
