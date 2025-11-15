@@ -296,6 +296,16 @@ section {
         font-size: 0.9rem;
         /* Slightly larger for better mobile readability */
     }
+
+    .blog-content blockquote {
+        background: #F1F1F1;
+        /* Light gray background to match sidenotes */
+        padding: 1rem;
+        /* Increased padding for better readability */
+        border-left: 3px solid #2b6cb0;
+        /* Blue left border to match sidenotes */
+        margin: 1rem 0;
+    }
 }
 
 
