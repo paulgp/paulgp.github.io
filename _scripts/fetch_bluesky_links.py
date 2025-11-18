@@ -110,6 +110,8 @@ def fetch_bluesky_links(handle, app_password, hashtag='linkoftheday'):
             if cursor:
                 params['cursor'] = cursor
 
+            # Use posts_no_replies filter to ensure we get all original posts
+            params['filter'] = 'posts_no_replies'
             response = client.get_author_feed(**params)
 
             if not response.feed:
@@ -117,6 +119,10 @@ def fetch_bluesky_links(handle, app_password, hashtag='linkoftheday'):
 
             for feed_view in response.feed:
                 post = feed_view.post
+
+                # Only look at posts authored by this user (skip reposts)
+                if post.author.did != did:
+                    continue
 
                 # Parse post timestamp
                 post_time = datetime.fromisoformat(post.record.created_at.replace('Z', '+00:00'))
