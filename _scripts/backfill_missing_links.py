@@ -2,8 +2,9 @@
 """
 Backfill missing links from Bluesky posts.
 
-This script scans a date range and creates blog posts for any days that have
-#linkoftheday posts on Bluesky but no corresponding blog post.
+This script scans a date range and:
+1. Creates blog posts for days with #linkoftheday posts but no corresponding blog post
+2. Updates existing blog posts if new #linkoftheday posts are found for that day
 
 Usage:
     # Backfill the last 30 days (default)
@@ -12,7 +13,7 @@ Usage:
     # Backfill a specific date range
     python backfill_missing_links.py --start-date 2025-11-01 --end-date 2025-11-15
 
-    # Dry run to see what would be created
+    # Dry run to see what would be created or updated
     python backfill_missing_links.py --dry-run
 """
 
@@ -185,6 +186,57 @@ def get_existing_post_dates(posts_dir):
 
     return existing_dates
 
+def parse_existing_post(post_path):
+    """
+    Parse an existing blog post and extract the links.
+
+    Args:
+        post_path: Path to the existing post file
+
+    Returns:
+        list: List of dicts with 'url', 'link_text', 'commentary' (URLs only, no timestamps)
+    """
+    if not post_path.exists():
+        return []
+
+    content = post_path.read_text()
+    links = []
+
+    # Split content into lines and skip the frontmatter
+    lines = content.split('\n')
+    in_frontmatter = False
+    frontmatter_count = 0
+
+    for line in lines:
+        # Track frontmatter boundaries
+        if line.strip() == '---':
+            frontmatter_count += 1
+            if frontmatter_count == 2:
+                in_frontmatter = False
+            else:
+                in_frontmatter = True
+            continue
+
+        if in_frontmatter:
+            continue
+
+        # Parse markdown links: - [link_text](url) - commentary
+        # or: - [link_text](url)
+        link_pattern = r'^\s*-\s*\[(.+?)\]\((.+?)\)(?:\s*-\s*(.+))?'
+        match = re.match(link_pattern, line)
+        if match:
+            link_text = match.group(1)
+            url = match.group(2)
+            commentary = match.group(3).strip() if match.group(3) else None
+
+            links.append({
+                'url': url,
+                'link_text': link_text,
+                'commentary': commentary
+            })
+
+    return links
+
 def generate_post(links, date):
     """
     Generate a Jekyll blog post from the links.
@@ -223,7 +275,7 @@ tags: [Links, Daily Digest]
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Backfill missing links-of-the-day posts from Bluesky'
+        description='Backfill missing links-of-the-day posts from Bluesky and update existing posts with new links'
     )
     parser.add_argument(
         '--start-date',
@@ -238,7 +290,7 @@ def main():
     parser.add_argument(
         '--dry-run',
         action='store_true',
-        help='Show what would be created without actually creating posts'
+        help='Show what would be created or updated without actually modifying posts'
     )
 
     args = parser.parse_args()
@@ -267,12 +319,12 @@ def main():
         # Default to 30 days before end_date
         start_date = end_date - timedelta(days=30)
 
-    print(f"Scanning for missing posts from {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
+    print(f"Scanning for missing posts and updates from {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
 
     # Get existing post dates
     posts_dir = Path(__file__).parent.parent / '_posts'
     existing_dates = get_existing_post_dates(posts_dir)
-    print(f"Found {len(existing_dates)} existing links-of-the-day posts")
+    print(f"Found {len(existing_dates)} existing links-of-the-day posts (will check for updates)")
 
     # Connect to Bluesky
     print("Connecting to Bluesky...")
@@ -289,40 +341,73 @@ def main():
     # Scan each date in the range
     current_date = start_date
     posts_created = 0
+    posts_updated = 0
     posts_skipped = 0
 
     while current_date <= end_date:
         date_str = current_date.strftime('%Y-%m-%d')
-
-        # Check if post already exists for this date
-        if date_str in existing_dates:
-            print(f"  {date_str}: Post already exists, skipping")
-            posts_skipped += 1
-            current_date += timedelta(days=1)
-            continue
+        post_path = posts_dir / f'{date_str}-links-of-the-day.md'
+        post_exists = date_str in existing_dates
 
         # Fetch links for this date
         print(f"  {date_str}: Checking for links...", end='')
         try:
-            links = fetch_bluesky_links_for_date(client, did, current_date)
+            fetched_links = fetch_bluesky_links_for_date(client, did, current_date)
 
-            if links:
-                print(f" found {len(links)} link(s)")
+            if not fetched_links:
+                if post_exists:
+                    print(" no new links found (post exists)")
+                else:
+                    print(" no links found")
+                current_date += timedelta(days=1)
+                continue
 
+            print(f" found {len(fetched_links)} link(s)", end='')
+
+            if post_exists:
+                # Parse existing post to get current links
+                existing_links = parse_existing_post(post_path)
+                existing_urls = {link['url'] for link in existing_links}
+
+                # Find new links not in existing post
+                new_links = [link for link in fetched_links if link['url'] not in existing_urls]
+
+                if new_links:
+                    print(f" ({len(new_links)} new)")
+                    # Merge: existing links + new links (removing timestamp from new links for consistency)
+                    merged_links = existing_links + [{
+                        'url': link['url'],
+                        'link_text': link['link_text'],
+                        'commentary': link['commentary']
+                    } for link in new_links]
+
+                    if args.dry_run:
+                        print(f"    [DRY RUN] Would update post with {len(new_links)} new links")
+                        for link in new_links:
+                            print(f"      + {link['link_text']}")
+                    else:
+                        # Generate and write the updated post
+                        post_content = generate_post(merged_links, current_date)
+                        post_path.write_text(post_content)
+                        print(f"    Updated: {post_path}")
+                        posts_updated += 1
+                else:
+                    print(" (all already in post)")
+                    posts_skipped += 1
+            else:
+                # No existing post, create new one
+                print()
                 if args.dry_run:
-                    print(f"    [DRY RUN] Would create post with {len(links)} links")
-                    for link in links:
+                    print(f"    [DRY RUN] Would create post with {len(fetched_links)} links")
+                    for link in fetched_links:
                         print(f"      - {link['link_text']}")
                 else:
                     # Generate and write the post
-                    post_content = generate_post(links, current_date)
+                    post_content = generate_post(fetched_links, current_date)
                     posts_dir.mkdir(exist_ok=True)
-                    post_path = posts_dir / f'{date_str}-links-of-the-day.md'
                     post_path.write_text(post_content)
                     print(f"    Created: {post_path}")
                     posts_created += 1
-            else:
-                print(" no links found")
 
         except Exception as e:
             print(f" ERROR: {e}")
@@ -333,11 +418,12 @@ def main():
     print("\n" + "="*60)
     print(f"Backfill complete!")
     print(f"  Posts created: {posts_created}")
-    print(f"  Posts skipped (already exist): {posts_skipped}")
+    print(f"  Posts updated: {posts_updated}")
+    print(f"  Posts skipped (no new links): {posts_skipped}")
     print(f"  Date range scanned: {(end_date - start_date).days + 1} days")
 
     if args.dry_run:
-        print("\n  This was a DRY RUN - no files were actually created")
+        print("\n  This was a DRY RUN - no files were actually created or updated")
 
 if __name__ == '__main__':
     main()
