@@ -24,7 +24,7 @@ The numbers are stark. As of week 47 (mid-November), cumulative postings for the
 
 If this trajectory continues, we're on track to finish the year with the lowest total posting count in over a decade. 
 
-This finding is in line with a recent post by [John Cawley on X/Twitter](https://x.com/cawley_john/status/1986196028685754412):
+This finding is in line with a recent post by [John Cawley on Bluesky](https://bsky.app/profile/johncawley.bsky.social/post/3m4w2x5es322c):
 
 
 <figure class="widefigure">
@@ -32,7 +32,7 @@ This finding is in line with a recent post by [John Cawley on X/Twitter](https:/
   <figcaption>John Cawley Nov 5, 2025 post on state of the Job Market</figcaption>
 </figure>
 
-A few comments on this: I'm not sure how Cawley has so many more posts than I do. My numbers come from just the raw counts exported on the [AEA JOE website](https://www.aeaweb.org/joe/listings?issue=2025-02). All of the trends seem very similar, but he has far larger numbers. I can't read through John's thread because I no longer have an X/Twitter account, so I can't speak to the differences. Maybe let me know on Bsky if you think you have an idea? {% include sidenote.html number="0" text="By the way, I think it's bad for us to have any real communication on X/Twitter if it requires having an account. I had a really tough time even finding this post because X doesn't allow you to see most recent posts for John when I go to his account page without logging in. " %}
+A few comments on this: I'm not sure how Cawley has so many more posts than I do. My numbers come from just the raw counts exported on the [AEA JOE website](https://www.aeaweb.org/joe/listings?issue=2025-02). All of the trends seem very similar, but he has far larger numbers. Maybe let me know on Bsky if you think you have an idea? 
 
 ## A Silver Lining: Finance Jobs Show Resilience
 
