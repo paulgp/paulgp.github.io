@@ -364,10 +364,3 @@ section {
     color: #6b5d52;
     font-style: italic;
 }
-
-/* Add icon/badge for Links posts */
-.links-post b::before {
-    content: "🔗 ";
-    opacity: 0.7;
-    margin-right: 0.3rem;
-}
