@@ -32,7 +32,8 @@ Here's the breakdown overall in 2025 of what fields are being posted (I would re
 <figcaption><a href="/joe-tracker/job_postings_by_jel.html">United States postings seem to be doing better than other countries.</a></figcaption>
 </figure>
 
-In what follows, I'll post the year-by-year comparison for each field, of which there are many:
+
+In what follows, I'll post the year-by-year comparison for each field, of which there are many:{% include sidenote.html number="1" text="Previously, I had been missing some finance jobs because I had focused only on G JEL codes, whereas this now includes the full picture of subfields as well." %}
 
 
 ### General Economics and Teaching
