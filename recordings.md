@@ -52,6 +52,7 @@ This page contains asciinema terminal recordings. To add a new recording:
 
 <div id="recordings-list"></div>
 
+{% raw %}
 <script>
 // Configuration: Add your recordings here
 const recordings = [
@@ -137,3 +138,4 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+{% endraw %}
