@@ -55,18 +55,28 @@ This page contains asciinema terminal recordings. To add a new recording:
 <script>
 // Configuration: Add your recordings here
 const recordings = [
-  // Example entry (uncomment when you have recordings):
-  // {
-  //   id: 'demo1',
-  //   file: '/assets/recordings/demo.cast',
-  //   title: 'Demo Recording',
-  //   description: 'A demonstration of terminal usage.',
-  //   options: {
-  //     theme: 'asciinema',
-  //     fit: 'width',
-  //     idleTimeLimit: 2
-  //   }
-  // }
+  {
+    id: 'plan-ice',
+    file: '/assets/recordings/plan_ICE.cast',
+    title: 'Planning ICE Estimation',
+    description: 'Planning session for ICE estimation analysis.',
+    options: {
+      theme: 'asciinema',
+      fit: 'width',
+      idleTimeLimit: 2
+    }
+  },
+  {
+    id: 'estimate-ice',
+    file: '/assets/recordings/estimate_ICE.cast',
+    title: 'Estimating ICE',
+    description: 'Running the ICE estimation analysis.',
+    options: {
+      theme: 'asciinema',
+      fit: 'width',
+      idleTimeLimit: 2
+    }
+  }
 ];
 
 // Render recordings
