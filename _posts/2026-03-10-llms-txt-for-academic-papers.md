@@ -161,3 +161,11 @@ The infrastructure exists. arXiv has LaTeX source for 2.4 million papers. Overle
 And for the reader who is unconvinced on the future of AI in research — the bundle improves accessibility, reproducibility, and human readability, regardless of whether an LLM is involved. The markdown version is more accessible on mobile devices and screen readers. The data and code make it easier for human researchers to verify and build on the work.
 
 The minimal ask: write a brief `llms.txt` for your next paper. Two paragraphs stating what it shows and what it does not. Post it with your PDF. Fifteen minutes. The value: when an LLM summarizes your work six months from now—and it will—the machine reads your caveats first. If you write in LaTeX, run Pandoc and include the markdown. At the ambitious end, include the computational environment so an agent can reproduce your results without human intervention. The minimal version costs minutes of reflection; the full version offers a path out of the reproducibility crisis.
+
+[peters2025]: https://doi.org/10.1098/rsos.241776
+[kumar2024]: https://doi.org/10.1145/3663548.3675634
+[somers2018]: https://www.theatlantic.com/science/archive/2018/04/the-scientific-paper-is-obsolete/556676/
+[stodden2018]: https://doi.org/10.1073/pnas.1708290115
+[adhikari2024]: https://arxiv.org/abs/2410.09871
+[docling2024]: https://github.com/DS4SD/docling
+[vilhuber2023]: https://doi.org/10.1162/99608f92.9ba2bd43
