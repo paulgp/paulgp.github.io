@@ -153,6 +153,10 @@
     }
 }
 
+.wrapper {
+    max-width: 65rem;
+}
+
 section {
     max-width: 600px;
     position: relative;
