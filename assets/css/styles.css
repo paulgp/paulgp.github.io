@@ -5,7 +5,7 @@
 /* Base styles */
 body {
   font-family: 'Spectral', Georgia, 'Times New Roman', serif;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.7;
   color: #1a1a1a;
   background: #faf8f5;
@@ -32,48 +32,116 @@ h6 {
   line-height: 1.3;
   color: #1a1a1a;
   letter-spacing: 0.01em;
-  margin: 2rem 0 1rem;
+  margin: 1.25rem 0 0.5rem;
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
 h2 {
   font-size: 1.75rem;
 }
 
+/* Base h3 - Note: This is a fallback only. 
+   In practice, all h3 elements match either :first-of-type or :not(:first-of-type) selectors below */
 h3 {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #1a1a1a;
+}
+
+/* First h3 is the title/subtitle - make it lighter and muted */
+section > h3:first-of-type {
+  font-family: 'Spectral', Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: #666;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+/* Section labels - quiet organizational markers with top border */
+section > h3:not(:first-of-type) {
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.72rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #6b6b6b;
+  letter-spacing: 0.12em;
+  color: #888;
+  border-top: 1px solid #ddd;
+  padding-top: 1rem;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
 }
 
 p,
 ul,
 ol {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 /* List items */
 li {
-  margin: 1.2rem 0;
-  /* Increased from previous value */
+  margin: 0.5rem 0;
   line-height: 1.6;
 }
 
 /* Nested lists should have less spacing */
 li li {
-  margin: 0.6rem 0;
-  /* Half the spacing for nested items */
+  margin: 0.25rem 0;
+}
+
+/* Accordion buttons */
+button.accordion,
+button.accordian {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #888;
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 0.1rem 0.4rem;
+  margin-left: 0.25rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  vertical-align: middle;
+}
+
+button.accordion:hover,
+button.accordian:hover,
+button.accordion.active,
+button.accordian.active {
+  background: none;
+  color: #1a1a1a;
+  border-color: #999;
+}
+
+/* Accordion panels */
+.panel {
+  display: none;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.panel.show {
+  display: block;
 }
 
 /* Links */
 a {
-  color: #2b6cb0;
+  color: #b5451b;
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: border-color 0.2s;
@@ -99,13 +167,15 @@ a:hover {
   padding: 0.5rem 1rem;
   margin: 0.25rem 0;
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: 0.75rem;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #6b6b6b;
+  letter-spacing: 0.12em;
+  color: #666;
+  line-height: 1.8;
+  border-bottom: none;
   border-radius: 4px;
-  transition: all 0.2s;
+  transition: color 0.2s;
   box-sizing: border-box;
   white-space: normal;
   /* Ensure text wraps */
@@ -199,7 +269,6 @@ a:hover {
 }
 
 .sidenav a:hover {
-  background: #ebe7e0;
   color: #1a1a1a;
 }
 
@@ -255,8 +324,13 @@ section {
     font-size: 1.5rem;
   }
 
-  h3 {
-    font-size: 0.75rem;
+  /* Maintain h3 hierarchy on mobile */
+  section > h3:first-of-type {
+    font-size: 1rem;
+  }
+
+  section > h3:not(:first-of-type) {
+    font-size: 0.68rem;
   }
 
   .sidenav a {
