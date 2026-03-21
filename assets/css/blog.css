@@ -158,7 +158,7 @@
 }
 
 section {
-    max-width: 600px;
+    max-width: 650px;
     position: relative;
     margin-right: 200px;
     /* Make room for sidenotes */
@@ -166,7 +166,7 @@ section {
 
 .sidenote {
     position: absolute;
-    right: -220px;
+    right: -210px;
     width: 200px;
     font-size: 0.9rem;
     color: #666;
@@ -337,6 +337,89 @@ section {
         margin: 0.75rem 0;
         padding: 8px;
     }
+}
+
+/* Links of the Day posts styling */
+/* Let code blocks extend into sidenote margin on wide screens */
+@media (min-width: 1201px) {
+    section > pre,
+    section > .highlighter-rouge > .highlight > pre,
+    section > .collapsible-code-wrapper {
+        width: calc(100% + 180px);
+        max-width: calc(100% + 180px);
+    }
+}
+
+/* Collapsible code blocks */
+.collapsible-code-wrapper {
+    margin: 1.5rem 0;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    background: #f8f9fa;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.collapsible-code-wrapper > pre,
+.collapsible-code-wrapper pre {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    overflow-x: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.collapsible-code-wrapper > pre:first-child {
+    border-radius: 4px 4px 0 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+details.collapsible-code {
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    margin: 0;
+}
+
+details.collapsible-code summary {
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9rem;
+    color: #555;
+    list-style: none;
+    user-select: none;
+    border-top: none;
+}
+
+details.collapsible-code summary::-webkit-details-marker {
+    display: none;
+}
+
+details.collapsible-code summary::before {
+    content: '\25B6';
+    display: inline-block;
+    margin-right: 0.5rem;
+    transition: transform 0.2s;
+    font-size: 0.75rem;
+}
+
+details.collapsible-code[open] summary::before {
+    transform: rotate(90deg);
+}
+
+/* Hide the preview code block when expanded */
+details.collapsible-code[open] ~ .collapsible-code-preview,
+.collapsible-code-wrapper:has(details.collapsible-code[open]) > pre:first-child {
+    display: none;
+}
+
+details.collapsible-code pre {
+    margin: 0;
+    border: none;
+    border-top: 1px solid #e9ecef;
+    border-radius: 0 0 4px 4px;
 }
 
 /* Links of the Day posts styling */
