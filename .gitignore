@@ -27,3 +27,11 @@ joe-tracker/job_postings_rolling_4wk_region_canada_europe.png
 joe-tracker/job_postings_rolling_4wk_region_us.png
 joe-tracker/job_postings_rolling_4wk_us.png
 joe-tracker/job_postings_rolling_4wk.png
+SKILL.md
+*.ts
+.pi/*
+.agents/*
+.agent-sync/*
+Blueskypost Leniency.docx
+.gitignore
+bluesky_posts.json
