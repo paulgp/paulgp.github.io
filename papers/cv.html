@@ -1,0 +1,20 @@
+---
+layout: default
+title: Paul Goldsmith-Pinkham
+---
+<!-- The CV body is generated from papers/cv.typ by papers/build_cv.sh into
+     _includes/cv.html, then embedded here so it renders inside the site
+     layout and is styled by assets/css/styles.css. The print/download PDF
+     lives at papers/cv.pdf (linked as "CV" in the menu). -->
+<style>
+  /* Typst marks the years/email as <code>; un-monospace them so the CV reads
+     in the site's body font. Scoped to this page only. */
+  .cv-web code { font-family: inherit; font-size: inherit; background: none; padding: 0; }
+  .cv-web footer { display: block; margin-top: 2rem; font-size: 0.85rem; color: #777; }
+</style>
+
+<p style="margin-top: -0.5rem;"><a href="/papers/cv.pdf">Download PDF version</a></p>
+
+<div class="cv-web">
+{% include cv.html %}
+</div>
