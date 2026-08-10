@@ -106,9 +106,8 @@ URL: #link("https://paulgp.github.io/")[`https://paulgp.github.io/`]
 = Working Papers
 
 + Paul Goldsmith-Pinkham #link("https://arxiv.org/abs/2405.20604")[“Tracking the Credibility Revolution across Fields”] (Submitted, 2026)
-+ Arun Chandrasekhar, Paul Goldsmith-Pinkham, Tyler McCormick, Samuel Thau and Jerry Wei (2026) #link("https://paulgp.github.io/papers/diffusion_error_CGPMTW.pdf")[“Non-robustness of diffusion estimates on networks with measurement error”] (Resubmitted, #underline[Econometrica])
++ Arun Chandrasekhar, Paul Goldsmith-Pinkham, Tyler McCormick, Samuel Thau and Jerry Wei (2026) #link("https://paulgp.github.io/papers/diffusion_error_CGPMTW.pdf")[“Non-robustness of diffusion estimates on networks with measurement error”] (2nd Round R\&R, #underline[Econometrica])
 + Paul Goldsmith-Pinkham and Tianshu Lyu (2025) #link("http://paulgp.github.io/papers/financial_event_studies_nov18.pdf")[“Causal Inference in Financial Event Studies”]
-+ Paul Goldsmith-Pinkham, Peter Hull and Michal Kolesar (2025) #link("https://arxiv.org/abs/2511.03572")[“Leniency Designs: An Operator's Manual”] (Solicited and Submitted, #underline[Journal of Economic Perspectives])
 + Florian Ederer, Paul Goldsmith-Pinkham, and Kyle Jensen (2024) #link("https://florianederer.github.io/ejmr.pdf")[“Anonymity and Identity Online”] (Revise and Resubmit, #underline[Review of Economic Studies])
 + Dong Beom Choi, Paul Goldsmith-Pinkham, and Tanju Yorulmazer (2023) #link("https://arxiv.org/pdf/2308.06642.pdf")[“Contagion Effects of the Silicon Valley Bank Run”] (Reject and Resubmit, #underline[Journal of Financial Economics])
 + Adrien Auclert, Paul Goldsmith-Pinkham, and Will Dobbie (2020), #link("http://paulgp.github.io/papers/Macroeconomic_Effects_of_Debt_Relief_Posting_342019.pdf")[“Macroeconomic Effects of Debt Relief: Consumer Bankruptcy Protections in the Great Recession”] (Revise and Resubmit, #underline[American Economic Review])
@@ -116,6 +115,8 @@ URL: #link("https://paulgp.github.io/")[`https://paulgp.github.io/`]
 
 = Publications
 
+
++ Paul Goldsmith-Pinkham, Peter Hull and Michal Kolesar (2026) #link("https://arxiv.org/abs/2511.03572")[“Leniency Designs: An Operator's Manual”] (#underline[Journal of Economic Perspectives])
 + Paul Goldsmith-Pinkham, Maxim Pinkovskiy and Jacob Wallace (2026), #link("http://paulgp.github.io/papers/GPW_compressed.pdf")[“Medicare and the Geography of Financial Health”] (Conditionally Accepted, #underline[Review of Economics and Statistics])
 + Florian Ederer, Paul Goldsmith-Pinkham, and Kyle Jensen (May 2025) #link("https://florianederer.github.io/anonymous_P&P.pdf")[“Anonymous Attention and Abuse”] #underline[AEA Papers and Proceedings]
 + Paul Goldsmith-Pinkham, Peter Hull and Michal Kolesar (December 2024) #link("https://arxiv.org/abs/2106.05024")[“Contamination Bias in Linear Regressions”] #underline[American Economic Review]
