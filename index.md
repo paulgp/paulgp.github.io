@@ -8,6 +8,9 @@ title: Paul Goldsmith-Pinkham
 ### CV
 [My CV is available here.](papers/cv.pdf)
 
+### Research Statement
+[My research and teaching statement is available here.](papers/research_statement.pdf)
+
 ### Research
 [My research is listed here.](papers.html)
 
